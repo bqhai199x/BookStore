@@ -1,0 +1,12 @@
+﻿using BookStore.BusinessLogic.BaseServices;
+using BookStore.DataAccess.Infrastructure;
+using BookStore.DataAccess.Repositories;
+using BookStore.Models;
+
+namespace BookStore.BusinessLogic.IServices
+{
+    public class ShipperServices : BaseServices<Shipper>, IShipperServices
+    {
+        public ShipperServices(IUnitOfWork unitOfWork, IGenericRepository<Shipper> genericRepository) : base(unitOfWork, genericRepository) { }
+    }
+}
