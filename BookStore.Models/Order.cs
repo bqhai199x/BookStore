@@ -14,10 +14,14 @@
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OrderId { get; set; }
 
-        
+        [NotMapped]
+        public string Code
+        {
+            get { return OrderId.ToString("DH000"); }
+        }
 
         [DisplayName("Ngày đặt")]
-        public DateTime OrderDate { get; set; }
+        public DateTime? OrderDate { get; set; }
 
         [DisplayName("Trạng thái")]
         public OrderStatus Status { get; set; }
@@ -31,11 +35,11 @@
         [DisplayName("Số điện thoại")]
         public string Phone { get; set; }
 
-        public int ShipperId { get; set; }
+        public int? ShipperId { get; set; }
 
-        public int CouponId { get; set; }
+        public int? CouponId { get; set; }
 
-        public int AccountId { get; set; }
+        public int? AccountId { get; set; }
 
         [ForeignKey("AccountId")]
         public virtual Account Account { get; set; }
@@ -49,15 +53,15 @@
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
 
         [NotMapped]
-        public decimal SubTotal
+        public decimal? SubTotal
         {
-            get { return OrderDetails.Sum(s => s.Product.Price * s.Quantity); }
+            get { return OrderDetails.Sum(x => x.Total); }
         }
 
         [NotMapped]
-        public decimal GrandTotal
+        public decimal? GrandTotal
         {
-            get { return SubTotal - SubTotal * Coupon.Discount; }
+            get { return SubTotal - SubTotal * Coupon.Discount + Shipper.Price; }
         }
     }
 }

@@ -17,7 +17,7 @@
 
         [DisplayName("Chiết khấu")]
         [DisplayFormat(DataFormatString = "{0:#,###}%")]
-        public decimal Discount { get; set; }
+        public decimal? Discount { get; set; }
 
         [DisplayName("Mô tả")]
         public string Description { get; set; }

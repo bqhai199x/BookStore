@@ -18,7 +18,6 @@ namespace BookStore.DataAccess.Data
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Publisher> Publishers { get; set; }
-        public virtual DbSet<Author> Authors { get; set; }
         public virtual DbSet<Shipper> Shippers { get; set; }
         public virtual DbSet<ProductImage> ProductImages { get; set; }
     }

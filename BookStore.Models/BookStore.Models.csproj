@@ -52,7 +52,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account.cs" />
-    <Compile Include="Author.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="enum\RoleUser.cs" />
     <Compile Include="enum\OrderStatus.cs" />

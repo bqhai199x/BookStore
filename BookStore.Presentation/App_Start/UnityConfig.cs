@@ -77,9 +77,6 @@ namespace BookStore.Presentation
             container.RegisterType<IGenericRepository<Account>, GenericRepository<Account>>();
             container.RegisterType<IAccountServices, AccountServices>();
 
-            container.RegisterType<IGenericRepository<Author>, GenericRepository<Author>>();
-            container.RegisterType<IAuthorServices, AuthorServices>();
-
             container.RegisterType<IGenericRepository<Coupon>, GenericRepository<Coupon>>();
             container.RegisterType<ICouponServices, CouponServices>();
 

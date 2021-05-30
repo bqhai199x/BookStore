@@ -14,6 +14,9 @@ namespace BookStore.Models
         [DisplayName("Tên hãng vận chuyển")]
         public string Name { get; set; }
 
+        [DisplayName("Đơn giá")]
+        public decimal? Price { get; set; }
+
         [DisplayName("Số điện thoại")]
         public string Phone { get; set; }
 

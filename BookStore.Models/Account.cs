@@ -40,7 +40,7 @@
         public RoleUser Role { get; set; }
 
         [DisplayName("Ngày tạo")]
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
 
         public virtual ICollection<Review> Reviews { get; set; }
 
