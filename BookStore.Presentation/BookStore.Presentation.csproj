@@ -335,7 +335,6 @@
     <Content Include="Assets\vendor\slick\slick.js" />
     <Content Include="Assets\vendor\slick\slick.min.js" />
     <Content Include="Assets\vendor\sweetalert\sweetalert.min.js" />
-    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
