@@ -24,6 +24,10 @@ namespace BookStore.BusinessLogic.BaseServices
         TEntity GetById(object id);
         Task<TEntity> GetByIdAsync(object id);
 
+        PaginatedList<TEntity> GetNotAsync(Expression<Func<TEntity, bool>> filter = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+            string includeProperties = "", int page = 1, int pageSize = 10);
+
         Task<PaginatedList<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "", int page = 1, int pageSize = 10);

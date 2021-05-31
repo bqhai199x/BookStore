@@ -30,5 +30,12 @@ namespace BookStore.Common
             var entities = await source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
             return new PaginatedList<TEntity>(entities, count, pageIndex, pageSize);
         }
+
+        public static PaginatedList<TEntity> Create(IQueryable<TEntity> source, int pageIndex, int pageSize)
+        {
+            var count = source.Count();
+            var entities = source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            return new PaginatedList<TEntity>(entities, count, pageIndex, pageSize);
+        }
     }
 }

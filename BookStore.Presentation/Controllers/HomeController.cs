@@ -1,7 +1,9 @@
 ﻿using BookStore.BusinessLogic.IServices;
+using BookStore.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -27,9 +29,15 @@ namespace BookStore.Presentation.Controllers
             return View();
         }
 
-        public ActionResult Product()
+        public PartialViewResult Product(int count = 0, int cateId = 0)
         {
-            var product = _product.GetAll();
+            Expression<Func<Product, bool>> filter = null;
+            Func<IQueryable<Product>, IOrderedQueryable<Product>> orderBy = x => x.OrderBy(y => y.Name);
+            if (cateId != 0)
+            {
+                filter = x => x.CategoryId == cateId;
+            }
+            var product = _product.GetNotAsync(filter, orderBy, "", 1, count + 8);
             return PartialView("_Product", product);
         }
     }

@@ -120,6 +120,18 @@ namespace BookStore.BusinessLogic.BaseServices
             return await PaginatedList<TEntity>.CreateAsync(query.AsNoTracking(), page, pageSize);
         }
 
+        public virtual PaginatedList<TEntity>
+            GetNotAsync(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>,
+            IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "", int page = 1, int pageSize = 10)
+        {
+            var query = _repository.Get(filter: filter, includeProperties: includeProperties);
+            if (orderBy != null)
+            {
+                query = orderBy(query);
+            }
+            return PaginatedList<TEntity>.Create(query.AsNoTracking(), page, pageSize);
+        }
+
         public virtual TEntity GetById(object id)
         {
             return _repository.GetById(id);

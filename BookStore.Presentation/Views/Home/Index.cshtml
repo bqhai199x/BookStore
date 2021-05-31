@@ -14,8 +14,27 @@
 
         @Html.Partial("_Category")
 
+    <div id="product">
         @Html.Action("Product")
+    </div>
 
         @*@Html.Partial("_Blog")*@
     </div>
 </section>
+
+<script>
+
+    var count = 0;
+
+    function LoadMore() {
+        count = count + 4;
+        var url = "/Home/Product?count=" + count;
+        $("#product").load(url)
+    }
+
+    function searchByCategory(id) {
+        var url = "/Home/Product?cateId=" + id;
+        $("#product").load(url)
+    }
+
+</script>
