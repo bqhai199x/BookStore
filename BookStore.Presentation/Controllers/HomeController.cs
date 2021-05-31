@@ -40,5 +40,10 @@ namespace BookStore.Presentation.Controllers
             var product = _product.GetNotAsync(filter, orderBy, "", 1, count + 8);
             return PartialView("_Product", product);
         }
+
+        public PartialViewResult AllProduct()
+        {
+            return PartialView("_Product", _product.GetAll().ToList());
+        }
     }
 }
