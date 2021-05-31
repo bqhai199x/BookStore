@@ -11,10 +11,10 @@
         public int ReviewId { get; set; }
 
         [ForeignKey("Account")]
-        public int AccountId { get; set; }
+        public int? AccountId { get; set; }
 
         [ForeignKey("Product")]
-        public int ProductId { get; set; }
+        public int? ProductId { get; set; }
 
         [DisplayName("Nội dung")]
         public string Content { get; set; }

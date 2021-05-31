@@ -53,7 +53,6 @@
   <ItemGroup>
     <Compile Include="BaseServices\BaseServices.cs" />
     <Compile Include="BaseServices\IBaseServices.cs" />
-    <Compile Include="IServices\IAuthorServices.cs" />
     <Compile Include="IServices\ICategoryServices.cs" />
     <Compile Include="IServices\IReviewServices.cs" />
     <Compile Include="IServices\IFeedbackServices.cs" />
@@ -74,7 +73,6 @@
     <Compile Include="Services\OrderServices.cs" />
     <Compile Include="Services\ProductImageServices.cs" />
     <Compile Include="Services\ProductServices.cs" />
-    <Compile Include="Services\AuthorServices.cs" />
     <Compile Include="Services\PublisherServices.cs" />
     <Compile Include="Services\AccountServices.cs" />
     <Compile Include="Services\ShipperServices.cs" />

@@ -8,7 +8,7 @@ namespace BookStore.Models
 
         public string ImageURL { get; set; }
 
-        public int ProductId { get; set; }
+        public int? ProductId { get; set; }
 
         [ForeignKey("ProductId")]
 

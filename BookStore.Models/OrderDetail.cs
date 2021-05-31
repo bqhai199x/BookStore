@@ -8,14 +8,14 @@
     {
         [Key]
         [Column(Order = 1)]
-        public int OrderId { get; set; }
+        public int? OrderId { get; set; }
 
         [Key]
         [Column(Order = 2)]
-        public int ProductId { get; set; }
+        public int? ProductId { get; set; }
 
         [DisplayName("Số lượng")]
-        public int Quantity { get; set; }
+        public int? Quantity { get; set; }
 
         [ForeignKey("OrderId")]
         public virtual Order Order { get; set; }
@@ -24,7 +24,7 @@
         public virtual Product Product { get; set; }
 
         [NotMapped]
-        public decimal Total
+        public decimal? Total
         {
             get { return Quantity * Product.Price; }
         }
