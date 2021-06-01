@@ -1,0 +1,9 @@
+﻿.visible_item {
+    display: none;
+}
+
+.isotope-grid:after {
+    content: '';
+    display: block;
+    clear: both;
+}

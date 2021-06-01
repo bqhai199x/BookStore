@@ -43,7 +43,7 @@ namespace BookStore.Presentation.Controllers
 
         public PartialViewResult AllProduct()
         {
-            return PartialView("_Product", _product.GetAll().ToList());
+            return PartialView("_Product", _product.GetAll());
         }
     }
 }

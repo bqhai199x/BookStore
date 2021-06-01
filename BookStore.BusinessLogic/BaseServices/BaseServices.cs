@@ -145,7 +145,7 @@ namespace BookStore.BusinessLogic.BaseServices
         public virtual IEnumerable<TEntity> GetTop(Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null)
         {
             var query = orderBy(_repository.GetAll());
-            return query.Take(8);
+            return query.ToList();
         }
 
         public virtual bool Update(TEntity entity)

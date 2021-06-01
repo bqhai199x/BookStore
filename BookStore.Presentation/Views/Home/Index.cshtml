@@ -4,7 +4,7 @@
 @Html.Partial("_Banner")
 
 <!-- Product -->
-<section class="bg0 p-t-23 p-b-140">
+<section class="bg0 p-t-23 p-b-100">
     <div class="container">
         <div class="p-b-10">
             <h3 class="ltext-103 cl5">
@@ -14,10 +14,7 @@
 
         @Html.Partial("_Category")
 
-
-        <div id="product">
-            @Html.Action("Product")
-        </div>
+        @Html.Action("AllProduct")
 
         @*@Html.Partial("_Blog")*@
     </div>
