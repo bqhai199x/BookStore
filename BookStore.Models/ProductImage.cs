@@ -2,6 +2,7 @@
 
 namespace BookStore.Models
 {
+    [Table("ProductImage")]
     public class ProductImage
     {
         public int ProductImageId { get; set; }

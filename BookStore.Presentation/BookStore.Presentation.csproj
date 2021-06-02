@@ -197,6 +197,14 @@
     <Content Include="Assets\images\gallery-07.jpg" />
     <Content Include="Assets\images\gallery-08.jpg" />
     <Content Include="Assets\images\gallery-09.jpg" />
+    <Content Include="Assets\images\icons\avatar.png" />
+    <Content Include="Assets\images\icons\bg-1.jpg" />
+    <Content Include="Assets\images\icons\bg-2.jpg" />
+    <Content Include="Assets\images\icons\bg-3.jpg" />
+    <Content Include="Assets\images\icons\bg.jpg" />
+    <Content Include="Assets\images\icons\book.jpg" />
+    <Content Include="Assets\images\icons\checkout.jpg" />
+    <Content Include="Assets\images\icons\empty_cart.jpeg" />
     <Content Include="Assets\images\icons\favicon.png" />
     <Content Include="Assets\images\icons\icon-close.png" />
     <Content Include="Assets\images\icons\icon-close2.png" />
@@ -210,8 +218,9 @@
     <Content Include="Assets\images\icons\icon-pay-04.png" />
     <Content Include="Assets\images\icons\icon-pay-05.png" />
     <Content Include="Assets\images\icons\icon-prev.png" />
-    <Content Include="Assets\images\icons\logo-01.png" />
     <Content Include="Assets\images\icons\logo-02.png" />
+    <Content Include="Assets\images\icons\logo.png" />
+    <Content Include="Assets\images\icons\mini-logo.jpg" />
     <Content Include="Assets\images\icons\pin.png" />
     <Content Include="Assets\images\item-cart-01.jpg" />
     <Content Include="Assets\images\item-cart-02.jpg" />
@@ -242,17 +251,25 @@
     <Content Include="Assets\images\product-min-03.jpg" />
     <Content Include="Assets\images\products\50-bai-hoc-co-ban-de-tro-thanh-nguoi-lich-thiep.jpg" />
     <Content Include="Assets\images\products\cho-tran-gio-kinh-thien.jpg" />
-    <Content Include="Assets\images\products\doraemon-truyen-dai-23-nobita-va-nhung-phap-su-gio-bi-an.jpg" />
+    <Content Include="Assets\images\products\cuon-sach-cua-nang-tho-2.jpg" />
+    <Content Include="Assets\images\products\cuon-sach-cua-nang-tho-3.jpg" />
+    <Content Include="Assets\images\products\cuon-sach-cua-nang-tho.jpg" />
     <Content Include="Assets\images\products\empty_cart.jpeg" />
+    <Content Include="Assets\images\products\hanh-trang-lap-trinh-2.jfif" />
+    <Content Include="Assets\images\products\hanh-trang-lap-trinh-3.jfif" />
     <Content Include="Assets\images\products\hanh-trang-lap-trinh.jpg" />
+    <Content Include="Assets\images\products\huan-luyen-vien-tu-tin-2.jpg" />
     <Content Include="Assets\images\products\huan-luyen-vien-tu-tin.jpg" />
-    <Content Include="Assets\images\products\naruto-tap-52.jpg" />
+    <Content Include="Assets\images\products\nguoi-ba-tai-gioi-vung-saga-2.jpg" />
+    <Content Include="Assets\images\products\nguoi-ba-tai-gioi-vung-saga.jpg" />
     <Content Include="Assets\images\products\nhung-toa-do-song-song.jpg" />
     <Content Include="Assets\images\products\no-img.jpg" />
-    <Content Include="Assets\images\products\Screenshot %281%29.png" />
-    <Content Include="Assets\images\products\tham-tu-lung-danh-conan-bo-dac-biet-tap-43.jpg" />
+    <Content Include="Assets\images\products\nobita-va-nhung-phap-su-gio-bi-an.jpg" />
     <Content Include="Assets\images\products\tiep-thi-giao-duc-4-0.jpg" />
     <Content Include="Assets\images\products\trung-chim-cuc-cu-nay-thuoc-ve-ai.jpg" />
+    <Content Include="Assets\images\products\truyen-con-meo-day-hai-au-bay-2.jpg" />
+    <Content Include="Assets\images\products\truyen-con-meo-day-hai-au-bay-3.jpg" />
+    <Content Include="Assets\images\products\truyen-con-meo-day-hai-au-bay.jpg" />
     <Content Include="Assets\images\products\tuyen-dung-dung-hay.jpg" />
     <Content Include="Assets\images\products\xu-huong-moi-day-tieng-anh-cho-tre-mam-non-va-tieu-hoc.jpg" />
     <Content Include="Assets\images\slide-01.jpg" />
@@ -466,6 +483,7 @@
     <Content Include="Views\Home\_Product.cshtml" />
     <Content Include="Views\Home\_Category.cshtml" />
     <Content Include="Views\Home\_Blog.cshtml" />
+    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BookStore.BusinessLogic\BookStore.BusinessLogic.csproj">

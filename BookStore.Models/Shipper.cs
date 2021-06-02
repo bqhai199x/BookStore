@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookStore.Models
 {
+    [Table("Shipper")]
     public class Shipper
     {
         [Key]
