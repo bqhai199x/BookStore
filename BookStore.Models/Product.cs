@@ -29,7 +29,7 @@
         public int? NumPage { get; set; }
 
         [DisplayName("Đơn giá")]
-        [DisplayFormat(DataFormatString = "{0:#,###} VNĐ")]
+        [DisplayFormat(DataFormatString = "{0:#,###}")]
         public decimal? Price { get; set; }
 
         [DisplayName("Tóm tắt")]
