@@ -52,7 +52,6 @@ namespace BookStore.Presentation
             container.RegisterSingleton<IDbFactory, DbFactory>();
             container.RegisterSingleton<IUnitOfWork, UnitOfWork>();
 
-
             container.RegisterType<IGenericRepository<Category>, GenericRepository<Category>>();
             container.RegisterType<ICategoryServices, CategoryServices>();
 

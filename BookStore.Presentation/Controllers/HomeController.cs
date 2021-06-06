@@ -16,6 +16,8 @@ namespace BookStore.Presentation.Controllers
             _category = category;
         }
 
+        [Route("trang-chu")]
+        [Route("")]
         public ActionResult Index()
         {
             ViewBag.LstCategory = _category.GetAll();

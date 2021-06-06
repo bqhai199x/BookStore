@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BookStore.Presentation.ViewModels.ProductVM>
+﻿@model IEnumerable<ProductVM>
 
 <div class="row isotope-grid">
     @foreach (var item in Model)
@@ -6,7 +6,7 @@
         <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item @item.CateCalss @item.PriceClass">
             <!-- Block2 -->
             <div class="block2">
-                <div class="block2-pic hov-img0">
+                <div class="block2-pic hov-img0 @item.NewCalss" data-label="New">
                     <img src="~/Assets/images/products/@item.Product.Images.FirstOrDefault().ImageURL"
                          width="315" height="440">
 

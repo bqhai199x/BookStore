@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BookStore.Models.Product>
+﻿@model IEnumerable<Product>
 
 <!-- Product -->
 <section class="sec-product bg0 p-t-100 p-b-50">
@@ -17,7 +17,7 @@
                     <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
                         <!-- Block2 -->
                         <div class="block2">
-                            <div class="block2-pic hov-img0">
+                            <div class="block2-pic hov-img0 label1" data-label1="Hot">
                                 <img src="~/Assets/images/products/@item.Images.FirstOrDefault().ImageURL" alt="IMG-PRODUCT"
                                      width="315" height="440">
 
@@ -34,7 +34,7 @@
                                     </a>
 
                                     <span class="stext-105 cl3">
-                                        @Html.DisplayFor(x => item.Price) VNĐ
+                                        <span class="text-danger">@Html.DisplayFor(x => item.Price) VNĐ</span>
                                     </span>
                                 </div>
 

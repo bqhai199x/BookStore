@@ -402,7 +402,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
     }
 
 .main-menu > li > .sub-menu {
-    top: 100%;
+    top: 90%;
     left: 0;
 }
 
@@ -2103,8 +2103,8 @@ input.num-product {
         border-radius: 11px;
         padding: 0 6px;
         background-color: #66a8a6;
-        top: 42px;
-        left: 12px;
+        top: 10px;
+        left: 10px;
     }
 
 
@@ -2933,8 +2933,8 @@ input.num-product {
         text-align: center;
         display: block;
         position: absolute;
-        top: 3px;
-        right: -9px;
+        top: 10px;
+        right: 10px;
         height: 15px;
         min-width: 32px;
         border-radius: 7px;

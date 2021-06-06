@@ -92,10 +92,11 @@
     $('.wrap-slick2').each(function () {
         $(this).find('.slick2').slick({
             slidesToShow: 4,
-            slidesToScroll: 4,
-            infinite: false,
-            autoplay: false,
-            autoplaySpeed: 6000,
+            slidesToScroll: 1,
+            infinite: true,
+            autoplay: true,
+            autoplaySpeed: 3000,
+            focusOnSelect: true,
             arrows: true,
             appendArrows: $(this),
             prevArrow: '<button class="arrow-slick2 prev-slick2"><i class="fa fa-angle-left" aria-hidden="true"></i></button>',

@@ -37,5 +37,17 @@ namespace BookStore.Presentation.ViewModels
                 }
             }
         }
+
+        public string NewCalss
+        {
+            get
+            {
+                if(Product.CreatedDate != null && DateTime.Compare(DateTime.Now, (DateTime)Product.CreatedDate) <= 3)
+                {
+                    return "label-new";
+                }
+                return string.Empty;
+            }
+        }
     }
 }
