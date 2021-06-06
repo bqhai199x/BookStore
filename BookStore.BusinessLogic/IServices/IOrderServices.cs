@@ -1,5 +1,5 @@
-﻿using BookStore.Models;
-using BookStore.BusinessLogic.BaseServices;
+﻿using BookStore.BusinessLogic.BaseServices;
+using BookStore.Models;
 
 namespace BookStore.BusinessLogic.IServices
 {

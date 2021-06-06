@@ -126,22 +126,6 @@
         e.stopPropagation();
     });
 
-
-    ///*==================================================================
-    //[ isotope ]*/
-
-    var isotopeButton = $('.filter-tope-group button');
-
-    $(isotopeButton).each(function () {
-        $(this).on('click', function () {
-            for (var i = 0; i < isotopeButton.length; i++) {
-                $(isotopeButton[i]).removeClass('how-active1');
-            }
-
-            $(this).addClass('how-active1');
-        });
-    });
-
     /*==================================================================
     [ Filter / Search product ]*/
     $('.js-show-filter').on('click', function () {
@@ -164,13 +148,11 @@
         }
     });
 
-
-
-
     /*==================================================================
     [ Cart ]*/
+
     $('.js-show-cart').on('click', function () {
-        $('.js-panel-cart').addClass('show-header-cart');
+        $('.js-panel-cart').addClass('show-header-cart')
     });
 
     $('.js-hide-cart').on('click', function () {
@@ -240,18 +222,5 @@
             }
         });
     });
-
-    /*==================================================================
-    [ Show modal1 ]*/
-    $('.js-show-modal1').on('click', function (e) {
-        e.preventDefault();
-        $('.js-modal1').addClass('show-modal1');
-    });
-
-    $('.js-hide-modal1').on('click', function () {
-        $('.js-modal1').removeClass('show-modal1');
-    });
-
-
 
 })(jQuery);

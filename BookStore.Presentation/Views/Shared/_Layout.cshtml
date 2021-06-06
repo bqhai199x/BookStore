@@ -35,12 +35,32 @@
     <link rel="stylesheet" type="text/css" href="~/Assets/css/main.css">
     <link rel="stylesheet" type="text/css" href="~/Assets/css/tofubook.css">
     <!--===============================================================================================-->
+
+
 </head>
 <body class="animsition">
 
     @Html.Partial("_Header")
 
-    @Html.Partial("_QuickCart")
+    <!-- Cart -->
+    <div class="wrap-header-cart js-panel-cart">
+        <div class="s-full js-hide-cart"></div>
+
+        <div class="header-cart flex-col-l p-l-65 p-r-25">
+            <div class="header-cart-title flex-w flex-sb-m p-b-8">
+                <span class="mtext-103 cl2">
+                    Giỏ hàng của bạn
+                </span>
+
+                <div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
+                    <i class="zmdi zmdi-close"></i>
+                </div>
+            </div>
+            <div class="header-cart-content flex-w js-pscroll">
+                <!-- Quick cart here -->
+            </div>
+        </div>
+    </div>
 
     @RenderBody()
 
@@ -49,6 +69,7 @@
     <!--===============================================================================================-->
     <script src="~/Assets/vendor/jquery/jquery-3.2.1.min.js"></script>
     <!--===============================================================================================-->
+
     <script src="~/Assets/vendor/animsition/js/animsition.min.js"></script>
     <!--===============================================================================================-->
     <script src="~/Assets/vendor/bootstrap/js/popper.js"></script>
@@ -96,10 +117,10 @@
         $('.js-addwish-b2').each(function () {
             var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
             $(this).on('click', function () {
-                swal(nameProduct, "is added to wishlist !", "success");
+                //swal(nameProduct, "is added to wishlist !", "success");
 
-                $(this).addClass('js-addedwish-b2');
-                $(this).off('click');
+                $(this).toggleClass('js-addedwish-b2');
+                //$(this).off('click');
             });
         });
 
@@ -119,7 +140,7 @@
         $('.js-addcart-detail').each(function () {
             var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
             $(this).on('click', function () {
-                swal(nameProduct, "is added to cart !", "success");
+                swal(nameProduct, "đã được thêm vào giỏ hàng !", "success");
             });
         });</script>
     <!--===============================================================================================-->
@@ -143,5 +164,6 @@
 
     <!--===============================================================================================-->
     <script src="~/Assets/js/tofubook.js"></script>
+
 </body>
 </html>

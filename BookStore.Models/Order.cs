@@ -15,12 +15,6 @@
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OrderId { get; set; }
 
-        [NotMapped]
-        public string Code
-        {
-            get { return OrderId.ToString("DH000"); }
-        }
-
         [DisplayName("Ngày đặt")]
         public DateTime? OrderDate { get; set; }
 
@@ -52,17 +46,5 @@
         public virtual Shipper Shipper { get; set; }
 
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
-
-        [NotMapped]
-        public decimal? SubTotal
-        {
-            get { return OrderDetails.Sum(x => x.Total); }
-        }
-
-        [NotMapped]
-        public decimal? GrandTotal
-        {
-            get { return SubTotal - SubTotal * Coupon.Discount + Shipper.Price; }
-        }
     }
 }

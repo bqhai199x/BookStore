@@ -1,0 +1,66 @@
+﻿@model BookStore.Presentation.ViewModels.OrderVM
+
+<ul class="header-cart-wrapitem w-full">
+    @foreach (var item in Model.Order.OrderDetails)
+    {
+        <li class="header-cart-item flex-w flex-t m-b-12">
+            <div class="header-cart-item-img">
+                <img src="~/Assets/images/products/@item.Product.Images.FirstOrDefault().ImageURL" alt="IMG">
+                <input class="productId" hidden value="@item.ProductId" />
+            </div>
+
+            <div class="header-cart-item-txt p-t-8">
+                <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+                    @item.Product.Name
+                </a>
+
+                <span class="header-cart-item-info">
+                    @item.Quantity x @Html.DisplayFor(x => item.Product.Price)
+                </span>
+            </div>
+        </li>
+    }
+</ul>
+
+<input id="numCart" value="@Model.TotalQuantity" hidden/>
+
+<div class="w-full">
+    <div class="header-cart-total w-full p-tb-40">
+        Tổng: @Html.DisplayFor(x => Model.GrandTotal) VNĐ
+    </div>
+
+    <div class="header-cart-buttons flex-w w-full">
+        <a href="#" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+            Giỏ hàng
+        </a>
+
+        <a href="#" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+            Thanh toán
+        </a>
+    </div>
+</div>
+
+<script>
+    /*==================================================================
+    [ Remove item from cart ]*/
+    $('.header-cart-content').each(function () {
+        $('.header-cart-item-img').on('click', function () {
+            $.ajax({
+                url: "/Cart/RemoveItem",
+                type: "POST",
+                data: {
+                    "productId": $(this).find('.productId').val(),
+                },
+                success: function (data) {
+                    $('.header-cart-content').load("/Cart/QuickCart", function () {
+                        $('.icon-header-noti').attr('data-notify', data);
+                    })
+
+                },
+                error: function (error) {
+                    swal("Lỗi", "xoá khỏi giỏ hàng không thành công !", "error");
+                }
+            });
+        });
+    });
+</script>

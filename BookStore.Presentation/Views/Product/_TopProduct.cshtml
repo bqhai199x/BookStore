@@ -1,0 +1,54 @@
+﻿@model IEnumerable<BookStore.Models.Product>
+
+<!-- Product -->
+<section class="sec-product bg0 p-t-100 p-b-50">
+    <div class="container">
+        <div class="p-b-32">
+            <h3 class="ltext-103 cl5">
+                Sản phẩm bán chạy
+            </h3>
+        </div>
+
+        <!-- Slide2 -->
+        <div class="wrap-slick2">
+            <div class="slick2">
+                @foreach (var item in Model)
+                {
+                    <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
+                        <!-- Block2 -->
+                        <div class="block2">
+                            <div class="block2-pic hov-img0">
+                                <img src="~/Assets/images/products/@item.Images.FirstOrDefault().ImageURL" alt="IMG-PRODUCT"
+                                     width="315" height="440">
+
+                                <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                                    <span class="newsort" hidden>@item.ProductId</span>
+                                    Xem nhanh
+                                </a>
+                            </div>
+
+                            <div class="block2-txt flex-w flex-t p-t-14">
+                                <div class="block2-txt-child1 flex-col-l ">
+                                    <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                        @item.Name
+                                    </a>
+
+                                    <span class="stext-105 cl3">
+                                        @Html.DisplayFor(x => item.Price) VNĐ
+                                    </span>
+                                </div>
+
+                                <div class="block2-txt-child2 flex-r p-t-3">
+                                    <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+                                        <img class="icon-heart1 dis-block trans-04" src="~/Assets/images/icons/icon-heart-01.png" alt="ICON">
+                                        <img class="icon-heart2 dis-block trans-04 ab-t-l" src="~/Assets/images/icons/icon-heart-02.png" alt="ICON">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

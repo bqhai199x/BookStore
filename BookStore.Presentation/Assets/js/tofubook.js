@@ -1,236 +1,218 @@
-﻿    
-//// init Isotope
-//var initial_items = 4;
-//var next_items = 4;
-//var $grid = $('.isotope-grid').isotope({
-//    itemSelector: '.isotope-item',
-//    percentPosition: true,
-//    animationEngine: 'best-available',
-//    layoutMode: 'fitRows',
-//    stamp: '.isotope-item--static',
-//    masonry: {
-//        columnWidth: '.isotope-item'
-//    }
-//});
+﻿///*==================================================================
+//[ active ]*/
 
+var isotopeButton = $('.filter-tope-group button');
 
-//// bind filter button click
-//$('.filter-tope-group').on('click', 'button', function () {
-//    var filterValue = $(this).attr('data-filter');
-//    // use filterFn if matches value
-//    $grid.isotope({ filter: filterValue });
-//    updateFilterCounts();
-//});
-//function updateFilterCounts() {
-//    // get filtered item elements
-//    var itemElems = $grid.isotope('getFilteredItemElements');
-//    var count_items = $(itemElems).length;
-
-//    if (count_items > initial_items) {
-//        $('.loadmore').show();
-//    }
-//    else {
-//        $('.loadmore').hide();
-//    }
-//    if ($('.isotope-item').hasClass('visible_item')) {
-//        $('.isotope-item').removeClass('visible_item');
-//    }
-//    var index = 0;
-
-//    $(itemElems).each(function () {
-//        if (index >= initial_items) {
-//            $(this).addClass('visible_item');
-//        }
-//        index++;
-//    });
-//    $grid.isotope('layout');
-//}
-
-//function showNextItems(pagination) {
-//    var itemsMax = $('.visible_item').length;
-//    var itemsCount = 0;
-//    $('.visible_item').each(function () {
-//        if (itemsCount < pagination) {
-//            $(this).removeClass('visible_item');
-//            itemsCount++;
-//        }
-//    });
-//    if (itemsCount >= itemsMax) {
-//        $('.loadmore').hide();
-//    }
-//    $grid.isotope('layout');
-//}
-//// function that hides items when page is loaded
-//function hideItems(pagination) {
-//    var itemsMax = $('.isotope-item').length;
-//    var itemsCount = 0;
-//    $('.isotope-item').each(function () {
-//        if (itemsCount >= pagination) {
-//            $(this).addClass('visible_item');
-//        }
-//        itemsCount++;
-//    });
-//    if (itemsCount < itemsMax || initial_items >= itemsMax) {
-//        $('.loadmore').hide();
-//    }
-//    $grid.isotope('layout');
-//}
-
-//$('.loadmore').on('click','button', function (e) {
-//    e.preventDefault();
-//    showNextItems(next_items);
-//});
-
-//hideItems(initial_items);
-
-// external js: isotope.pkgd.js
-
-// external js: isotope.pkgd.js
-
-$(document).ready(function () {
-
-    // init Isotope
-    var $container = $('.isotope-grid').isotope({
-        itemSelector: '.isotope-item',
-        percentPosition: true,
-        animationEngine: 'best-available',
-        layoutMode: 'fitRows',
-        stamp: '.isotope-item--static',
-        masonry: {
-            columnWidth: '.isotope-item'
-        },
-    });
-
-    // filter functions
-    var filterFns = {
-        // show if number is greater than 50
-        lessThan100k: function () {
-            var price = $(this).find('.price').text();
-            price = parseFloat(price.replace('.', ''));
-            return parseInt(price, 10) < 100000;
-        },
-        greaterThan100k: function () {
-            var price = $(this).find('.price').text();
-            price = parseFloat(price.replace('.', ''));
-            return parseInt(price, 10) > 100000;
-        },
-
-        //// show if name ends with -ium
-        ////greaterThan100: function () {
-        ////    var name = $(this).find('.name').text();
-        ////    return name.match(/ium$/);
-        ////}
-    };
-
-    var filters = {};
-
-    function concatValues(obj) {
-        var value = '';
-        for (var prop in obj) {
-            value += obj[prop];
+$(isotopeButton).each(function () {
+    $(this).on('click', function () {
+        for (var i = 0; i < isotopeButton.length; i++) {
+            $(isotopeButton[i]).removeClass('how-active1');
         }
-        return value;
+
+        $(this).addClass('how-active1');
+    });
+});
+
+var isotopeButton2 = $('.filter-tope-group-2 button');
+
+$(isotopeButton2).each(function () {
+    $(this).on('click', function () {
+        for (var i = 0; i < isotopeButton2.length; i++) {
+            $(isotopeButton2[i]).removeClass('filter-link-active');
+        }
+
+        $(this).addClass('filter-link-active');
+    });
+});
+
+var isotopeButton3 = $('.sort-tope-group button');
+
+$(isotopeButton3).each(function () {
+    $(this).on('click', function () {
+        for (var i = 0; i < isotopeButton3.length; i++) {
+            $(isotopeButton3[i]).removeClass('filter-link-active');
+        }
+
+        $(this).addClass('filter-link-active');
+    });
+});
+
+///*==================================================================
+//[ isotope ]*/
+
+// init Isotope
+var qsRegex;
+var filters = {};
+var buttonFilter;
+var initial_items = 8;
+var next_items = 8;
+
+var $grid = $('.isotope-grid').isotope({
+    itemSelector: '.isotope-item',
+    percentPosition: true,
+    animationEngine: 'best-available',
+    layoutMode: 'fitRows',
+    stamp: '.isotope-item--static',
+    masonry: {
+        columnWidth: '.isotope-item'
+    },
+    getSortData: {
+        price: function (itemElem) {
+            var price = $(itemElem).find('.pricesort').text();
+            return parseFloat(price.replace('.', ''));
+        },
+        newness: function (itemElem) {
+            var newness = $(itemElem).find('.newsort').text();
+            return parseInt(newness);
+        },
+        name: '.name'
+    },
+    filter: function () {
+        var $this = $(this);
+        var searchResult = qsRegex ? $this.find('.name, .author, .publisher').text().match(qsRegex) : true;
+        var buttonResult = buttonFilter ? $this.is(buttonFilter) : true;
+        return searchResult && buttonResult;
     }
+});
 
-    // bind filter button click
-    $('.filter-tope-group, .filter-tope-group-2').on('click', 'button', function (event) {
-        var $button = $(event.currentTarget);
-        // get group key
-        var $buttonGroup = $button.parents('.filter-tope-group, .filter-tope-group-2');
-        var filterGroup = $buttonGroup.attr('data-filter-group');
-        // set filter for group
-        var temp = $button.attr('data-filter');
-        temp = filterFns[temp] || temp;
-        filters[filterGroup] = temp;
+// use value of search field to filter
+var $quicksearch = $('.quicksearch').keyup(debounce(function () {
+    qsRegex = new RegExp($quicksearch.val(), 'gi');
+    $grid.isotope();
+    updateFilterCounts();
+}, 300));
 
-        // combine filters
-        var filterValue = concatValues(filters);
-        filterValue = 
-        // use filterFn if matches value
-        $container.isotope({
-            filter: filterValue
-        });
-    });
+// debounce so filtering doesn't happen every millisecond
+function debounce(fn, threshold) {
+    var timeout;
+    threshold = threshold || 100;
+    return function debounced() {
+        clearTimeout(timeout);
+        var args = arguments;
+        var _this = this;
+        function delayed() {
+            fn.apply(_this, args);
+        }
+        timeout = setTimeout(delayed, threshold);
+    };
+}
 
-
-    //$('#sorts').on('click', 'button', function () {
-    //    var filterValue = $(this).attr('data-filter');
-    //    // use filterFn if matches value
-    //    filterValue = filterFns[filterValue] || filterValue;
-    //    $container.isotope({
-    //        filter: filterValue
-    //    });
-    //});
-
-    // bind sort button click   
-    //$('#sorts').on('click', 'a', function () {
-    //    var sortByValue = $(this).attr('data-sort-by');
-    //    $container.isotope({
-    //        sortBy: sortByValue
-    //    });
-    //});
-
-    //// change is-checked class on buttons
-    //$('.button-group').each(function (i, buttonGroup) {
-    //    var $buttonGroup = $(buttonGroup);
-    //    $buttonGroup.on('click', 'button', function () {
-    //        $buttonGroup.find('.is-checked').removeClass('is-checked');
-    //        $(this).addClass('is-checked');
-    //    });
-    //});
-
-    //****************************
-    // Isotope Load more button
-    //****************************
-    var initShow = 8; //number of items loaded on init & onclick load more button
-    var counter = initShow; //counter for load more button
-    var iso = $container.data('isotope'); // get Isotope instance
-
-    loadMore(initShow); //execute function onload
-
-    function loadMore(toShow) {
-        $container.find(".hidden").removeClass("hidden");
-
-        var hiddenElems = iso.filteredItems.slice(toShow, iso.filteredItems.length).map(function (item) {
-            return item.element;
-        });
-        $(hiddenElems).addClass('hidden');
-        $container.isotope('layout');
-
-        //when no more to load, hide show more button
-        if (hiddenElems.length == 0) {
-            jQuery(".loadmore").hide();
-        } else {
-            jQuery(".loadmore").show();
-        };
-
+function concatValues(obj) {
+    var value = '';
+    for (var prop in obj) {
+        value += obj[prop];
     }
+    return value;
+}
 
-    //append load more button
-    //$container.after('<button id="load-more"> Load More</button>');
+//bind filter button click
+$('.filter-tope-group, .filter-tope-group-2').on('click', 'button', function (event) {
+    var $button = $(event.currentTarget);
+    // get group key
+    var $buttonGroup = $button.parents('.filter-tope-group, .filter-tope-group-2');
+    var filterGroup = $buttonGroup.attr('data-filter-group');
+    // set filter for group
+    filters[filterGroup] = $button.attr('data-filter');
 
-    //when load more button clicked
-    $('.loadmore').on('click', 'button', function () {
-        if ($('.filter-tope-group').data('clicked')) {
-            //when filter button clicked, set initial value for counter
-            counter = initShow;
-            $('.filter-tope-group').data('clicked', false);
-        } else {
-            counter = counter;
-        };
+    // combine filters
+    buttonFilter = concatValues(filters);
+    $grid.isotope();
+    updateFilterCounts();
+});
 
-        counter = counter + initShow;
-
-        loadMore(counter);
+$('.sort-tope-group').on('click', 'button', function () {
+    var sortByValue = $(this).attr('data-sort-by');
+    sortByValue = sortByValue.split(' ');
+    var value = sortByValue[0];
+    var isSortByAsc = sortByValue[1] == 'asc' ? true : false;
+    $grid.isotope({
+        sortBy: value,
+        sortAscending: isSortByAsc
     });
+    updateFilterCounts();
+});
 
-    //when filter button clicked
-    $(".filter-tope-group").click(function () {
-        $(this).data('clicked', true);
+function updateFilterCounts() {
+    // get filtered item elements
+    var itemElems = $grid.isotope('getFilteredItemElements');
+    var count_items = $(itemElems).length;
 
-        loadMore(initShow);
+    if (count_items > initial_items) {
+        $('.loadmore').show();
+    }
+    else {
+        $('.loadmore').hide();
+    }
+    if ($('.isotope-item').hasClass('visible_item')) {
+        $('.isotope-item').removeClass('visible_item');
+    }
+    var index = 0;
+
+    $(itemElems).each(function () {
+        if (index >= initial_items) {
+            $(this).addClass('visible_item');
+        }
+        index++;
     });
+    $grid.isotope('layout');
+}
 
+function showNextItems(pagination) {
+    var itemsMax = $('.visible_item').length;
+    var itemsCount = 0;
+    $('.visible_item').each(function () {
+        if (itemsCount < pagination) {
+            $(this).removeClass('visible_item');
+            itemsCount++;
+        }
+    });
+    if (itemsCount >= itemsMax) {
+        $('.loadmore').hide();
+    }
+    $grid.isotope('layout');
+}
+// function that hides items when page is loaded
+function hideItems(pagination) {
+    var itemsMax = $('.isotope-item').length;
+    var itemsCount = 0;
+    $('.isotope-item').each(function () {
+        if (itemsCount >= pagination) {
+            $(this).addClass('visible_item');
+        }
+        itemsCount++;
+    });
+    if (itemsCount < itemsMax || initial_items >= itemsMax) {
+        $('.loadmore').hide();
+    }
+    $grid.isotope('layout');
+}
 
+$('.loadmore').on('click', 'button', function (e) {
+    e.preventDefault();
+    showNextItems(next_items);
+    $('html,body').animate({
+        scrollTop: $('.scroll').offset().top - $('.isotope-item').height() * 1.61
+    }, 1500);
+});
 
+hideItems(initial_items);
+
+/*==================================================================
+    [ Show modal1 ]*/
+$('.js-show-modal1').on('click', function (e) {
+    e.preventDefault();
+    var url = '/Product/QuickProduct?id=' + $(this).find('.newsort').text();
+    $('.quick-product').load(url, function () {
+        $('.js-modal1').addClass('show-modal1');
+    })
+});
+
+$('.js-hide-modal1').on('click', function () {
+    $('.js-modal1').removeClass('show-modal1');
+});
+
+/*==================================================================
+    [ Quick cart ]*/
+$('.header-cart-content').load("/Cart/QuickCart", function () {
+    $('.icon-header-noti').attr('data-notify', $('#numCart').val())
 });

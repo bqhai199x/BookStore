@@ -1,89 +1,90 @@
-﻿ <!-- Filter -->
+﻿<!-- Search product -->
+<div class="dis-none panel-search w-full p-t-10 p-b-15">
+    <div class="bor8 dis-flex p-l-15">
+        <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+            <i class="zmdi zmdi-search"></i>
+        </button>
+
+        <input class="mtext-107 cl2 size-114 p-r-15 quicksearch" type="text" name="search-product" placeholder="Nhập từ khoá (Tên sách, tác giả, nhà xuất bản)">
+    </div>
+</div>
+
+<!-- Filter -->
 <div class="dis-none panel-filter w-full p-t-10">
     <div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
         <div class="filter-col1 p-r-15 p-b-27">
             <div class="mtext-102 cl2 p-b-15">
-                Sort By
+                Sắp xếp theo
             </div>
 
-            <ul>
+            <ul class="sort-tope-group">
+
+
                 <li class="p-b-6">
-                    <a href="#" class="filter-link stext-106 trans-04">
-                        Default
-                    </a>
+                    <button class="filter-link stext-106 trans-04 filter-link-active" data-sort-by="newness desc">
+                        Sản phẩm mới
+                    </button>
                 </li>
 
                 <li class="p-b-6">
-                    <a href="#" class="filter-link stext-106 trans-04">
-                        Popularity
-                    </a>
+                    <button class="filter-link stext-106 trans-04" data-sort-by="name asc">
+                        Tên sách: A - Z
+                    </button>
                 </li>
 
                 <li class="p-b-6">
-                    <a href="#" class="filter-link stext-106 trans-04">
-                        Average rating
-                    </a>
+                    <button class="filter-link stext-106 trans-04" data-sort-by="name desc">
+                        Tên sách: Z - A
+                    </button>
                 </li>
 
                 <li class="p-b-6">
-                    <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-                        Newness
-                    </a>
+                    <button class="filter-link stext-106 trans-04" data-sort-by="price asc">
+                        Giá: Thấp -> Cao
+                    </button>
                 </li>
 
                 <li class="p-b-6">
-                    <a href="#" class="filter-link stext-106 trans-04">
-                        Price: Low to High
-                    </a>
-                </li>
-
-                <li class="p-b-6">
-                    <a href="#" class="filter-link stext-106 trans-04">
-                        Price: High to Low
-                    </a>
+                    <button class="filter-link stext-106 trans-04" data-sort-by="price desc">
+                        Giá: Cao -> Thấp
+                    </button>
                 </li>
             </ul>
         </div>
 
         <div class="filter-col2 p-r-15 p-b-27">
             <div class="mtext-102 cl2 p-b-15">
-                Price
+                Khoảng giá
             </div>
 
             <ul class="filter-tope-group-2" data-filter-group="price">
                 <li class="p-b-6">
-                    <button class="filter-link stext-106 trans-04 filter-link-active">
-                        All
+                    <button class="filter-link stext-106 trans-04 filter-link-active" data-filter="*">
+                        Mọi mức giá
                     </button>
                 </li>
 
                 <li class="p-b-6">
-                    <button class="filter-link stext-106 trans-04" data-filter="lessThan100k">
-                        $0.00 - $50.00
+                    <button class="filter-link stext-106 trans-04" data-filter=".lessthan100k">
+                        0 - 100.000 VNĐ
                     </button>
                 </li>
 
                 <li class="p-b-6">
-                    <button class="filter-link stext-106 trans-04" data-filter="greaterThan100k">
-                        $50.00 - $100.00
+                    <button class="filter-link stext-106 trans-04" data-filter=".p100-200k">
+                        100.000 - 200.000 VNĐ
                     </button>
                 </li>
 
                 <li class="p-b-6">
-                    <button class="filter-link stext-106 trans-04">
-                        $100.00 - $150.00
+                    <button class="filter-link stext-106 trans-04" data-filter=".p200-300k">
+                        200.000 - 300.000 VNĐ
                     </button>
                 </li>
 
                 <li class="p-b-6">
-                    <button class="filter-link stext-106 trans-04">
-                        $150.00 - $200.00
-                    </button>
-                </li>
-
-                <li class="p-b-6">
-                    <button class="filter-link stext-106 trans-04">
-                        $200.00+
+                    <button class="filter-link stext-106 trans-04" data-filter=".greaterthan300k">
+                        Trên 300.000 VNĐ
                     </button>
                 </li>
             </ul>
@@ -142,16 +143,6 @@
 
                     <a href="#" class="filter-link stext-106 trans-04">
                         Red
-                    </a>
-                </li>
-
-                <li class="p-b-6">
-                    <span class="fs-15 lh-12 m-r-6" style="color: #aaa;">
-                        <i class="zmdi zmdi-circle-o"></i>
-                    </span>
-
-                    <a href="#" class="filter-link stext-106 trans-04">
-                        White
                     </a>
                 </li>
             </ul>

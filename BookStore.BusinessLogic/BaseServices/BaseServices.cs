@@ -46,10 +46,30 @@ namespace BookStore.BusinessLogic.BaseServices
             return await _unitOfWork.CommitAsync();
         }
 
-        public bool Delete(object id)
+        public bool Delete(TEntity entity)
+        {
+            if (entity == null)
+            {
+                throw new Exception("entity không tồn tại!");
+            }
+            _repository.Delete(entity);
+            return _unitOfWork.Commit() > 0;
+        }
+
+        public virtual async Task<bool >DeleteAsync(TEntity entity)
+        {
+            if (entity == null)
+            {
+                throw new Exception("entity không tồn tại!");
+            }
+            _repository.Delete(entity);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public bool DeleteById(object id)
         {
             var entity = _repository.GetById(id);
-            if(entity == null)
+            if (entity == null)
             {
                 throw new Exception("id không tồn tại!");
             }
@@ -57,10 +77,10 @@ namespace BookStore.BusinessLogic.BaseServices
             return _unitOfWork.Commit() > 0;
         }
 
-        public virtual async Task<bool> DeleteAsync(object id)
+        public virtual async Task<bool> DeleteByIdAsync(object id)
         {
             var entity = await _repository.GetByIdAsync(id);
-            if(entity == null)
+            if (entity == null)
             {
                 throw new Exception("id không tồn tại");
             }
@@ -91,7 +111,7 @@ namespace BookStore.BusinessLogic.BaseServices
         public virtual TEntity FindInclude(Expression<Func<TEntity, bool>> filter, string includeProperties = "")
         {
             var query = _repository.FindBy(filter);
-            foreach (var item in includeProperties.Split(new[] { ","}, StringSplitOptions.RemoveEmptyEntries))
+            foreach (var item in includeProperties.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries))
             {
                 query = query.Include(item);
             }
@@ -108,12 +128,12 @@ namespace BookStore.BusinessLogic.BaseServices
             return await _repository.GetAllAsync();
         }
 
-        public virtual async Task<PaginatedList<TEntity>> 
-            GetAsync(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, 
+        public virtual async Task<PaginatedList<TEntity>>
+            GetAdvancedAsync(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>,
             IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "", int page = 1, int pageSize = 10)
         {
             var query = _repository.Get(filter: filter, includeProperties: includeProperties);
-            if(orderBy != null)
+            if (orderBy != null)
             {
                 query = orderBy(query);
             }
@@ -121,7 +141,7 @@ namespace BookStore.BusinessLogic.BaseServices
         }
 
         public virtual PaginatedList<TEntity>
-            GetNotAsync(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>,
+            GetAdvanced(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>,
             IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "", int page = 1, int pageSize = 10)
         {
             var query = _repository.Get(filter: filter, includeProperties: includeProperties);
@@ -142,9 +162,11 @@ namespace BookStore.BusinessLogic.BaseServices
             return await _repository.GetByIdAsync(id);
         }
 
-        public virtual IEnumerable<TEntity> GetTop(Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null)
+        public virtual IEnumerable<TEntity> GetTop(Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, int top = 0)
         {
             var query = orderBy(_repository.GetAll());
+            if (top != 0)
+                return query.Take(top).ToList();
             return query.ToList();
         }
 
@@ -157,7 +179,7 @@ namespace BookStore.BusinessLogic.BaseServices
         public virtual async Task<bool> UpdateAsync(TEntity entity)
         {
             _repository.Update(entity);
-            return await _unitOfWork.CommitAsync()>0;
+            return await _unitOfWork.CommitAsync() > 0;
         }
         #endregion
     }

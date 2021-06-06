@@ -15,8 +15,13 @@ namespace BookStore.BusinessLogic.BaseServices
         bool Update(TEntity entity);
         Task<bool> UpdateAsync(TEntity entity);
 
-        bool Delete(object id);
-        Task<bool> DeleteAsync(object id);
+        bool Delete(TEntity entity); 
+        
+        Task<bool> DeleteAsync(TEntity entity);
+
+        bool DeleteById(object id);
+
+        Task<bool> DeleteByIdAsync(object id);
 
         int Count();
         Task<int> CountAsync();
@@ -24,11 +29,11 @@ namespace BookStore.BusinessLogic.BaseServices
         TEntity GetById(object id);
         Task<TEntity> GetByIdAsync(object id);
 
-        PaginatedList<TEntity> GetNotAsync(Expression<Func<TEntity, bool>> filter = null,
+        PaginatedList<TEntity> GetAdvanced(Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "", int page = 1, int pageSize = 10);
 
-        Task<PaginatedList<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter = null,
+        Task<PaginatedList<TEntity>> GetAdvancedAsync(Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "", int page = 1, int pageSize = 10);
 
@@ -41,6 +46,6 @@ namespace BookStore.BusinessLogic.BaseServices
         IEnumerable<TEntity> FindAll(Expression<Func<TEntity, bool>> filter);
         Task<IEnumerable<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> filter);
 
-        IEnumerable<TEntity> GetTop(Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null);
+        IEnumerable<TEntity> GetTop(Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, int top = 0);
     }
 }

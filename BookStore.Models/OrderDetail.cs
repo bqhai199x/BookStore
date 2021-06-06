@@ -23,11 +23,5 @@
 
         [ForeignKey("ProductId")]
         public virtual Product Product { get; set; }
-
-        [NotMapped]
-        public decimal? Total
-        {
-            get { return Quantity * Product.Price; }
-        }
     }
 }

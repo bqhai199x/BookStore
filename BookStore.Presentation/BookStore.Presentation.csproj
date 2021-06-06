@@ -147,11 +147,16 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\OrderDetailVM.cs" />
+    <Compile Include="ViewModels\OrderVM.cs" />
+    <Compile Include="ViewModels\ProductVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\css\main.css" />
@@ -254,22 +259,43 @@
     <Content Include="Assets\images\products\cuon-sach-cua-nang-tho-2.jpg" />
     <Content Include="Assets\images\products\cuon-sach-cua-nang-tho-3.jpg" />
     <Content Include="Assets\images\products\cuon-sach-cua-nang-tho.jpg" />
+    <Content Include="Assets\images\products\dam-yeu-dam-ganh-vac-2.jpg" />
+    <Content Include="Assets\images\products\dam-yeu-dam-ganh-vac-3.jpg" />
+    <Content Include="Assets\images\products\dam-yeu-dam-ganh-vac.jpg" />
+    <Content Include="Assets\images\products\de-men-phieu-luu-ky-2.jfif" />
+    <Content Include="Assets\images\products\de-men-phieu-luu-ky-3.jfif" />
+    <Content Include="Assets\images\products\de-men-phieu-luu-ky.jpg" />
     <Content Include="Assets\images\products\empty_cart.jpeg" />
     <Content Include="Assets\images\products\hanh-trang-lap-trinh-2.jfif" />
     <Content Include="Assets\images\products\hanh-trang-lap-trinh-3.jfif" />
+    <Content Include="Assets\images\products\hanh-trang-lap-trinh.jfif" />
     <Content Include="Assets\images\products\hanh-trang-lap-trinh.jpg" />
+    <Content Include="Assets\images\products\he-thong-ngan-hang-hoa-ky-2.jpg" />
+    <Content Include="Assets\images\products\he-thong-ngan-hang-hoa-ky.png" />
     <Content Include="Assets\images\products\huan-luyen-vien-tu-tin-2.jpg" />
     <Content Include="Assets\images\products\huan-luyen-vien-tu-tin.jpg" />
     <Content Include="Assets\images\products\nguoi-ba-tai-gioi-vung-saga-2.jpg" />
     <Content Include="Assets\images\products\nguoi-ba-tai-gioi-vung-saga.jpg" />
     <Content Include="Assets\images\products\nhung-toa-do-song-song.jpg" />
     <Content Include="Assets\images\products\no-img.jpg" />
+    <Content Include="Assets\images\products\nobita-va-nhung-phap-su-gio-bi-an-2.jpg" />
     <Content Include="Assets\images\products\nobita-va-nhung-phap-su-gio-bi-an.jpg" />
+    <Content Include="Assets\images\products\phep-mau-de-tro-thanh-chinh-minh-2.jfif" />
+    <Content Include="Assets\images\products\phep-mau-de-tro-thanh-chinh-minh-3.jfif" />
+    <Content Include="Assets\images\products\phep-mau-de-tro-thanh-chinh-minh.jfif" />
     <Content Include="Assets\images\products\tiep-thi-giao-duc-4-0.jpg" />
+    <Content Include="Assets\images\products\trump-dung-bao-gio-bo-cuoc-2.jfif" />
+    <Content Include="Assets\images\products\trump-dung-bao-gio-bo-cuoc-3.jfif" />
+    <Content Include="Assets\images\products\trump-dung-bao-gio-bo-cuoc.jfif" />
+    <Content Include="Assets\images\products\trung-chim-cuc-cu-nay-thuoc-ve-ai-2.jpg" />
+    <Content Include="Assets\images\products\trung-chim-cuc-cu-nay-thuoc-ve-ai-3.jpg" />
     <Content Include="Assets\images\products\trung-chim-cuc-cu-nay-thuoc-ve-ai.jpg" />
     <Content Include="Assets\images\products\truyen-con-meo-day-hai-au-bay-2.jpg" />
     <Content Include="Assets\images\products\truyen-con-meo-day-hai-au-bay-3.jpg" />
     <Content Include="Assets\images\products\truyen-con-meo-day-hai-au-bay.jpg" />
+    <Content Include="Assets\images\products\tu-hoc-2000-tu-vung-tieng-anh-theo-chu-de-2.jpg" />
+    <Content Include="Assets\images\products\tu-hoc-2000-tu-vung-tieng-anh-theo-chu-de-3.jpg" />
+    <Content Include="Assets\images\products\tu-hoc-2000-tu-vung-tieng-anh-theo-chu-de.jpg" />
     <Content Include="Assets\images\products\tuyen-dung-dung-hay.jpg" />
     <Content Include="Assets\images\products\xu-huong-moi-day-tieng-anh-cho-tre-mam-non-va-tieu-hoc.jpg" />
     <Content Include="Assets\images\slide-01.jpg" />
@@ -369,7 +395,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
@@ -473,14 +498,13 @@
     <Content Include="Assets\vendor\slick\slick.scss" />
     <None Include="packages.config" />
     <Content Include="Views\Home\_Slider.cshtml" />
-    <Content Include="Views\Home\_Search.cshtml" />
     <Content Include="Views\Home\_Filter.cshtml" />
-    <Content Include="Views\Home\_Banner.cshtml" />
-    <Content Include="Views\Home\_QuickProduct.cshtml" />
+    <Content Include="Views\Product\_TopProduct.cshtml" />
+    <Content Include="Views\Product\_QuickProduct.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
-    <Content Include="Views\Shared\_QuickCart.cshtml" />
-    <Content Include="Views\Home\_Product.cshtml" />
+    <Content Include="Views\Cart\_QuickCart.cshtml" />
+    <Content Include="Views\Product\_Product.cshtml" />
     <Content Include="Views\Home\_Category.cshtml" />
     <Content Include="Views\Home\_Blog.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
