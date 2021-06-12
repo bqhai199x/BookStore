@@ -27,7 +27,7 @@
         [DisplayName("Họ tên")]
         public string FullName 
         { 
-            get { return FirstName + " " + LastName; }
+            get { return LastName + " " + FirstName; }
         }
 
         [DisplayName("Địa chỉ")]

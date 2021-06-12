@@ -1,5 +1,6 @@
 ﻿namespace BookStore.Models
 {
+    using System;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
@@ -17,8 +18,14 @@
         [ForeignKey("Product")]
         public int? ProductId { get; set; }
 
+        [DisplayName("Đánh giá")]
+        public int? Rating { get; set; }
+
         [DisplayName("Nội dung")]
         public string Content { get; set; }
+
+        [DisplayName("Ngày tạo")]
+        public DateTime? CreatedTime { get; set; }
 
         public virtual Account Account { get; set; }
 

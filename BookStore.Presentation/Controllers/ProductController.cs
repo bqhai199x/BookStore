@@ -1,6 +1,9 @@
 ﻿using BookStore.BusinessLogic.IServices;
+using BookStore.Common;
+using BookStore.Models;
 using BookStore.Presentation.ViewModels;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace BookStore.Presentation.Controllers
@@ -8,10 +11,60 @@ namespace BookStore.Presentation.Controllers
     public class ProductController : Controller
     {
         private readonly IProductServices _product;
+        private readonly ICategoryServices _category;
+        private readonly IReviewServices _review;
 
-        public ProductController(IProductServices product)
+        public ProductController(IProductServices product, ICategoryServices category, IReviewServices review)
         {
             _product = product;
+            _category = category;
+            _review = review;
+        }
+
+        [Route("san-pham")]
+        public ActionResult Product()
+        {
+            return View();
+        }
+
+        public async Task<ActionResult> ProductDetail(int id = 17)
+        {
+            var product = await _product.GetByIdAsync(id);
+            return View(product);
+        }
+
+        public PartialViewResult Review(int productId = 17)
+        {
+            var review = _review.FindAll(x => x.ProductId == productId);
+            return PartialView("_Review", review);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> AddReview(int productId, int? rate, string content)
+        {
+            Review review = new Review()
+            {
+                AccountId = MyVariable.AccountID,
+                ProductId = productId,
+                Rating = rate,
+                Content = content
+            };
+            await _review.CreateAsync(review);
+            var reviews = await _review.FindAllAsync(x => x.ProductId == productId);
+            return Json(reviews.Count(), JsonRequestBehavior.AllowGet);
+        }
+
+        public PartialViewResult RelatedProduct(int? productId, int? categoryId, string author, int? publisherId)
+        {
+            var product = _product.FindAll
+                (
+                    x => x.ProductId != productId && (x.CategoryId == categoryId ||
+                    x.Author == author || x.PublisherId == publisherId)
+                )
+                .OrderByDescending(x => x.CategoryId == categoryId)
+                .ThenByDescending(x => x.Author == author)
+                .ThenByDescending(x => x.PublisherId == publisherId);
+            return PartialView("_RelatedProduct", product);
         }
 
         public PartialViewResult TopProduct()
@@ -20,12 +73,18 @@ namespace BookStore.Presentation.Controllers
             return PartialView("_TopProduct", products);
         }
 
+        public PartialViewResult Category()
+        {
+            ViewBag.LstCategory = _category.GetAll();
+            return PartialView("_Category");
+        }
+
         public PartialViewResult AllProduct()
         {
             var products = _product.GetTop(x => x.OrderByDescending(y => y.ProductId))
                 .Select(x => new ProductVM { Product = x });
 
-            return PartialView("_Product", products);
+            return PartialView("_AllProduct", products);
         }
 
         public PartialViewResult QuickProduct(int id)

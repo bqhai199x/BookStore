@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Review>
+
+@foreach (var item in Model.OrderByDescending(x => x.ReviewId))
+{
+    <div class="flex-w flex-t p-b-10">
+        <div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
+            @if (item.AccountId == 1)
+            {
+                <img src="~/Assets/images/icons/avt-hai.jpg" alt="AVATAR">
+            }
+            else
+            {
+                <img src="~/Assets/images/icons/avt.jpg" alt="AVATAR">
+            }
+        </div>
+        <div class="size-207">
+            <div class="flex-w flex-sb-m p-b-10">
+                <span class="mtext-107 cl2 p-r-20">
+                    @item.Account.FullName
+                </span>
+
+                @if (item.Rating != 0)
+                {
+                    <span class="fs-18 cl11">
+                        @for (int i = 0; i < item.Rating; i++)
+                        {
+                            <i class="zmdi zmdi-star"></i>
+                        }
+                        @for (int i = 0; i < 5 - item.Rating; i++)
+                        {
+                            <i class="zmdi zmdi-star-outline"></i>
+                        }
+                    </span>
+                }
+            </div>
+            <p class="stext-102 cl6">
+                @item.Content
+            </p>
+        </div>
+    </div>
+    <hr />
+}
+
+

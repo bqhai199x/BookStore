@@ -199,6 +199,7 @@ hideItems(initial_items);
 
 /*==================================================================
     [ Show modal1 ]*/
+
 $('.js-show-modal1').on('click', function (e) {
     e.preventDefault();
     var url = '/Product/QuickProduct?id=' + $(this).find('.newsort').text();
@@ -213,6 +214,56 @@ $('.js-hide-modal1').on('click', function () {
 
 /*==================================================================
     [ Quick cart ]*/
+
 $('.header-cart-content').load("/Cart/QuickCart", function () {
     $('.icon-header-noti').attr('data-notify', $('#numCart').val())
+});
+
+/*==================================================================
+    [ AddToCart ]*/
+
+$('.js-addcart-detail').each(function () {
+    $(this).on('click', function () {
+        var nameProduct = $('.name').text();
+        $.ajax({
+            url: "/Cart/AddToCart",
+            type: "POST",
+            data: {
+                "productId": $('#detailId').val(),
+                "quantity": $('.num-product2').val()
+            },
+            success: function (data) {
+                $('.header-cart-content').load("/Cart/QuickCart", function () {
+                    $('.icon-header-noti').attr('data-notify', data)
+                    swal(nameProduct, "đã được thêm vào giỏ hàng !", "success");
+                })
+            },
+            error: function (error) {
+                swal(nameProduct, "thêm vào giỏ hàng không thành công !", "error");
+            }
+        });
+    });
+});
+
+/*==================================================================
+    [ AddReview ]*/
+
+$('.send').on('click', function () {
+    $.ajax({
+        url: "/Product/AddReview",
+        type: "POST",
+        data: {
+            "productId": $('#detailId').val(),
+            "rate": $('#rating').val(),
+            "content": $('#review').val()
+        },
+        success: function (data) {
+            $('#review-content').load("/Product/Review");
+            $('#reviewCount').text("Đánh giá (" + data + ")");
+            toastr.success('Đăng tải bình luận thành công','', { positionClass: "toast-bottom-right"});
+        },
+        error: function (error) {
+            toastr.error('Đăng tải bình luận thất bại');
+        }
+    })
 });

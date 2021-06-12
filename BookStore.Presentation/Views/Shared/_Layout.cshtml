@@ -31,6 +31,8 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="~/Assets/vendor/perfect-scrollbar/perfect-scrollbar.css">
     <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Assets/css/toastr.min.css">
+    <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="~/Assets/css/util.css">
     <link rel="stylesheet" type="text/css" href="~/Assets/css/main.css">
     <link rel="stylesheet" type="text/css" href="~/Assets/css/tofubook.css">
@@ -64,7 +66,7 @@
 
     @RenderBody()
 
-    @Html.Partial("_Footer")
+    @Html.Action("Footer", "Home")
 
     <!--===============================================================================================-->
     <script src="~/Assets/vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -89,6 +91,8 @@
     <!--===============================================================================================-->
     <script src="~/Assets/vendor/slick/slick.min.js"></script>
     <script src="~/Assets/js/slick-custom.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Assets/js/toastr.min.js"></script>
     <!--===============================================================================================-->
     <script src="~/Assets/vendor/parallax100/parallax100.js"></script>
     <script>$('.parallax100').parallax100();</script>
@@ -128,21 +132,14 @@
             var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
 
             $(this).on('click', function () {
-                swal(nameProduct, "is added to wishlist !", "success");
+                //swal(nameProduct, "is added to wishlist !", "success");
 
-                $(this).addClass('js-addedwish-detail');
-                $(this).off('click');
+                $(this).toggleClass('js-addedwish-detail');
+                //$(this).off('click');
             });
         });
 
-        /*---------------------------------------------*/
-
-        $('.js-addcart-detail').each(function () {
-            var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
-            $(this).on('click', function () {
-                swal(nameProduct, "đã được thêm vào giỏ hàng !", "success");
-            });
-        });</script>
+    </script>
     <!--===============================================================================================-->
     <script src="~/Assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script>

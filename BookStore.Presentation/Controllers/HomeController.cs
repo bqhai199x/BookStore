@@ -7,21 +7,23 @@ namespace BookStore.Presentation.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IProductServices _product;
         private readonly ICategoryServices _category;
 
-        public HomeController(IProductServices product, ICategoryServices category)
+        public HomeController(ICategoryServices category)
         {
-            _product = product;
             _category = category;
         }
 
-        [Route("trang-chu")]
         [Route("")]
         public ActionResult Index()
         {
-            ViewBag.LstCategory = _category.GetAll();
             return View();
+        }
+
+        public PartialViewResult Footer()
+        {
+            ViewBag.LstCategory = _category.GetAll();
+            return PartialView("_Footer");
         }
     }
 }

@@ -1,20 +1,11 @@
-﻿@{
-    ViewBag.Title = "Trang chủ";
+﻿
+@{
+    ViewBag.Title = "Sản phẩm";
 }
 
-@Html.Partial("_Slider")
-
-@Html.Action("TopProduct", "Product")
-
 <!-- Product -->
-<section class="bg0 p-t-23 p-b-100 sec-product">
+<div class="bg0 m-t-23 p-b-140">
     <div class="container">
-        <div class="p-b-10">
-            <h3 class="ltext-103 cl5">
-                Tất cả sản phẩm
-            </h3>
-        </div>
-
         <div class="flex-w flex-sb-m p-b-52 category">
             @Html.Action("Category", "Product")
 
@@ -64,10 +55,8 @@
             </button>
         </div>
     </div>
-</section>
+</div>
 
 <script>
-    document.getElementById("header").classList.remove('header-v4');
-    document.getElementById("wrap-menu").classList.remove('how-shadow1');
-    document.getElementById("index").classList.add('active-menu');
+    document.getElementById("product").classList.add('active-menu');
 </script>

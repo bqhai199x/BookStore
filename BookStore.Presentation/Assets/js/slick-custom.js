@@ -96,7 +96,6 @@
             infinite: true,
             autoplay: true,
             autoplaySpeed: 3000,
-            focusOnSelect: true,
             arrows: true,
             appendArrows: $(this),
             prevArrow: '<button class="arrow-slick2 prev-slick2"><i class="fa fa-angle-left" aria-hidden="true"></i></button>',
@@ -146,8 +145,8 @@
             slidesToScroll: 1,
             fade: true,
             infinite: true,
-            autoplay: false,
-            autoplaySpeed: 6000,
+            autoplay: true,
+            autoplaySpeed: 4000,
 
             arrows: true,
             appendArrows: $(this).find('.wrap-slick3-arrows'),
@@ -160,6 +159,30 @@
             customPaging: function (slick, index) {
                 var portrait = $(slick.$slides[index]).data('thumb');
                 return '<img src=" ' + portrait + ' "/><div class="slick3-dot-overlay"></div>';
+            },
+        });
+    });
+
+    $('.wrap-slick4').each(function () {
+        $(this).find('.slick4').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            fade: true,
+            infinite: true,
+            autoplay: true,
+            autoplaySpeed: 4000,
+
+            arrows: true,
+            appendArrows: $(this).find('.wrap-slick4-arrows'),
+            prevArrow: '<button class="arrow-slick4 prev-slick4"><i class="fa fa-angle-left" aria-hidden="true"></i></button>',
+            nextArrow: '<button class="arrow-slick4 next-slick4"><i class="fa fa-angle-right" aria-hidden="true"></i></button>',
+
+            dots: true,
+            appendDots: $(this).find('.wrap-slick4-dots'),
+            dotsClass: 'slick4-dots',
+            customPaging: function (slick, index) {
+                var portrait = $(slick.$slides[index]).data('thumb');
+                return '<img src=" ' + portrait + ' "/><div class="slick4-dot-overlay"></div>';
             },
         });
     });

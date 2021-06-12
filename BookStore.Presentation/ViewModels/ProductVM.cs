@@ -27,13 +27,9 @@ namespace BookStore.Presentation.ViewModels
                 {
                     return "p100-200k";
                 }
-                else if (Product.Price >= 200000 && Product.Price <= 300000)
-                {
-                    return "p200-300k";
-                }
                 else
                 {
-                    return "greaterthan300k";
+                    return "greaterthan200k";
                 }
             }
         }
@@ -42,7 +38,7 @@ namespace BookStore.Presentation.ViewModels
         {
             get
             {
-                if(Product.CreatedDate != null && DateTime.Compare(DateTime.Now, (DateTime)Product.CreatedDate) <= 3)
+                if(Product.CreatedDate != null && (DateTime.Now - Product.CreatedDate.Value).Days <= 3)
                 {
                     return "label-new";
                 }
