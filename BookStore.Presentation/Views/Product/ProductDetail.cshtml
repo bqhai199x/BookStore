@@ -230,7 +230,7 @@
                                 <div class="p-b-30 m-lr-15-sm">
                                     <!-- Review -->
                                     <div id="review-content">
-                                        @Html.Action("Review", "Product")
+                                        @Html.Action("Review", "Product", new { productId = Model.ProductId })
                                     </div>
                                     <!-- Add review -->
                                     <div class="w-full">

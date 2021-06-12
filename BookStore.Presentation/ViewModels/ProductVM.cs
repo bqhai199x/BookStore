@@ -45,5 +45,14 @@ namespace BookStore.Presentation.ViewModels
                 return string.Empty;
             }
         }
+
+        public string SubName
+        {
+            get
+            {
+                return Product.Images.FirstOrDefault().ImageURL
+                    .Substring(0, Product.Images.FirstOrDefault().ImageURL.IndexOf('.'));
+            }
+        }
     }
 }

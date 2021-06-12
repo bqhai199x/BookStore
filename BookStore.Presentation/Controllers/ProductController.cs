@@ -27,13 +27,14 @@ namespace BookStore.Presentation.Controllers
             return View();
         }
 
-        public async Task<ActionResult> ProductDetail(int id = 17)
+        [Route("san-pham/{id}")]
+        public async Task<ActionResult> ProductDetail(int? id)
         {
             var product = await _product.GetByIdAsync(id);
             return View(product);
         }
 
-        public PartialViewResult Review(int productId = 17)
+        public PartialViewResult Review(int? productId)
         {
             var review = _review.FindAll(x => x.ProductId == productId);
             return PartialView("_Review", review);

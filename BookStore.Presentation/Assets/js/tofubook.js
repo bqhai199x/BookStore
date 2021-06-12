@@ -258,9 +258,10 @@ $('.send').on('click', function () {
             "content": $('#review').val()
         },
         success: function (data) {
-            $('#review-content').load("/Product/Review");
+            $('#review-content').load("/Product/Review?productId=" + $('#detailId').val());
             $('#reviewCount').text("Đánh giá (" + data + ")");
-            toastr.success('Đăng tải bình luận thành công','', { positionClass: "toast-bottom-right"});
+            $('#review').val('');
+            toastr.success('Đăng tải bình luận thành công', '', { positionClass: "toast-bottom-right" });
         },
         error: function (error) {
             toastr.error('Đăng tải bình luận thất bại');
