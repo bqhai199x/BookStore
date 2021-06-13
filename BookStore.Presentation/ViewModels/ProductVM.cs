@@ -7,7 +7,7 @@ using System.Web;
 
 namespace BookStore.Presentation.ViewModels
 {
-    public class ProductVM 
+    public class ProductVM
     {
         public Product Product { get; set; }
 
@@ -18,7 +18,8 @@ namespace BookStore.Presentation.ViewModels
 
         public string PriceClass
         {
-            get {
+            get
+            {
                 if (Product.Price < 100000)
                 {
                     return "lessthan100k";
@@ -38,11 +39,21 @@ namespace BookStore.Presentation.ViewModels
         {
             get
             {
-                if(Product.CreatedDate != null && (DateTime.Now - Product.CreatedDate.Value).Days <= 3)
+                if (Product.CreatedDate != null && (DateTime.Now - Product.CreatedDate.Value).Days <= 3)
                 {
                     return "label-new";
                 }
                 return string.Empty;
+            }
+        }
+
+        public double? RateAVG
+        {
+            get
+            {
+                double? rateAVG = Product.Reviews.Where(x => x.Rating != 0).Average(x => x.Rating);
+                if (rateAVG == null) rateAVG = 0;
+                return rateAVG * 10;
             }
         }
 

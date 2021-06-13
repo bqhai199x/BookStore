@@ -147,6 +147,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -176,7 +178,6 @@
     <Content Include="Assets\fonts\PlayfairDisplay\OFL.txt" />
     <Content Include="Assets\images\about-01.jpg" />
     <Content Include="Assets\images\about-02.jpg" />
-    <Content Include="Assets\images\avatar-01.jpg" />
     <Content Include="Assets\images\bg-01.jpg" />
     <Content Include="Assets\images\bg-02.jpg" />
     <Content Include="Assets\images\blog-01.jpg" />
@@ -194,9 +195,9 @@
     <Content Include="Assets\images\gallery-07.jpg" />
     <Content Include="Assets\images\gallery-08.jpg" />
     <Content Include="Assets\images\gallery-09.jpg" />
-    <Content Include="Assets\images\icons\avatar.png" />
-    <Content Include="Assets\images\icons\avt-hai.jpg" />
-    <Content Include="Assets\images\icons\avt.jpg" />
+    <Content Include="Assets\images\avatars\avatar.png" />
+    <Content Include="Assets\images\avatars\avt-hai.jpg" />
+    <Content Include="Assets\images\avatars\avt.jpg" />
     <Content Include="Assets\images\icons\bg-1.jpg" />
     <Content Include="Assets\images\icons\bg-2.jpg" />
     <Content Include="Assets\images\icons\bg-3.jpg" />
@@ -353,6 +354,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
@@ -454,6 +458,7 @@
     <Content Include="Assets\vendor\slick\slick-theme.scss" />
     <Content Include="Assets\vendor\slick\slick.less" />
     <Content Include="Assets\vendor\slick\slick.scss" />
+    <Content Include="Areas\Admin\Views\web.config" />
     <None Include="packages.config" />
     <Content Include="Views\Home\_Slider.cshtml" />
     <Content Include="Views\Shared\_Filter.cshtml" />
@@ -466,10 +471,12 @@
     <Content Include="Views\Shared\_Category.cshtml" />
     <Content Include="Views\Home\_Blog.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
-    <Content Include="Views\Product\Product.cshtml" />
+    <Content Include="Views\Product\ViewShop.cshtml" />
     <Content Include="Views\Product\ProductDetail.cshtml" />
     <Content Include="Views\Product\_RelatedProduct.cshtml" />
     <Content Include="Views\Product\_Review.cshtml" />
+    <Content Include="Views\Account\Account.cshtml" />
+    <Content Include="Views\Cart\ViewCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BookStore.BusinessLogic\BookStore.BusinessLogic.csproj">

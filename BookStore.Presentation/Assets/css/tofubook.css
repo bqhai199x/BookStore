@@ -2,3 +2,6 @@
     display: none;
 }
 
+.block2 .block2-pic img:hover {
+    cursor: pointer;
+}

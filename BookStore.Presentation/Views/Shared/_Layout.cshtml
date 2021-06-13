@@ -113,6 +113,7 @@
     <script src="~/Assets/vendor/isotope/isotope.pkgd.min.js"></script>
     <!--===============================================================================================-->
     <script src="~/Assets/vendor/sweetalert/sweetalert.min.js"></script>
+    <!--===============================================================================================-->
     <script>
         $('.js-addwish-b2').on('click', function (e) {
             e.preventDefault();
@@ -132,7 +133,8 @@
             var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
 
             $(this).on('click', function () {
-                //swal(nameProduct, "is added to wishlist !", "success");
+                //
+                (nameProduct, "is added to wishlist !", "success");
 
                 $(this).toggleClass('js-addedwish-detail');
                 //$(this).off('click');

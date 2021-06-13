@@ -1,5 +1,6 @@
 ﻿namespace BookStore.Models
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
@@ -19,6 +20,15 @@
         [DisplayName("Chiết khấu")]
         [DisplayFormat(DataFormatString = "{0:#,###}%")]
         public decimal? Discount { get; set; }
+
+        [DisplayName("Ngày bắt đầu")]
+        public DateTime? StartDate { get; set; }
+
+        [DisplayName("Ngày kết thúc")]
+        public DateTime? EndDate { get; set; }
+
+        [DisplayName("Số lượng")]
+        public int? Quantity { get; set; }
 
         [DisplayName("Mô tả")]
         public string Description { get; set; }

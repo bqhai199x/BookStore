@@ -19,6 +19,9 @@
         [DisplayName("Mật khẩu")]
         public string Password { get; set; }
 
+        [DisplayName("Ảnh đại diện")]
+        public string ImageURL { get; set; }
+
         public string FirstName { get; set; }
         
         public string LastName { get; set; }

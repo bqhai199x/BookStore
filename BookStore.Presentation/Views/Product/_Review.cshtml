@@ -4,13 +4,13 @@
 {
     <div class="flex-w flex-t p-b-10">
         <div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
-            @if (item.AccountId == 1)
+            @if (string.IsNullOrEmpty(item.Account.ImageURL))
             {
-                <img src="~/Assets/images/icons/avt-hai.jpg" alt="AVATAR">
+                <img src="~/Assets/images/avatars/avt.jpg" alt="@item.Account.FullName">
             }
             else
             {
-                <img src="~/Assets/images/icons/avt.jpg" alt="AVATAR">
+                <img src="~/Assets/images/avatars/@item.Account.ImageURL" alt="@item.Account.FullName">
             }
         </div>
         <div class="size-207">
@@ -33,9 +33,13 @@
                     </span>
                 }
             </div>
-            <p class="stext-102 cl6">
+            <p class="stext-102 cl6" style="word-wrap:break-word">
                 @item.Content
             </p>
+            @if (MyVariable.IsAdmin == true)
+            {
+                <button class="pos-absolute text-danger" onclick="RemoveReview(@item.ReviewId)" style="right: 15px">Xoá</button>
+            }
         </div>
     </div>
     <hr />

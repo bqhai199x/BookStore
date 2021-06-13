@@ -61,6 +61,10 @@ var $grid = $('.isotope-grid').isotope({
             var price = $(itemElem).find('.pricesort').text();
             return parseFloat(price.replace('.', ''));
         },
+        rate: function (itemElem) {
+            var rate = $(itemElem).find('.ratesort').text();
+            return parseInt(rate);
+        },
         newness: function (itemElem) {
             var newness = $(itemElem).find('.newsort').text();
             return parseInt(newness);
@@ -239,7 +243,16 @@ $('.js-addcart-detail').each(function () {
                 })
             },
             error: function (error) {
-                swal(nameProduct, "thêm vào giỏ hàng không thành công !", "error");
+                swal({
+                    icon: 'error',
+                    title: 'Bạn chưa đăng nhập !',
+                    buttons: 'Đăng nhập',
+                    text: 'Vui lòng đăng nhập để thực hiện chức năng này!',
+                }).then((value) => {
+                    if (value) {
+                        window.location = "/dang-nhap";
+                    }
+                });
             }
         });
     });
@@ -249,22 +262,46 @@ $('.js-addcart-detail').each(function () {
     [ AddReview ]*/
 
 $('.send').on('click', function () {
+    if ($('#review').val().trim().length == 0) {
+        toastr.error('Bạn chưa nhập nội dung', '', { positionClass: "toast-bottom-right" });
+    }
+    else {
+        $.ajax({
+            url: "/Product/AddReview",
+            type: "POST",
+            data: {
+                "productId": $('#detailId').val(),
+                "rate": $('#rating').val(),
+                "content": $('#review').val()
+            },
+            success: function (data) {
+                $('#review-content').load("/Product/Review?productId=" + $('#detailId').val());
+                $('#reviewCount').text("Đánh giá (" + data + ")");
+                $('#review').val('');
+                $('.item-rating').removeClass('zmdi-star');
+                $('.item-rating').removeClass('zmdi-star-outline');
+                $('.item-rating').addClass('zmdi-star-outline');
+                toastr.success('Đăng tải bình luận thành công', '', { positionClass: "toast-bottom-right" });
+            },
+            error: function (error) {
+                toastr.error('Đăng tải bình luận thất bại');
+            }
+        })
+    }
+});
+
+/*==================================================================
+    [ RemoveReview ]*/
+function RemoveReview(reviewID) {
     $.ajax({
-        url: "/Product/AddReview",
-        type: "POST",
-        data: {
-            "productId": $('#detailId').val(),
-            "rate": $('#rating').val(),
-            "content": $('#review').val()
-        },
+        url: "/Product/DeleteReview?reviewId=" + reviewID,
         success: function (data) {
             $('#review-content').load("/Product/Review?productId=" + $('#detailId').val());
             $('#reviewCount').text("Đánh giá (" + data + ")");
-            $('#review').val('');
-            toastr.success('Đăng tải bình luận thành công', '', { positionClass: "toast-bottom-right" });
+            toastr.success('Xoá thành công', '', { positionClass: "toast-bottom-right" });
         },
         error: function (error) {
-            toastr.error('Đăng tải bình luận thất bại');
+            toastr.error('Xoá thất bại');
         }
     })
-});
+}

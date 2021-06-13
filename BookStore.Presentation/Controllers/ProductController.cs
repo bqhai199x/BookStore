@@ -21,8 +21,8 @@ namespace BookStore.Presentation.Controllers
             _review = review;
         }
 
-        [Route("san-pham")]
-        public ActionResult Product()
+        [Route("cua-hang")]
+        public ActionResult ViewShop()
         {
             return View();
         }
@@ -31,6 +31,7 @@ namespace BookStore.Presentation.Controllers
         public async Task<ActionResult> ProductDetail(int? id)
         {
             var product = await _product.GetByIdAsync(id);
+            ViewBag.RateAVG = product.Reviews.Where(x => x.Rating != 0).Average(x => x.Rating);
             return View(product);
         }
 
@@ -51,6 +52,15 @@ namespace BookStore.Presentation.Controllers
                 Content = content
             };
             await _review.CreateAsync(review);
+            var reviews = await _review.FindAllAsync(x => x.ProductId == productId);
+            return Json(reviews.Count(), JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<JsonResult> DeleteReview(int? reviewId)
+        {
+            var review = await _review.GetByIdAsync(reviewId);
+            int? productId = review.ProductId;
+            await _review.DeleteAsync(review);
             var reviews = await _review.FindAllAsync(x => x.ProductId == productId);
             return Json(reviews.Count(), JsonRequestBehavior.AllowGet);
         }
@@ -84,13 +94,14 @@ namespace BookStore.Presentation.Controllers
         {
             var products = _product.GetTop(x => x.OrderByDescending(y => y.ProductId))
                 .Select(x => new ProductVM { Product = x });
-
             return PartialView("_AllProduct", products);
         }
 
         public PartialViewResult QuickProduct(int id)
         {
-            return PartialView("_QuickProduct", _product.GetById(id));
+            var product = _product.GetById(id);
+            ViewBag.RateAVG = product.Reviews.Where(x => x.Rating != 0).Average(x => x.Rating);
+            return PartialView("_QuickProduct", product);
         }
     }
 }
