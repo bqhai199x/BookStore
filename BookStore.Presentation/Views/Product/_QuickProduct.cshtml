@@ -12,7 +12,9 @@
                     {
                         <div class="item-slick3" data-thumb="/Assets/images/products/@item.ImageURL">
                             <div class="wrap-pic-w pos-relative">
-                                <img src="~/Assets/images/products/@item.ImageURL" alt="IMG-PRODUCT" style="height: 740px">
+                                <a href="/Assets/images/products/@item.ImageURL" 0>
+                                    <img src="/Assets/images/products/@item.ImageURL" alt="IMG-PRODUCT" style="max-height: 740px">
+                                </a>
 
                                 <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="/Assets/images/products/@item.ImageURL">
                                     <i class="fa fa-expand"></i>
@@ -36,13 +38,13 @@
             <span class="mtext-106 cl2">
                 @Html.DisplayFor(x => x.Price) VNĐ
             </span>
-
-            <p class="stext-102 cl3 p-t-23 text-justify">
-                @Model.Description
-                <span>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book
-                </span>
+                
+            @if (!string.IsNullOrEmpty(Model.Description))
+            {
+            <p class="stext-102 cl3 p-t-23 sub-description">
+                @Model.Description.Replace("<br>", "").Replace("<b>","").Replace("</b>","");
             </p>
+            }
 
             <!--  -->
             <div class="p-t-33">

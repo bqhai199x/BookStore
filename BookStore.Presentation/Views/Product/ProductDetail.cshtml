@@ -35,10 +35,12 @@
                             {
                                 <div class="item-slick4" data-thumb="/Assets/images/products/@item.ImageURL">
                                     <div class="wrap-pic-w pos-relative">
-                                        <img src="/Assets/images/products/@item.ImageURL" alt="IMG-PRODUCT" style="max-height: 720px">
+                                        <a href="/Assets/images/products/@item.ImageURL"0>
+                                            <img src="/Assets/images/products/@item.ImageURL" alt="IMG-PRODUCT" style="max-height: 740px">
+                                        </a>
 
                                         <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="/Assets/images/products/@item.ImageURL">
-                                            <i class="fa fa-expand"></i>
+                                            <i class="fa fa-expand" id="x"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -58,10 +60,13 @@
                         <span class="text-danger">@Html.DisplayFor(x => x.Price) VNĐ</span>
                     </span>
 
-                    <p class="stext-102 cl3 p-t-23">
-                        @Model.Description
-                        Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
-                    </p>
+                    @if (!string.IsNullOrEmpty(Model.Description))
+                    {
+                        <p class="stext-102 cl3 p-t-23 sub-description">
+
+                            @Model.Description.Replace("<br>", "").Replace("<b>", "").Replace("</b>", "");
+                        </p>
+                    }
 
                     <input id="detailId" hidden value="@Model.ProductId" />
 
@@ -186,9 +191,14 @@
                     <!-- - -->
                     <div class="tab-pane fade show active" id="description" role="tabpanel">
                         <div class="how-pos2 p-lr-15-md">
-                            <p class="stext-102 cl6">
-                                @Model.Description
-                            </p>
+                            @if (!string.IsNullOrEmpty(Model.Description))
+                            {
+                                <p class="mtext-102 cl6 pb-2">@Model.Name</p>
+                                <br />
+                                <p class="stext-102 cl6 text-justify">
+                                    @(new HtmlString(HttpUtility.HtmlDecode((Model.Description))))
+                                </p>
+                            }
                         </div>
                     </div>
 

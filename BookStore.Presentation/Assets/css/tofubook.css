@@ -5,3 +5,19 @@
 .block2 .block2-pic img:hover {
     cursor: pointer;
 }
+
+br {
+    content: "";
+    margin: 2em;
+    display: block;
+    font-size: 25%;
+}
+
+.sub-description {
+    text-align: justify;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
