@@ -48,20 +48,12 @@ namespace BookStore.BusinessLogic.BaseServices
 
         public bool Delete(TEntity entity)
         {
-            if (entity == null)
-            {
-                throw new Exception("entity không tồn tại!");
-            }
             _repository.Delete(entity);
             return _unitOfWork.Commit() > 0;
         }
 
         public virtual async Task<bool >DeleteAsync(TEntity entity)
         {
-            if (entity == null)
-            {
-                throw new Exception("entity không tồn tại!");
-            }
             _repository.Delete(entity);
             return await _unitOfWork.CommitAsync() > 0;
         }
@@ -69,10 +61,6 @@ namespace BookStore.BusinessLogic.BaseServices
         public bool DeleteById(object id)
         {
             var entity = _repository.GetById(id);
-            if (entity == null)
-            {
-                throw new Exception("id không tồn tại!");
-            }
             _repository.Delete(entity);
             return _unitOfWork.Commit() > 0;
         }
@@ -80,10 +68,6 @@ namespace BookStore.BusinessLogic.BaseServices
         public virtual async Task<bool> DeleteByIdAsync(object id)
         {
             var entity = await _repository.GetByIdAsync(id);
-            if (entity == null)
-            {
-                throw new Exception("id không tồn tại");
-            }
             _repository.Delete(entity);
             return await _unitOfWork.CommitAsync() > 0;
         }
