@@ -2,6 +2,7 @@
 using BookStore.Common;
 using BookStore.Models;
 using BookStore.Presentation.ViewModels;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -22,8 +23,9 @@ namespace BookStore.Presentation.Controllers
         }
 
         [Route("cua-hang")]
-        public ActionResult ViewShop()
+        public ActionResult ViewShop(string searchStr)
         {
+            ViewBag.SearchStr = searchStr;
             return View();
         }
 
@@ -90,11 +92,27 @@ namespace BookStore.Presentation.Controllers
             return PartialView("_Category");
         }
 
-        public PartialViewResult AllProduct()
+        public PartialViewResult ShowProduct(string searchStr)
         {
-            var products = _product.GetTop(x => x.OrderByDescending(y => y.ProductId))
-                .Select(x => new ProductVM { Product = x });
-            return PartialView("_AllProduct", products);
+            IEnumerable<ProductVM> productVMs = new List<ProductVM>();
+            if (!string.IsNullOrEmpty(searchStr))
+            {
+                productVMs = _product.FindAll
+                (
+                    x => x.Category.Name.Equals(searchStr) ||
+                    x.Name.Contains(searchStr) ||
+                    x.Author.Contains(searchStr) ||
+                    x.Publisher.Name.Contains(searchStr)
+                )
+                .OrderByDescending(x => x.ProductId)
+                .Select(x => new ProductVM { Product = x }); ;
+            }
+            else
+            {
+                productVMs = _product.GetTop(x => x.OrderByDescending(y => y.ProductId))
+                    .Select(x => new ProductVM { Product = x });
+            }
+            return PartialView("_ShowProduct", productVMs);
         }
 
         public PartialViewResult QuickProduct(int id)

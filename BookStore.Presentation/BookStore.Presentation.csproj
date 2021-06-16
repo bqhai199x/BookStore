@@ -266,6 +266,7 @@
     <Content Include="Assets\images\products\tu-hoc-2000-tu-vung-tieng-anh-theo-chu-de.jpg" />
     <Content Include="Assets\images\products\tuyen-dung-dung-hay.jpg" />
     <Content Include="Assets\images\products\xu-huong-moi-day-tieng-anh-cho-tre-mam-non-va-tieu-hoc.jpg" />
+    <Content Include="Assets\js\jquery.show-more.js" />
     <Content Include="Assets\js\main.js" />
     <Content Include="Assets\js\map-custom.js" />
     <Content Include="Assets\js\slick-custom.js" />
@@ -467,7 +468,7 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Cart\_QuickCart.cshtml" />
-    <Content Include="Views\Product\_AllProduct.cshtml" />
+    <Content Include="Views\Product\_ShowProduct.cshtml" />
     <Content Include="Views\Shared\_Category.cshtml" />
     <Content Include="Views\Home\_Blog.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />

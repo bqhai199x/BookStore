@@ -305,3 +305,14 @@ function RemoveReview(reviewID) {
         }
     })
 }
+
+/*==================================================================
+    [ Show more description ]*/
+
+$('.description').showMore({
+    minheight: 240,
+    buttontxtmore: 'Xem thêm nội dung',
+    buttontxtless: 'Thu gọn nội dung',
+    buttoncss: 'flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-20 trans-04 showmore-btn',
+    animationspeed: 500
+});

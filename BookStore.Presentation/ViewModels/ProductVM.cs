@@ -39,7 +39,8 @@ namespace BookStore.Presentation.ViewModels
         {
             get
             {
-                if (Product.CreatedDate != null && (DateTime.Now - Product.CreatedDate.Value).Days <= 3)
+                //if (Product.CreatedDate != null && (DateTime.Now - Product.CreatedDate.Value).Days <= 3)
+                if (Product.ProductId == 17 || Product.ProductId == 18 || Product.ProductId == 16)
                 {
                     return "label-new";
                 }

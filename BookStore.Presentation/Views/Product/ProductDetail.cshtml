@@ -10,7 +10,7 @@
             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
         </a>
 
-        <a href="/cua-hang" class="stext-109 cl8 hov-cl1 trans-04">
+        <a href="/cua-hang?searchStr=@Model.Category.Name" class="stext-109 cl8 hov-cl1 trans-04">
             @Model.Category.Name
             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
         </a>
@@ -35,7 +35,7 @@
                             {
                                 <div class="item-slick4" data-thumb="/Assets/images/products/@item.ImageURL">
                                     <div class="wrap-pic-w pos-relative">
-                                        <a href="/Assets/images/products/@item.ImageURL"0>
+                                        <a href="/Assets/images/products/@item.ImageURL" 0>
                                             <img src="/Assets/images/products/@item.ImageURL" alt="IMG-PRODUCT" style="max-height: 740px">
                                         </a>
 
@@ -63,8 +63,7 @@
                     @if (!string.IsNullOrEmpty(Model.Description))
                     {
                         <p class="stext-102 cl3 p-t-23 sub-description">
-
-                            @Model.Description.Replace("<br>", "").Replace("<b>", "").Replace("</b>", "");
+                            @Regex.Replace(Model.Description ,@"<\/?[a-z][a-z0-9]*[^<>]*>", "")
                         </p>
                     }
 
@@ -195,7 +194,7 @@
                             {
                                 <p class="mtext-102 cl6 pb-2">@Model.Name</p>
                                 <br />
-                                <p class="stext-102 cl6 text-justify">
+                                <p class="stext-102 cl6 text-justify description">
                                     @(new HtmlString(HttpUtility.HtmlDecode((Model.Description))))
                                 </p>
                             }
