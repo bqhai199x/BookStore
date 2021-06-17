@@ -1,5 +1,5 @@
 ﻿using BookStore.DataAccess.Data;
-using BookStore.Models;
+using BookStore.Domain;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;

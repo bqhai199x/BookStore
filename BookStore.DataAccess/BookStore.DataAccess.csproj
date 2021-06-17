@@ -67,9 +67,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BookStore.Models\BookStore.Models.csproj">
-      <Project>{4ef202a3-8600-4e4f-891c-407ad0e310d9}</Project>
-      <Name>BookStore.Models</Name>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BookStore.Domain\BookStore.Domain.csproj">
+      <Project>{84d4fcba-b25b-4318-97e4-a9815a5371d7}</Project>
+      <Name>BookStore.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

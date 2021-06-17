@@ -2,7 +2,7 @@ using BookStore.BusinessLogic.IServices;
 using BookStore.DataAccess.Data;
 using BookStore.DataAccess.Infrastructure;
 using BookStore.DataAccess.Repositories;
-using BookStore.Models;
+using BookStore.Domain;
 using System;
 
 using Unity;

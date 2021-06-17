@@ -1,6 +1,4 @@
 ﻿using BookStore.BusinessLogic.IServices;
-using BookStore.Presentation.ViewModels;
-using System.Linq;
 using System.Web.Mvc;
 
 namespace BookStore.Presentation.Controllers

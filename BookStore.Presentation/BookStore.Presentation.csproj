@@ -156,9 +156,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\OrderDetailVM.cs" />
-    <Compile Include="ViewModels\OrderVM.cs" />
-    <Compile Include="ViewModels\ProductVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\css\main.css" />
@@ -492,9 +489,9 @@
       <Project>{fd9b6288-b990-4d0b-a2e0-b3a3f50bac0f}</Project>
       <Name>BookStore.DataAccess</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BookStore.Models\BookStore.Models.csproj">
-      <Project>{4ef202a3-8600-4e4f-891c-407ad0e310d9}</Project>
-      <Name>BookStore.Models</Name>
+    <ProjectReference Include="..\BookStore.Domain\BookStore.Domain.csproj">
+      <Project>{84d4fcba-b25b-4318-97e4-a9815a5371d7}</Project>
+      <Name>BookStore.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

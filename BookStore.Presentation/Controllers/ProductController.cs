@@ -1,7 +1,6 @@
 ﻿using BookStore.BusinessLogic.IServices;
 using BookStore.Common;
-using BookStore.Models;
-using BookStore.Presentation.ViewModels;
+using BookStore.Domain;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -94,10 +93,10 @@ namespace BookStore.Presentation.Controllers
 
         public PartialViewResult ShowProduct(string searchStr)
         {
-            IEnumerable<ProductVM> productVMs = new List<ProductVM>();
+            List<Product> products = new List<Product>();
             if (!string.IsNullOrEmpty(searchStr))
             {
-                productVMs = _product.FindAll
+                products = _product.FindAll
                 (
                     x => x.Category.Name.Equals(searchStr) ||
                     x.Name.Contains(searchStr) ||
@@ -105,14 +104,13 @@ namespace BookStore.Presentation.Controllers
                     x.Publisher.Name.Contains(searchStr)
                 )
                 .OrderByDescending(x => x.ProductId)
-                .Select(x => new ProductVM { Product = x }); ;
+                .ToList();
             }
             else
             {
-                productVMs = _product.GetTop(x => x.OrderByDescending(y => y.ProductId))
-                    .Select(x => new ProductVM { Product = x });
+                products = _product.GetTop(x => x.OrderByDescending(y => y.ProductId)).ToList();
             }
-            return PartialView("_ShowProduct", productVMs);
+            return PartialView("_ShowProduct", products);
         }
 
         public PartialViewResult QuickProduct(int id)

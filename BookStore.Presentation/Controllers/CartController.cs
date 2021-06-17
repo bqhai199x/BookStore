@@ -1,7 +1,6 @@
 ﻿using BookStore.BusinessLogic.IServices;
 using BookStore.Common;
-using BookStore.Models;
-using BookStore.Presentation.ViewModels;
+using BookStore.Domain;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -29,10 +28,7 @@ namespace BookStore.Presentation.Controllers
 
         public PartialViewResult QuickCart()
         {
-            OrderVM cart = new OrderVM
-            {
-                Order = _order.Find(x => x.AccountId == MyVariable.AccountID && x.Status == OrderStatus.InCart)
-            };
+            var cart = _order.Find(x => x.AccountId == MyVariable.AccountID && x.Status == OrderStatus.InCart);
             return PartialView("_QuickCart", cart);
         }
 
@@ -72,9 +68,7 @@ namespace BookStore.Presentation.Controllers
                 await _orderDetail.CreateAsync(orderDetail);
             }
 
-            OrderVM orderVM = new OrderVM { Order = order };
-
-            return Json(orderVM.TotalQuantity, JsonRequestBehavior.AllowGet);
+            return Json(order.TotalQuantity, JsonRequestBehavior.AllowGet);
         }
 
         public async Task<JsonResult> RemoveItem(int productId)
@@ -83,9 +77,7 @@ namespace BookStore.Presentation.Controllers
             var orderDetail = await _orderDetail.FindAsync(x => x.OrderId == order.OrderId && x.ProductId == productId);
             await _orderDetail.DeleteAsync(orderDetail);
 
-            OrderVM orderVM = new OrderVM { Order = order };
-
-            return Json(orderVM.TotalQuantity, JsonRequestBehavior.AllowGet);
+            return Json(order.TotalQuantity, JsonRequestBehavior.AllowGet);
         }
     }
 }

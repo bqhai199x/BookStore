@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProductVM>
+﻿@model IEnumerable<Product>
 
 <div class="row isotope-grid">
     @foreach (var item in Model)
@@ -7,27 +7,27 @@
             <!-- Block2 -->
             <div class="block2">
                 <div class="block2-pic hov-img0 @item.NewCalss" data-label="New">
-                    <img src="~/Assets/images/products/@item.Product.Images.FirstOrDefault().ImageURL"
-                         width="315" height="440" onclick="location.href='/san-pham/@item.Product.ProductId'">
+                    <img src="~/Assets/images/products/@item.Images.FirstOrDefault().ImageURL"
+                         width="315" height="440" onclick="location.href='/san-pham/@item.ProductId'">
 
                     <button class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                        <span class="newsort" hidden>@item.Product.ProductId</span>
+                        <span class="newsort" hidden>@item.ProductId</span>
                         Xem nhanh
                     </button>
                 </div>
 
-                <div class="author" hidden>@item.Product.Author</div>
-                <div class="publisher" hidden>@item.Product.Publisher.Name</div>
+                <div class="author" hidden>@item.Author</div>
+                <div class="publisher" hidden>@item.Publisher.Name</div>
                 <div class="ratesort" hidden>@item.RateAVG</div>
 
                 <div class="block2-txt flex-w flex-t p-t-14">
                     <div class="block2-txt-child1 flex-col-l ">
-                        <a href="/san-pham/@item.Product.ProductId" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6 name">
-                            @item.Product.Name
+                        <a href="/san-pham/@item.ProductId" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6 name">
+                            @item.Name
                         </a>
 
                         <span class="stext-105 cl3">
-                            <span class="text-danger pricesort">@Html.DisplayFor(x => item.Product.Price) VNĐ</span>
+                            <span class="text-danger pricesort">@Html.DisplayFor(x => item.Price) VNĐ</span>
                         </span>
 
                     </div>
