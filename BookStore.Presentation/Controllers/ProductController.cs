@@ -47,7 +47,7 @@ namespace BookStore.Presentation.Controllers
         {
             Review review = new Review()
             {
-                AccountId = MyVariable.AccountID,
+                AccountId = StaticVariables.AccountID,
                 ProductId = productId,
                 Rating = rate,
                 Content = content
@@ -94,23 +94,15 @@ namespace BookStore.Presentation.Controllers
         public PartialViewResult ShowProduct(string searchStr)
         {
             var products = _product.GetAll();
-            if (!string.IsNullOrEmpty(searchStr))
+            if (searchStr.IsNotBlank())
             {
-                //products = _product.FindAll
-                //(
-                //    x => !x.Category.Name.Equals(searchStr) &&
-                //    !x.Name.Contains(searchStr) &&
-                //    !x.Author.Contains(searchStr) &&
-                //    !x.Publisher.Name.Contains(searchStr)
-                //)
-                //.OrderByDescending(x => x.ProductId)
-                //.ToList();
+                searchStr = searchStr.ToLower();
                 foreach (var x in products)
                 {
-                    if (x.Category.Name.Equals(searchStr) ||
-                        x.Name.Contains(searchStr) ||
-                        x.Author.Contains(searchStr) ||
-                        x.Publisher.Name.Contains(searchStr))
+                    if (x.Category.Name.ToLower().Equals(searchStr) ||
+                        x.Name.ToLower().Contains(searchStr) ||
+                        x.Author.ToLower().Contains(searchStr) ||
+                        x.Publisher.Name.ToLower().Contains(searchStr))
                     {
                         x.SearchClass = "search-value";
                     }
@@ -119,11 +111,17 @@ namespace BookStore.Presentation.Controllers
                         x.SearchClass = string.Empty;
                     }
                 }
+                ViewBag.IsSearch = true;
             }
             else
             {
-                products = _product.GetTop(x => x.OrderByDescending(y => y.ProductId)).ToList();
+                foreach (var x in products)
+                {
+                    x.SearchClass = string.Empty;
+                }
+                ViewBag.IsSearch = false;
             }
+            products = products.OrderByDescending(x => x.ProductId);
             return PartialView("_ShowProduct", products);
         }
 

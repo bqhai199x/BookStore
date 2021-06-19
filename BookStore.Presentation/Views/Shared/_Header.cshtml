@@ -55,7 +55,7 @@
                         <ul class="main-menu">
                             <li>
                                 <i class="zmdi zmdi-accounts-outline"></i>
-                                @if (MyVariable.AccountID == null)
+                                @if (StaticVariables.AccountID == null)
                                 {
                                     <ul class="sub-menu">
                                         <li><a href="#">Đăng nhập</a></li>
@@ -65,10 +65,10 @@
                                 else
                                 {
                                     <ul class="sub-menu">
-                                        <li><a class="text-danger">@MyVariable.FullName</a></li>
+                                        <li><a class="text-danger">@StaticVariables.FullName</a></li>
                                         <li class="dropdown-divider"></li>
                                         <li><a href="#">Sửa thông tin</a></li>
-                                        @if (MyVariable.IsAdmin)
+                                        @if (StaticVariables.IsAdmin)
                                         {
                                             <li><a href="#">Trang quản trị</a></li>
                                         }

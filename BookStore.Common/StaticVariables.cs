@@ -1,6 +1,6 @@
 ﻿namespace BookStore.Common
 {
-    public class MyVariable
+    public class StaticVariables
     {
         public static int? AccountID { get; set; } = 1;
         public static string FullName { get; set; } = "Bùi Quang Hải";

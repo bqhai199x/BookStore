@@ -39,7 +39,7 @@
                 @Html.DisplayFor(x => x.Price) VNĐ
             </span>
 
-            @if (!string.IsNullOrEmpty(Model.Description))
+            @if (Model.Description.IsNotBlank())
             {
                 <p class="stext-102 cl3 p-t-23 sub-description">
                     @Regex.Replace(Model.Description, @"<\/?[a-z][a-z0-9]*[^<>]*>", "")

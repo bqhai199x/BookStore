@@ -318,6 +318,9 @@ $('.description').showMore({
 });
 
 
-//$("document").ready(function () {
-//    $("[data-filter='.search-value']").trigger('click');
-//});
+$("document").ready(function () {
+    var isSearch = $("#isSearch").val();
+    if (isSearch) {
+        $("[data-filter='.search-value']").trigger('click');
+    }
+});

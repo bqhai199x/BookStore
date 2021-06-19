@@ -5,7 +5,7 @@ namespace BookStore.DataAccess.Data
 {
     public class BookStoreContext : DbContext
     {
-        public BookStoreContext() : base("name=TofuBookDB")
+        public BookStoreContext() : base("name=BookStoreDB")
         {
         }
 
