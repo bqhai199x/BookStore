@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace BookStore.Domain
 {
@@ -59,5 +60,8 @@ namespace BookStore.Domain
                     .Substring(0, Images.FirstOrDefault().ImageURL.IndexOf('.'));
             }
         }
+
+        [NotMapped]
+        public string SearchClass { get; set; } = string.Empty;
     }
 }

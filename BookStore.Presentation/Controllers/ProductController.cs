@@ -93,18 +93,32 @@ namespace BookStore.Presentation.Controllers
 
         public PartialViewResult ShowProduct(string searchStr)
         {
-            List<Product> products = new List<Product>();
+            var products = _product.GetAll();
             if (!string.IsNullOrEmpty(searchStr))
             {
-                products = _product.FindAll
-                (
-                    x => x.Category.Name.Equals(searchStr) ||
-                    x.Name.Contains(searchStr) ||
-                    x.Author.Contains(searchStr) ||
-                    x.Publisher.Name.Contains(searchStr)
-                )
-                .OrderByDescending(x => x.ProductId)
-                .ToList();
+                //products = _product.FindAll
+                //(
+                //    x => !x.Category.Name.Equals(searchStr) &&
+                //    !x.Name.Contains(searchStr) &&
+                //    !x.Author.Contains(searchStr) &&
+                //    !x.Publisher.Name.Contains(searchStr)
+                //)
+                //.OrderByDescending(x => x.ProductId)
+                //.ToList();
+                foreach (var x in products)
+                {
+                    if (x.Category.Name.Equals(searchStr) ||
+                        x.Name.Contains(searchStr) ||
+                        x.Author.Contains(searchStr) ||
+                        x.Publisher.Name.Contains(searchStr))
+                    {
+                        x.SearchClass = "search-value";
+                    }
+                    else
+                    {
+                        x.SearchClass = string.Empty;
+                    }
+                }
             }
             else
             {

@@ -316,3 +316,8 @@ $('.description').showMore({
     buttoncss: 'flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-20 trans-04 showmore-btn',
     animationspeed: 500
 });
+
+
+//$("document").ready(function () {
+//    $("[data-filter='.search-value']").trigger('click');
+//});
