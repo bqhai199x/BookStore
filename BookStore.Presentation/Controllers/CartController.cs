@@ -21,9 +21,24 @@ namespace BookStore.Presentation.Controllers
             _orderDetail = orderDetail;
         }
 
-        public ActionResult ViewCart()
+        [Route("gio-hang")]
+        public async Task<ActionResult> ViewCart()
         {
-            return View();
+            Order order = new Order();
+
+            // Check cart exist
+            var cart = await _order.FindAsync(x => x.AccountId == StaticVariables.AccountID && x.Status == OrderStatus.InCart);
+            if (cart != null)
+            {
+                order = cart;
+            }
+            else
+            {
+                order.AccountId = StaticVariables.AccountID;
+                order.Status = OrderStatus.InCart;
+                await _order.CreateAsync(order);
+            }
+            return View(order);
         }
 
         public PartialViewResult QuickCart()

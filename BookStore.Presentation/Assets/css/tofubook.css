@@ -31,3 +31,12 @@ br {
     margin: 15px auto;
     width: fit-content;
 }
+
+.empty-cart {
+    padding: 40px 0px;
+    text-align: center;
+    width: 100%;
+}
+.empty-note {
+    margin: 15px 0px 30px;
+}
