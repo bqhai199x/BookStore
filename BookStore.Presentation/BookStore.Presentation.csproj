@@ -475,6 +475,7 @@
     <Content Include="Views\Product\_Review.cshtml" />
     <Content Include="Views\Account\Account.cshtml" />
     <Content Include="Views\Cart\ViewCart.cshtml" />
+    <Content Include="Views\Cart\_ShoppingCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BookStore.BusinessLogic\BookStore.BusinessLogic.csproj">

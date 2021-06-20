@@ -1,6 +1,7 @@
 ﻿using BookStore.BusinessLogic.IServices;
 using BookStore.Common;
 using BookStore.Domain;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -22,7 +23,12 @@ namespace BookStore.Presentation.Controllers
         }
 
         [Route("gio-hang")]
-        public async Task<ActionResult> ViewCart()
+        public ActionResult ViewCart()
+        {
+            return View();
+        }
+
+        public async Task<PartialViewResult> ShoppingCart()
         {
             Order order = new Order();
 
@@ -38,16 +44,16 @@ namespace BookStore.Presentation.Controllers
                 order.Status = OrderStatus.InCart;
                 await _order.CreateAsync(order);
             }
-            return View(order);
+
+            return PartialView("_ShoppingCart", order);
         }
 
-        public PartialViewResult QuickCart()
+        public async Task<PartialViewResult> QuickCart()
         {
-            var cart = _order.Find(x => x.AccountId == StaticVariables.AccountID && x.Status == OrderStatus.InCart);
+            var cart = await _order.FindAsync(x => x.AccountId == StaticVariables.AccountID && x.Status == OrderStatus.InCart);
             return PartialView("_QuickCart", cart);
         }
 
-        [HttpPost]
         public async Task<JsonResult> AddToCart(int productId, int quantity)
         {
             Order order = new Order();
@@ -84,6 +90,15 @@ namespace BookStore.Presentation.Controllers
             }
 
             return Json(order.TotalQuantity, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<JsonResult> UpdateQuantity(int productId, bool isUp)
+        {
+            var cart = await _order.FindAsync(x => x.AccountId == StaticVariables.AccountID && x.Status == OrderStatus.InCart);
+            var cartItem = await _orderDetail.FindAsync(x => x.OrderId == cart.OrderId && x.ProductId == productId);
+            cartItem.Quantity = isUp ? cartItem.Quantity += 1 : cartItem.Quantity -= 1;
+            await _orderDetail.UpdateAsync(cartItem);
+            return Json(cart.TotalQuantity, JsonRequestBehavior.AllowGet);
         }
 
         public async Task<JsonResult> RemoveItem(int productId)

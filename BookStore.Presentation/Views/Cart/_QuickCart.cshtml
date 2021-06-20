@@ -3,7 +3,7 @@
 @if (!Model.OrderDetails.Any())
 {
     <div class="empty-cart m-l--15">
-        <img src="~/Assets/images/layouts/empty-cart.png" alt="empty-cart" class="w-100"/>
+        <img src="~/Assets/images/layouts/empty-cart.png" alt="empty-cart" class="w-100" />
         <p class="empty-note mtext-101">Không có sản phẩm nào trong giỏ hàng của bạn.</p>
         <a href="/cua-hang" class="stext-101 cl0 bg1 bor1 hov-btn1 d-inline-block p-lr-40 p-tb-12 trans-04">
             Tiếp tục mua sắm
@@ -67,8 +67,9 @@ else
                 success: function (data) {
                     $('.header-cart-content').load("/Cart/QuickCart", function () {
                         $('.icon-header-noti').attr('data-notify', data);
+                        if (('.shopping-cart').length)
+                            $('.shopping-cart').load('/Cart/ShoppingCart')
                     })
-
                 },
                 error: function (error) {
                     swal("Lỗi", "xoá khỏi giỏ hàng không thành công !", "error");
