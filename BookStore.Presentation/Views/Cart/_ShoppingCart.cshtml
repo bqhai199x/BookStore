@@ -42,15 +42,15 @@
                                     <td class="column-3" style="text-align:center">@Html.DisplayFor(x => item.Product.Price)</td>
                                     <td class="column-4">
                                         <div class="wrap-num-product flex-w m-auto m-r-0">
-                                            <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m" proId="@item.ProductId">
+                                            <button class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m" proId="@item.ProductId">
                                                 <i class="fs-16 zmdi zmdi-minus"></i>
-                                            </div>
+                                            </button>
 
                                             <input class="mtext-104 cl3 txt-center num-product" type="number" name="quantity" value="@item.Quantity">
 
-                                            <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m" proId="@item.ProductId">
+                                            <button class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m" proId="@item.ProductId">
                                                 <i class="fs-16 zmdi zmdi-plus"></i>
-                                            </div>
+                                            </button>
                                         </div>
                                     </td>
                                     <td class="column-5" style="text-align:center">@Html.DisplayFor(x => item.Total)</td>
@@ -65,14 +65,15 @@
                         <div class="flex-w flex-m m-r-20 m-tb-5">
                             <input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="coupon" placeholder="Mã giảm giá">
 
-                            <p class="text-danger"></p>
-                            <div class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
-                                Áp dụng
-                            </div>
+                            <p class="text-danger coupon-message"></p>
+                            @*<div class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
+                                    Áp dụng
+                                </div>*@
                         </div>
 
-                        <button type="submit" name="update" class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
-                            Cập nhật
+                        <button class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10"
+                                name="update-coupon" orderId="@Model.OrderId">
+                            Áp dụng
                         </button>
                     </div>
                 </div>
@@ -144,29 +145,58 @@
     }
 </div>
 
+<style>
+    .swal-button--danger {
+        background-color: #e64942;
+        font-size: revert;
+        font-weight: 600;
+    }
+
+    .swal-button--cancel {
+        color: #555;
+        font-size: revert;
+        background-color: revert;
+        font-weight: 600;
+    }
+
+    .swal-button:hover {
+        color: white;
+    }
+</style>
+
 <script>
     /*==================================================================
     [ Remove item from cart ]*/
     $('.table-shopping-cart').each(function () {
         $('.remove-item').on('click', function () {
-            $.ajax({
-                url: "/Cart/RemoveItem",
-                type: "POST",
-                data: {
-                    "productId": $(this).find('img').attr('value'),
-                },
-                success: function (data) {
-                    $('.shopping-cart').load('/Cart/ShoppingCart', function () {
-                        $('.header-cart-content').load('/Cart/QuickCart', function () {
-                            toastr.success('Xoá sản phẩm thành công', '', { positionClass: "toast-bottom-right" });
-                            $('.icon-header-noti').attr('data-notify', data);
-                        })
-                    })
-                },
-                error: function (error) {
-                    swal("Lỗi", "xoá khỏi giỏ hàng không thành công !", "error");
-                }
-            });
+            swal({
+                text: "Bạn có chắc muốn xoá sản phẩm này khỏi giỏ hàng?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            url: "/Cart/RemoveItem",
+                            type: "POST",
+                            data: {
+                                "productId": $(this).find('img').attr('value'),
+                            },
+                            success: function (data) {
+                                $('.shopping-cart').load('/Cart/ShoppingCart', function () {
+                                    $('.header-cart-content').load('/Cart/QuickCart', function () {
+                                        toastr.success('Xoá sản phẩm thành công', '', { positionClass: "toast-bottom-right" });
+                                        $('.icon-header-noti').attr('data-notify', data);
+                                    })
+                                })
+                            },
+                            error: function (error) {
+                                swal("Lỗi", "xoá khỏi giỏ hàng không thành công !", "error");
+                            }
+                        });
+                    }
+                });
         });
     });
 
@@ -219,4 +249,31 @@
             }
         });
     });
+
+    /*==================================================================
+    [ Update coupon ]*/
+    $("[name='update-coupon']").on('click', function () {
+        $.ajax({
+            url: "/Cart/UpdateCoupon",
+            type: "POST",
+            data: {
+                "orderId": $(this).attr('orderId'),
+                "code": $("[name='coupon']").val()
+            },
+            success: function (data) {
+                if (data == 'Ok') {
+                    $('.shopping-cart').load('/Cart/ShoppingCart', function () {
+                        $('.header-cart-content').load('/Cart/QuickCart')
+                    })
+                }
+                else {
+                    $('.coupon-message').text(data)
+                }
+
+            },
+            error: function (error) {
+                swal("Lỗi", "sử dụng mã giảm giá không thành công !", "error");
+            }
+        });
+    })
 </script>

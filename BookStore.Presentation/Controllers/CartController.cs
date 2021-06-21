@@ -1,6 +1,7 @@
 ﻿using BookStore.BusinessLogic.IServices;
 using BookStore.Common;
 using BookStore.Domain;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -11,15 +12,13 @@ namespace BookStore.Presentation.Controllers
     {
         private readonly IOrderServices _order;
         private readonly IOrderDetailServices _orderDetail;
-        private readonly IAccountServices _account;
-        private readonly IShipperServices _shipper;
+        private readonly ICouponServices _coupon;
 
-        public CartController(IAccountServices account, IOrderServices order, IShipperServices shipper, IOrderDetailServices orderDetail)
+        public CartController(IOrderServices order, IOrderDetailServices orderDetail, ICouponServices coupon)
         {
-            _account = account;
             _order = order;
-            _shipper = shipper;
             _orderDetail = orderDetail;
+            _coupon = coupon;
         }
 
         [Route("gio-hang")]
@@ -108,6 +107,24 @@ namespace BookStore.Presentation.Controllers
             await _orderDetail.DeleteAsync(orderDetail);
 
             return Json(order.TotalQuantity, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<JsonResult> UpdateCoupon(int orderId, string code)
+        {
+            var order = await _order.GetByIdAsync(orderId);
+            code = code.ToUpper();
+            var coupon = await _coupon.FindAsync(x => x.Code.Equals(code));
+            
+            if(coupon == null)
+                return Json("Mã giảm giá không hợp lệ!", JsonRequestBehavior.AllowGet);
+            else if(coupon.EndDate < DateTime.Now)
+                return Json("Mã giảm giá đã hết hạn!", JsonRequestBehavior.AllowGet);
+            else if (coupon.Quantity <= 0)
+                return Json("Mã giảm đã dùng hết!", JsonRequestBehavior.AllowGet);
+
+            order.CouponId = coupon.CouponId;
+            await _order.UpdateAsync(order);
+            return Json("Ok", JsonRequestBehavior.AllowGet);
         }
     }
 }
