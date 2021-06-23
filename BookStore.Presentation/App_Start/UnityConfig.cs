@@ -46,7 +46,6 @@ namespace BookStore.Presentation
             // container.LoadConfiguration();
 
             // TODO: Register your type's mappings here.
-            // container.RegisterType<IProductRepository, ProductRepository>();
 
             container.RegisterSingleton<BookStoreContext, BookStoreContext>();
             container.RegisterSingleton<IDbFactory, DbFactory>();

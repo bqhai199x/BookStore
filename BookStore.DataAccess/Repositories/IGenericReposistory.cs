@@ -9,17 +9,23 @@ namespace BookStore.DataAccess.Repositories
     public interface IGenericRepository<TEntity> where TEntity : class
     {
         TEntity Add(TEntity entity);
+
         void Update(TEntity entity);
+
         TEntity Delete(TEntity entity);
+
         IEnumerable<TEntity> DeleteBy(Expression<Func<TEntity, bool>> filter);
 
         int Count();
+
         Task<int> CountAsync();
 
         TEntity GetById(object id);
+
         Task<TEntity> GetByIdAsync(object id);
 
         IQueryable<TEntity> GetAll();
+
         Task<IEnumerable<TEntity>> GetAllAsync();
 
         IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null,
@@ -27,10 +33,13 @@ namespace BookStore.DataAccess.Repositories
             string includeProperties = "");
 
         TEntity Find(Expression<Func<TEntity, bool>> filter);
+
         Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> filter);
 
         IEnumerable<TEntity> FindAll(Expression<Func<TEntity, bool>> filter);
+
         Task<IEnumerable<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> filter);
+
         IQueryable<TEntity> FindBy(Expression<Func<TEntity, bool>> filter);
     }
 }

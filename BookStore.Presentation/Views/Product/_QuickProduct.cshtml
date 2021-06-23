@@ -42,7 +42,7 @@
             @if (Model.Description.IsNotBlank())
             {
                 <p class="stext-102 cl3 p-t-23 sub-description">
-                    @Regex.Replace(Model.Description, @"<\/?[a-z][a-z0-9]*[^<>]*>", "")
+                    @Model.SubDescription
                 </p>
             }
 

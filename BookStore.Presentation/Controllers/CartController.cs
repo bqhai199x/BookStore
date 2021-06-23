@@ -91,11 +91,11 @@ namespace BookStore.Presentation.Controllers
             return Json(order.TotalQuantity, JsonRequestBehavior.AllowGet);
         }
 
-        public async Task<JsonResult> UpdateQuantity(int productId, bool isUp)
+        public async Task<JsonResult> UpdateQuantity(int productId, int quantity)
         {
             var cart = await _order.FindAsync(x => x.AccountId == StaticVariables.AccountID && x.Status == OrderStatus.InCart);
             var cartItem = await _orderDetail.FindAsync(x => x.OrderId == cart.OrderId && x.ProductId == productId);
-            cartItem.Quantity = isUp ? cartItem.Quantity += 1 : cartItem.Quantity -= 1;
+            cartItem.Quantity = quantity;
             await _orderDetail.UpdateAsync(cartItem);
             return Json(cart.TotalQuantity, JsonRequestBehavior.AllowGet);
         }
@@ -112,6 +112,12 @@ namespace BookStore.Presentation.Controllers
         public async Task<JsonResult> UpdateCoupon(int orderId, string code)
         {
             var order = await _order.GetByIdAsync(orderId);
+            if (code.IsBlank())
+            {
+                order.CouponId = null;
+                await _order.UpdateAsync(order);
+                return Json("OK", JsonRequestBehavior.AllowGet);
+            }
             code = code.ToUpper();
             var coupon = await _coupon.FindAsync(x => x.Code.Equals(code));
             

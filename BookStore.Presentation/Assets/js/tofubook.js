@@ -219,9 +219,7 @@ $('.js-hide-modal1').on('click', function () {
 /*==================================================================
     [ Quick cart ]*/
 
-$('.header-cart-content').load("/Cart/QuickCart", function () {
-    $('.icon-header-noti').attr('data-notify', $('#numCart').val())
-});
+
 
 /*==================================================================
     [ AddToCart ]*/
@@ -317,10 +315,38 @@ $('.description').showMore({
     animationspeed: 500
 });
 
-
+/*==================================================================
+    [ Search product ]*/
 $("document").ready(function () {
+    $('.header-cart-content').load("/Cart/QuickCart", function () {
+        $('.icon-header-noti').attr('data-notify', $('#numCart').val())
+    });
     var isSearch = $("#isSearch").val();
     if (isSearch) {
         $("[data-filter='.search-value']").trigger('click');
     }
 });
+
+/*==================================================================
+    [ Update Quantity ]*/
+
+function UpdateQuantity(productId, quantity) {
+    $.ajax({
+        url: "/Cart/UpdateQuantity",
+        type: "POST",
+        data: {
+            "productId": productId,
+            "quantity": quantity
+        },
+        success: function (data) {
+            $('.shopping-cart').load('/Cart/ShoppingCart', function () {
+                $('.header-cart-content').load('/Cart/QuickCart', function () {
+                    $('.icon-header-noti').attr('data-notify', data);
+                })
+            })
+        },
+        error: function (error) {
+            toastr.warning('Host cùi bấm từ từ thôi =))', '', { positionClass: "toast-bottom-right" })
+        }
+    });
+}

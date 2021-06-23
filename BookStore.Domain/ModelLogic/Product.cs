@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace BookStore.Domain
 {
@@ -58,6 +59,14 @@ namespace BookStore.Domain
             {
                 return Images.FirstOrDefault().ImageURL
                     .Substring(0, Images.FirstOrDefault().ImageURL.IndexOf('.'));
+            }
+        }
+
+        public string SubDescription
+        {
+            get
+            {
+                return Regex.Replace(Description, @"<\/?[a-z][a-z0-9]*[^<>]*>", "");
             }
         }
 

@@ -206,46 +206,26 @@
         var numProduct = Number($(this).next().val());
         if (numProduct > 1) {
             $(this).next().val(numProduct - 1);
-            $.ajax({
-                url: "/Cart/UpdateQuantity",
-                type: "POST",
-                data: {
-                    "productId": $(this).attr('proId'),
-                    "isUp": false
-                },
-                success: function (data) {
-                    $('.shopping-cart').load('/Cart/ShoppingCart', function () {
-                        $('.header-cart-content').load('/Cart/QuickCart', function () {
-                            $('.icon-header-noti').attr('data-notify', data);
-                        })
-                    })
-                },
-                error: function (error) {
-                    swal("Lỗi", "xoá khỏi giỏ hàng không thành công !", "error");
-                }
-            });
+            UpdateQuantity($(this).attr('proId'), $(this).next().val());
         }
     });
 
     $('.btn-num-product-up').on('click', function () {
         var numProduct = Number($(this).prev().val());
         $(this).prev().val(numProduct + 1);
-        $.ajax({
-            url: "/Cart/UpdateQuantity",
-            type: "POST",
-            data: {
-                "productId": $(this).attr('proId'),
-                "isUp": true
-            },
-            success: function (data) {
-                $('.shopping-cart').load('/Cart/ShoppingCart', function () {
-                    $('.header-cart-content').load('/Cart/QuickCart', function () {
-                        $('.icon-header-noti').attr('data-notify', data);
-                    })
-                })
-            },
-            error: function (error) {
-                swal("Lỗi", "xoá khỏi giỏ hàng không thành công !", "error");
+        UpdateQuantity($(this).attr('proId'), $(this).prev().val());
+    });
+
+    $('.num-product').on('focus', function () {
+        let initNumber = Number($(this).val());
+        $('.num-product').on('change', function () {
+            let number = Number($(this).val());
+            if (Number.isInteger(number) && number > 0) {
+                UpdateQuantity($(this).prev().attr('proId'), number);
+            }
+            else {
+                toastr.error('Số lượng không hợp lệ', '', { positionClass: "toast-bottom-right" });
+                $(this).val(initNumber);
             }
         });
     });
@@ -263,7 +243,9 @@
             success: function (data) {
                 if (data == 'Ok') {
                     $('.shopping-cart').load('/Cart/ShoppingCart', function () {
-                        $('.header-cart-content').load('/Cart/QuickCart')
+                        $('.header-cart-content').load('/Cart/QuickCart', function () {
+                            toastr.success('Đã áp dụng mã giảm giá', '', { positionClass: "toast-bottom-right" })
+                        })
                     })
                 }
                 else {
