@@ -276,6 +276,7 @@ $('.send').on('click', function () {
                 $('#review-content').load("/Product/Review?productId=" + $('#detailId').val());
                 $('#reviewCount').text("Đánh giá (" + data + ")");
                 $('#review').val('');
+                $('#rating').val('');
                 $('.item-rating').removeClass('zmdi-star');
                 $('.item-rating').removeClass('zmdi-star-outline');
                 $('.item-rating').addClass('zmdi-star-outline');

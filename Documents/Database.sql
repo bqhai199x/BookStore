@@ -4,13 +4,23 @@ SET IDENTITY_INSERT [dbo].[Account] ON
 GO
 INSERT [dbo].[Account] ([AccountId], [UserName], [Password], [ImageURL], [FirstName], [LastName], [Address], [Phone], [Email], [Role], [CreatedDate]) VALUES (1, N'bqhai', N'123', N'avt-hai.jpg', N'Hải', N'Bùi Quang', N'Mạch Lũng - Đại Mạch - Đông Anh - Hà Nội', N'0976445870', N'bqhai.199x@gmail.com', 1, NULL)
 GO
-INSERT [dbo].[Account] ([AccountId], [UserName], [Password], [ImageURL], [FirstName], [LastName], [Address], [Phone], [Email], [Role], [CreatedDate]) VALUES (2, N'haibq', N'123', NULL, N'Giang', N'Nguyễn Hoàng', N'Làng Chài - Võng La - Đông Anh - Hà Nội', N'0907076600', N'yendu197@gmail.com', 0, NULL)
+INSERT [dbo].[Account] ([AccountId], [UserName], [Password], [ImageURL], [FirstName], [LastName], [Address], [Phone], [Email], [Role], [CreatedDate]) VALUES (2, N'haibq', N'123', NULL, N'Duyên', N'Bùi Thị Mỹ', N'Làng Chài - Võng La - Đông Anh - Hà Nội', N'0907076600', N'yendu197@gmail.com', 0, NULL)
 GO
 SET IDENTITY_INSERT [dbo].[Account] OFF
 GO
+SET IDENTITY_INSERT [dbo].[Coupon] ON 
+GO
+INSERT [dbo].[Coupon] ([CouponId], [Code], [Discount], [StartDate], [EndDate], [Quantity], [Description]) VALUES (1, N'HETMA', CAST(0.50 AS Decimal(18, 2)), CAST(N'2021-06-21T00:00:00.000' AS DateTime), CAST(N'2021-12-31T00:00:00.000' AS DateTime), 0, NULL)
+GO
+INSERT [dbo].[Coupon] ([CouponId], [Code], [Discount], [StartDate], [EndDate], [Quantity], [Description]) VALUES (2, N'HETHAN', CAST(0.75 AS Decimal(18, 2)), CAST(N'2021-06-21T00:00:00.000' AS DateTime), CAST(N'2021-06-30T00:00:00.000' AS DateTime), 2, NULL)
+GO
+INSERT [dbo].[Coupon] ([CouponId], [Code], [Discount], [StartDate], [EndDate], [Quantity], [Description]) VALUES (3, N'MAOK', CAST(0.25 AS Decimal(18, 2)), CAST(N'2021-07-04T00:00:00.000' AS DateTime), CAST(N'2021-12-31T00:00:00.000' AS DateTime), 9999, NULL)
+GO
+SET IDENTITY_INSERT [dbo].[Coupon] OFF
+GO
 SET IDENTITY_INSERT [dbo].[Order] ON 
 GO
-INSERT [dbo].[Order] ([OrderId], [OrderDate], [Status], [FullName], [Address], [Phone], [ShipperId], [CouponId], [AccountId]) VALUES (1, NULL, 0, N'Bùi Quang Hải', N'Mạch Lũng - Đại Mạch - Đông Anh - Hà Nội', N'0976445870', NULL, NULL, 1)
+INSERT [dbo].[Order] ([OrderId], [OrderDate], [Status], [FullName], [Address], [Phone], [ShipperId], [CouponId], [AccountId]) VALUES (1, NULL, 0, N'Bùi Quang Hải', N'Mạch Lũng - Đại Mạch - Đông Anh - Hà Nội', N'0976445870', NULL, 1, 1)
 GO
 SET IDENTITY_INSERT [dbo].[Order] OFF
 GO
@@ -295,19 +305,13 @@ Sau khi học các từ mới, bạn nên tập sử dụng chúng hàng
 GO
 SET IDENTITY_INSERT [dbo].[Product] OFF
 GO
-SET IDENTITY_INSERT [dbo].[Review] ON 
+INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (1, 13, 2)
 GO
-INSERT [dbo].[Review] ([ReviewId], [AccountId], [ProductId], [Rating], [Content], [CreatedTime]) VALUES (1, 2, 17, 5, N'Cuốn sách rất bổ ích', NULL)
+INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (1, 14, 1)
 GO
-INSERT [dbo].[Review] ([ReviewId], [AccountId], [ProductId], [Rating], [Content], [CreatedTime]) VALUES (2, 2, 17, NULL, N'Trump đại đế', NULL)
+INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (1, 17, 2)
 GO
-INSERT [dbo].[Review] ([ReviewId], [AccountId], [ProductId], [Rating], [Content], [CreatedTime]) VALUES (3, 1, 17, 2, N'Phản đối Donal Trump', NULL)
-GO
-SET IDENTITY_INSERT [dbo].[Review] OFF
-GO
-INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (1, 10, 2)
-GO
-INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (1, 17, 1)
+INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (1, 18, 3)
 GO
 SET IDENTITY_INSERT [dbo].[ProductImage] ON 
 GO

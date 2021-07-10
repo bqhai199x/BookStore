@@ -241,7 +241,7 @@
                 "code": $("[name='coupon']").val()
             },
             success: function (data) {
-                if (data == 'Ok') {
+                if (data == 'OK') {
                     $('.shopping-cart').load('/Cart/ShoppingCart', function () {
                         $('.header-cart-content').load('/Cart/QuickCart', function () {
                             toastr.success('Đã áp dụng mã giảm giá', '', { positionClass: "toast-bottom-right" })

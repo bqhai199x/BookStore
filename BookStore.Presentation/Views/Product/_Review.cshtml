@@ -4,7 +4,7 @@
 {
     <div class="flex-w flex-t p-b-10">
         <div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
-            @if (item.Account.ImageURL.IsNotBlank())
+            @if (item.Account.ImageURL.IsBlank())
             {
                 <img src="~/Assets/images/avatars/avt.jpg" alt="@item.Account.FullName">
             }

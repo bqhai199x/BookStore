@@ -120,17 +120,22 @@ namespace BookStore.Presentation.Controllers
             }
             code = code.ToUpper();
             var coupon = await _coupon.FindAsync(x => x.Code.Equals(code));
-            
-            if(coupon == null)
+
+            if (coupon == null)
                 return Json("Mã giảm giá không hợp lệ!", JsonRequestBehavior.AllowGet);
-            else if(coupon.EndDate < DateTime.Now)
+            else if (coupon.EndDate < DateTime.Now)
                 return Json("Mã giảm giá đã hết hạn!", JsonRequestBehavior.AllowGet);
             else if (coupon.Quantity <= 0)
-                return Json("Mã giảm đã dùng hết!", JsonRequestBehavior.AllowGet);
+                return Json("Mã giảm giá đã dùng hết!", JsonRequestBehavior.AllowGet);
 
             order.CouponId = coupon.CouponId;
-            await _order.UpdateAsync(order);
-            return Json("Ok", JsonRequestBehavior.AllowGet);
+            if (await _order.UpdateAsync(order))
+            {
+                coupon.Quantity -= 1;
+                await _coupon.UpdateAsync(coupon);
+            }
+
+            return Json("OK", JsonRequestBehavior.AllowGet);
         }
     }
 }
