@@ -1,6 +1,6 @@
 ﻿@model  Order
 
-@if (!Model.OrderDetails.Any())
+@if (Model == null || Model.OrderDetails == null || !Model.OrderDetails.Any())
 {
     <div class="empty-cart m-l--15">
         <img src="~/Assets/images/layouts/empty-cart.png" alt="empty-cart" class="w-100" />

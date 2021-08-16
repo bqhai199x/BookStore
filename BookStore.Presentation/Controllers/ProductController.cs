@@ -47,7 +47,7 @@ namespace BookStore.Presentation.Controllers
         {
             Review review = new Review()
             {
-                AccountId = StaticVariables.AccountID,
+                AccountId = Static.AccountID,
                 ProductId = productId,
                 Rating = rate,
                 Content = content

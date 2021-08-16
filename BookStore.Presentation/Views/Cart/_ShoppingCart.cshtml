@@ -1,7 +1,7 @@
 ﻿@model Order
 
 <div class="container">
-    @if (!Model.OrderDetails.Any())
+    @if (Model == null || Model.OrderDetails == null || !Model.OrderDetails.Any())
     {
         <div class="empty-cart">
             <img src="~/Assets/images/layouts/empty-cart.png" alt="empty-cart" />
