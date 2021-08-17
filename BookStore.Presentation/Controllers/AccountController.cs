@@ -20,6 +20,10 @@ namespace BookStore.Presentation.Controllers
         [Route("dang-nhap")]
         public ActionResult LoginView()
         {
+            if(Static.AccountID != null)
+            {
+                return Redirect("/");
+            }
             return View("Login");
         }
 
@@ -38,6 +42,10 @@ namespace BookStore.Presentation.Controllers
         [Route("dang-ky")]
         public ActionResult RegisterView()
         {
+            if (Static.AccountID != null)
+            {
+                return Redirect("/");
+            }
             return View("Register");
         }
 
@@ -45,7 +53,7 @@ namespace BookStore.Presentation.Controllers
         {
             List<string> infoList = new List<string>();
             // userName, email, phoneNumber
-            bool[] isValid = new bool[] { true, true, true };
+            bool[] isValid = new bool[] { false, false, false };
             foreach (var item in await _account.GetAllAsync())
             {
                 infoList.Add(item.UserName.ToLower());
@@ -54,24 +62,25 @@ namespace BookStore.Presentation.Controllers
             }
             if (infoList.Exists(x => x.Equals(info.UserName.ToLower())))
             {
-                isValid[0] = false;
+                isValid[0] = true;
             }
             if (infoList.Exists(x => x.Equals(info.Email.ToLower())))
             {
-                isValid[1] = false;
+                isValid[1] = true;
             }
             if (infoList.Exists(x => x.Equals(info.Phone.ToLower())))
             {
-                isValid[2] = false;
+                isValid[2] = true;
             }
-            if (!isValid[0] || !isValid[1] || !isValid[2])
+            if (isValid[0] || isValid[1] || isValid[2])
             {
                 return Json(new 
                 { 
-                    success = false, existUser = isValid[0],
+                    success = false, 
+                    existUser = isValid[0],
                     existEmail = isValid[1],
                     existPhone = isValid[2] 
-                }, JsonRequestBehavior.AllowGet);
+                }, JsonRequestBehavior.AllowGet);   
             }
             Account newAccount = new Account()
             {

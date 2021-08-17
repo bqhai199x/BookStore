@@ -66,7 +66,11 @@
                                 else
                                 {
                                     <ul class="sub-menu">
-                                        <li><a class="text-danger">@Static.FullName</a></li>
+                                        <li>
+                                            <a class="text-danger">
+                                                @(Static.FullName.IsBlank() ? "Xin chào!" : Static.FullName)
+                                            </a>
+                                        </li>
                                         <li class="dropdown-divider"></li>
                                         <li><a href="#">Sửa thông tin</a></li>
                                         @if (Static.IsAdmin)

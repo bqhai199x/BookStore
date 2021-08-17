@@ -235,22 +235,27 @@ $('.js-addcart-detail').each(function () {
                 "quantity": $('.num-product2').val()
             },
             success: function (data) {
-                $('.header-cart-content').load("/Cart/QuickCart", function () {
-                    $('.icon-header-noti').attr('data-notify', data)
-                    swal(nameProduct, "đã được thêm vào giỏ hàng !", "success");
-                })
+                if (!data) {
+                    swal({
+                        icon: 'error',
+                        title: 'Bạn chưa đăng nhập !',
+                        buttons: 'Đăng nhập',
+                        text: 'Vui lòng đăng nhập để thực hiện chức năng này!',
+                    }).then((value) => {
+                        if (value) {
+                            window.location = "/dang-nhap";
+                        }
+                    });
+                }
+                else {
+                    $('.header-cart-content').load("/Cart/QuickCart", function () {
+                        $('.icon-header-noti').attr('data-notify', data)
+                        swal(nameProduct, "đã được thêm vào giỏ hàng !", "success");
+                    })
+                }
             },
             error: function (error) {
-                swal({
-                    icon: 'error',
-                    title: 'Bạn chưa đăng nhập !',
-                    buttons: 'Đăng nhập',
-                    text: 'Vui lòng đăng nhập để thực hiện chức năng này!',
-                }).then((value) => {
-                    if (value) {
-                        window.location = "/dang-nhap";
-                    }
-                });
+                swal("Lỗi", "Có lỗi đã xảy ra !", "error");
             }
         });
     });

@@ -55,6 +55,11 @@ namespace BookStore.Presentation.Controllers
 
         public async Task<JsonResult> AddToCart(int productId, int quantity)
         {
+            if(Static.AccountID == null)
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+
             Order order = new Order();
 
             // Check cart exist

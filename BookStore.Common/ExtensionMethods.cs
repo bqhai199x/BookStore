@@ -9,7 +9,7 @@
         /// <returns></returns>
         public static bool IsBlank(this string str)
         {
-            return string.IsNullOrWhiteSpace(str) && string.IsNullOrEmpty(str);
+            return string.IsNullOrWhiteSpace(str) || string.IsNullOrEmpty(str);
         }
 
         /// <summary>
@@ -19,7 +19,7 @@
         /// <returns></returns>
         public static bool IsNotBlank(this string str)
         {
-            return !string.IsNullOrWhiteSpace(str) && !string.IsNullOrEmpty(str);
+            return !string.IsNullOrWhiteSpace(str) || !string.IsNullOrEmpty(str);
         }
     }
 }
