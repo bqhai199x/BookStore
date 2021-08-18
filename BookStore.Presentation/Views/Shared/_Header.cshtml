@@ -55,7 +55,7 @@
                         <ul class="main-menu">
                             <li>
                                 <i class="zmdi zmdi-accounts-outline"></i>
-                                @if (Static.AccountID == null)
+                                @if (Base.Account == null)
                                 {
                                     <ul class="sub-menu">
                                         <li><a href="/dang-nhap">Đăng nhập</a></li>
@@ -68,12 +68,13 @@
                                     <ul class="sub-menu">
                                         <li>
                                             <a class="text-danger">
-                                                @(Static.FullName.IsBlank() ? "Xin chào!" : Static.FullName)
+                                                @(Base.Account.FirstName.IsBlank() ? "Xin chào!" : $"Hi, {Base.Account.FirstName}")
                                             </a>
                                         </li>
                                         <li class="dropdown-divider"></li>
                                         <li><a href="#">Sửa thông tin</a></li>
-                                        @if (Static.IsAdmin)
+                                        <li><a href="#">Quản lý đơn hàng</a></li>
+                                        @if (Base.Account.Role == RoleUser.Admin)
                                         {
                                             <li><a href="#">Trang quản trị</a></li>
                                         }

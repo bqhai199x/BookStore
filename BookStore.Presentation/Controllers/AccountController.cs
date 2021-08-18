@@ -20,7 +20,7 @@ namespace BookStore.Presentation.Controllers
         [Route("dang-nhap")]
         public ActionResult LoginView()
         {
-            if(Static.AccountID != null)
+            if(Base.Account != null)
             {
                 return Redirect("/");
             }
@@ -29,11 +29,12 @@ namespace BookStore.Presentation.Controllers
 
         public async Task<JsonResult> LoginRequest(string user, string password)
         {
+            password = password.Encrypt();
             Account account = await _account.FindAsync(
                 x => (x.UserName.Equals(user) || x.Email.Equals(user) || x.Phone.Equals(user)) && x.Password.Equals(password));
             if (account != null)
             {
-                Static.Login(account.AccountId, account.FullName, account.Role == RoleUser.Admin);
+                Base.Login(account);
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
             return Json(new { success = false }, JsonRequestBehavior.AllowGet);
@@ -42,7 +43,7 @@ namespace BookStore.Presentation.Controllers
         [Route("dang-ky")]
         public ActionResult RegisterView()
         {
-            if (Static.AccountID != null)
+            if (Base.Account != null)
             {
                 return Redirect("/");
             }
@@ -82,6 +83,7 @@ namespace BookStore.Presentation.Controllers
                     existPhone = isValid[2] 
                 }, JsonRequestBehavior.AllowGet);   
             }
+            info.Password = info.Password.Encrypt();
             Account newAccount = new Account()
             {
                 FirstName = info.FirstName,
@@ -101,7 +103,7 @@ namespace BookStore.Presentation.Controllers
         [Route("dang-xuat")]
         public ActionResult Logout()
         {
-            Static.Logout();
+            Base.Logout();
             return Redirect(Request.UrlReferrer.ToString());
         }
     }

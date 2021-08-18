@@ -36,20 +36,20 @@
 
 body, html {
 	height: 100%;
-	font-family: Poppins-Regular, sans-serif;
+	font-family: Montserrat-Regular, sans-serif;
 }
 
 /*---------------------------------------------*/
 a {
-	font-family: Poppins-Regular;
+	font-family: Montserrat-Regular;
 	font-size: 14px;
 	line-height: 1.7;
-	color: #666666;
+	/*color: #666666;*/
 	margin: 0px;
 	transition: all 0.4s;
 	-webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
+	-o-transition: all 0.4s;
+	-moz-transition: all 0.4s;
 }
 
 a:focus {
@@ -148,13 +148,13 @@ iframe {
 
 .txt2 {
   /*font-family: Poppins-Regular;*/
-  font-family: Montserrat-Medium;
+  font-family: Montserrat-Regular;
   font-size: 14px;
-  color: #999999;
+  /*color: #999999;*/
   line-height: 1.5;
 }
 
-.bo1 {border-bottom: 1px solid #999999;}
+.bo1 {border-bottom: 1px solid /*#999999*/;}
 
 /*//////////////////////////////////////////////////////////////////
 [ login ]*/
@@ -310,17 +310,16 @@ iframe {
 
 /*---------------------------------------------*/
 .input100 {
-  /*font-family: Poppins-Regular;*/
-  font-family: Montserrat-Medium;
-  color: #333333;
-  line-height: 1.2;
-  font-size: 18px;
-
-  display: block;
-  width: 100%;
-  background: transparent;
-  height: 60px;
-  padding: 0 20px;
+	/*font-family: Poppins-Regular;*/
+	font-family: Montserrat-Regular;
+	color: #333333;
+	line-height: 1.2;
+	font-size: 18px;
+	display: block;
+	width: 100%;
+	background: transparent;
+	height: 60px;
+	padding: 0 20px;
 }
 /*------------------------------------------------------------------
 [ Focus Input ]*/
@@ -449,36 +448,33 @@ iframe {
 }
 
 .alert-validate::before {
-  content: attr(data-validate);
-  position: absolute;
-  max-width: 70%;
-  background-color: #fff;
-  border: 1px solid #c80000;
-  border-radius: 2px;
-  padding: 4px 25px 5px 10px;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  transform: translateY(-50%);
-  right: 12px;
-  pointer-events: none;
-
-  /*font-family: Poppins-Regular;*/
-  font-family: Montserrat-Medium;
-  color: #c80000;
-  font-size: 14px;
-  line-height: 1.4;
-  text-align: left;
-
-  visibility: hidden;
-  opacity: 0;
-
-  -webkit-transition: opacity 0.4s;
-  -o-transition: opacity 0.4s;
-  -moz-transition: opacity 0.4s;
-  transition: opacity 0.4s;
+	content: attr(data-validate);
+	position: absolute;
+	max-width: 70%;
+	background-color: #fff;
+	border: 1px solid #c80000;
+	border-radius: 2px;
+	padding: 4px 25px 5px 10px;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	transform: translateY(-50%);
+	right: 12px;
+	pointer-events: none;
+	/*font-family: Poppins-Regular;*/
+	font-family: Montserrat-Regular;
+	color: #c80000;
+	font-size: 14px;
+	line-height: 1.4;
+	text-align: left;
+	visibility: hidden;
+	opacity: 0;
+	-webkit-transition: opacity 0.4s;
+	-o-transition: opacity 0.4s;
+	-moz-transition: opacity 0.4s;
+	transition: opacity 0.4s;
 }
 
 .alert-validate::after {
