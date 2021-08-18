@@ -1,4 +1,8 @@
-﻿namespace BookStore.Common
+﻿using System;
+using System.Security.Cryptography;
+using System.Text;
+
+namespace BookStore.Common
 {
     public static class ExtensionMethods
     {
@@ -20,6 +24,48 @@
         public static bool IsNotBlank(this string str)
         {
             return !string.IsNullOrWhiteSpace(str) || !string.IsNullOrEmpty(str);
+        }
+
+        /// <summary>
+        /// Encrypt password
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public static string Encrypt(this string text)
+        {
+            var data = Encoding.UTF8.GetBytes(text);
+
+            using (var md5 = new MD5CryptoServiceProvider())
+            {
+                var keys = md5.ComputeHash(Encoding.UTF8.GetBytes("tofu"));
+                using (var tripDes = new TripleDESCryptoServiceProvider { Key = keys, Mode = CipherMode.ECB, Padding = PaddingMode.PKCS7 })
+                {
+                    var transform = tripDes.CreateEncryptor();
+                    var results = transform.TransformFinalBlock(data, 0, data.Length);
+                    return Convert.ToBase64String(results, 0, results.Length);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Decrypt password
+        /// </summary>
+        /// <param name="cipher"></param>
+        /// <returns></returns>
+        public static string Decrypt(this string cipher)
+        {
+            var data = Convert.FromBase64String(cipher);
+            using (var md5 = new MD5CryptoServiceProvider())
+            {
+                var keys = md5.ComputeHash(Encoding.UTF8.GetBytes("tofu"));
+
+                using (var tripDes = new TripleDESCryptoServiceProvider() { Key = keys, Mode = CipherMode.ECB, Padding = PaddingMode.PKCS7 })
+                {
+                    var transform = tripDes.CreateDecryptor();
+                    var results = transform.TransformFinalBlock(data, 0, data.Length);
+                    return Encoding.UTF8.GetString(results);
+                }
+            }
         }
     }
 }

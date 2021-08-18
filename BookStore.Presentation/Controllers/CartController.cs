@@ -2,7 +2,6 @@
 using BookStore.Common;
 using BookStore.Domain;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -32,14 +31,14 @@ namespace BookStore.Presentation.Controllers
             Order order = new Order();
 
             // Check cart exist
-            var cart = await _order.FindAsync(x => x.AccountId == Static.AccountID && x.Status == OrderStatus.InCart);
+            var cart = await _order.FindAsync(x => x.AccountId == Base.AccountId && x.Status == OrderStatus.InCart);
             if (cart != null)
             {
                 order = cart;
             }
             else
             {
-                order.AccountId = Static.AccountID;
+                order.AccountId = Base.AccountId;
                 order.Status = OrderStatus.InCart;
                 await _order.CreateAsync(order);
             }
@@ -49,13 +48,14 @@ namespace BookStore.Presentation.Controllers
 
         public async Task<PartialViewResult> QuickCart()
         {
-            var cart = await _order.FindAsync(x => x.AccountId == Static.AccountID && x.Status == OrderStatus.InCart);
+            
+            var cart = await _order.FindAsync(x => x.AccountId == Base.AccountId && x.Status == OrderStatus.InCart);
             return PartialView("_QuickCart", cart);
         }
 
         public async Task<JsonResult> AddToCart(int productId, int quantity)
         {
-            if(Static.AccountID == null)
+            if(Base.Account == null)
             {
                 return Json(false, JsonRequestBehavior.AllowGet);
             }
@@ -63,14 +63,14 @@ namespace BookStore.Presentation.Controllers
             Order order = new Order();
 
             // Check cart exist
-            var cart = await _order.FindAsync(x => x.AccountId == Static.AccountID && x.Status == OrderStatus.InCart);
+            var cart = await _order.FindAsync(x => x.AccountId == Base.AccountId && x.Status == OrderStatus.InCart);
             if (cart != null)
             {
                 order = cart;
             }
             else
             {
-                order.AccountId = Static.AccountID;
+                order.AccountId = Base.AccountId;
                 order.Status = OrderStatus.InCart;
                 await _order.CreateAsync(order);
             }
@@ -98,7 +98,7 @@ namespace BookStore.Presentation.Controllers
 
         public async Task<JsonResult> UpdateQuantity(int productId, int quantity)
         {
-            var cart = await _order.FindAsync(x => x.AccountId == Static.AccountID && x.Status == OrderStatus.InCart);
+            var cart = await _order.FindAsync(x => x.AccountId == Base.AccountId && x.Status == OrderStatus.InCart);
             var cartItem = await _orderDetail.FindAsync(x => x.OrderId == cart.OrderId && x.ProductId == productId);
             cartItem.Quantity = quantity;
             await _orderDetail.UpdateAsync(cartItem);
@@ -107,7 +107,7 @@ namespace BookStore.Presentation.Controllers
 
         public async Task<JsonResult> RemoveItem(int productId)
         {
-            var order = await _order.FindAsync(x => x.AccountId == Static.AccountID && x.Status == OrderStatus.InCart);
+            var order = await _order.FindAsync(x => x.AccountId == Base.AccountId && x.Status == OrderStatus.InCart);
             var orderDetail = await _orderDetail.FindAsync(x => x.OrderId == order.OrderId && x.ProductId == productId);
             await _orderDetail.DeleteAsync(orderDetail);
 

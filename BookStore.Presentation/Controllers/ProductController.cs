@@ -1,7 +1,6 @@
 ﻿using BookStore.BusinessLogic.IServices;
 using BookStore.Common;
 using BookStore.Domain;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -47,7 +46,7 @@ namespace BookStore.Presentation.Controllers
         {
             Review review = new Review()
             {
-                AccountId = Static.AccountID,
+                AccountId = Base.AccountId,
                 ProductId = productId,
                 Rating = rate,
                 Content = content
