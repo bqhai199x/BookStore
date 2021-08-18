@@ -198,7 +198,6 @@
     <Content Include="Assets\images\icons\icon-close.png" />
     <Content Include="Assets\images\icons\icon-close2.png" />
     <Content Include="Assets\images\icons\icon-email.png" />
-    <Content Include="Assets\images\icons\icon-google.png" />
     <Content Include="Assets\images\icons\icon-heart-01.png" />
     <Content Include="Assets\images\icons\icon-heart-02.png" />
     <Content Include="Assets\images\icons\icon-next.png" />
@@ -268,6 +267,7 @@
     <Content Include="Assets\js\toastr.min.js" />
     <Content Include="Assets\js\tofubook.js" />
     <Content Include="Assets\css\main-login.css" />
+    <Content Include="Assets\css\util-login.css" />
     <Content Include="Assets\js\main-login.js" />
     <Content Include="Assets\vendor\animate\animate.css" />
     <Content Include="Assets\vendor\animsition\css\animsition.css" />

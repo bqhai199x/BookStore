@@ -36,7 +36,7 @@
             <p class="stext-102 cl6" style="word-wrap:break-word">
                 @item.Content
             </p>
-            @if (Base.Account != null && Base.Account.Role == RoleUser.Admin)
+            @if (Static.IsAdmin == true)
             {
                 <button class="pos-absolute text-danger" onclick="RemoveReview(@item.ReviewId)" style="right: 15px">Xoá</button>
             }
