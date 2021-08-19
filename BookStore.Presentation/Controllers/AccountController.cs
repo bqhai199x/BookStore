@@ -20,18 +20,17 @@ namespace BookStore.Presentation.Controllers
         [Route("dang-nhap")]
         public ActionResult LoginView()
         {
-            if(Base.Account != null)
+            if (Base.Account != null)
             {
                 return Redirect("/");
             }
             return View("Login");
         }
 
-        public async Task<JsonResult> LoginRequest(string user, string password)
+        public async Task<JsonResult> LoginRequest(string email, string password)
         {
             password = password.Encrypt();
-            Account account = await _account.FindAsync(
-                x => (x.UserName.Equals(user) || x.Email.Equals(user) || x.Phone.Equals(user)) && x.Password.Equals(password));
+            Account account = await _account.FindAsync(x => x.Email.Equals(email) && x.Password.Equals(password));
             if (account != null)
             {
                 Base.Login(account);
@@ -52,47 +51,18 @@ namespace BookStore.Presentation.Controllers
 
         public async Task<JsonResult> RegisterRequest(Account info)
         {
-            List<string> infoList = new List<string>();
-            // userName, email, phoneNumber
-            bool[] isValid = new bool[] { false, false, false };
-            foreach (var item in await _account.GetAllAsync())
-            {
-                infoList.Add(item.UserName.ToLower());
-                infoList.Add(item.Email.ToLower());
-                infoList.Add(item.Phone);
-            }
-            if (infoList.Exists(x => x.Equals(info.UserName.ToLower())))
-            {
-                isValid[0] = true;
-            }
-            if (infoList.Exists(x => x.Equals(info.Email.ToLower())))
-            {
-                isValid[1] = true;
-            }
-            if (infoList.Exists(x => x.Equals(info.Phone.ToLower())))
-            {
-                isValid[2] = true;
-            }
-            if (isValid[0] || isValid[1] || isValid[2])
-            {
-                return Json(new 
-                { 
-                    success = false, 
-                    existUser = isValid[0],
-                    existEmail = isValid[1],
-                    existPhone = isValid[2] 
-                }, JsonRequestBehavior.AllowGet);   
+            var account = await _account.FindAsync(x => x.Email.ToLower().Equals(info.Email.ToLower()));
+            if (account != null)
+             {
+                return Json(new { success = false }, JsonRequestBehavior.AllowGet);
             }
             info.Password = info.Password.Encrypt();
             Account newAccount = new Account()
             {
                 FirstName = info.FirstName,
                 LastName = info.LastName,
-                UserName = info.UserName,
                 Password = info.Password,
                 Email = info.Email,
-                Phone = info.Phone,
-                Address = info.Address,
                 Role = RoleUser.Customer,
                 CreatedDate = DateTime.Now
             };

@@ -142,5 +142,11 @@ namespace BookStore.Presentation.Controllers
 
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
+
+        [Route("thanh-toan")]
+        public ActionResult Checkout()
+        {
+            return View();
+        }
     }
 }

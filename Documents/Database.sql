@@ -2,9 +2,9 @@ USE [BookStoreDB]
 GO
 SET IDENTITY_INSERT [dbo].[Account] ON 
 GO
-INSERT [dbo].[Account] ([AccountId], [UserName], [Password], [ImageURL], [FirstName], [LastName], [Address], [Phone], [Email], [Role], [CreatedDate]) VALUES (1, N'bqhai', N'123', N'avt-hai.jpg', N'Hải', N'Bùi Quang', N'Mạch Lũng - Đại Mạch - Đông Anh - Hà Nội', N'0976445870', N'bqhai.199x@gmail.com', 1, NULL)
+INSERT [dbo].[Account] ([AccountId], [Password], [ImageURL], [FirstName], [LastName], [Address], [Phone], [Email], [Role], [CreatedDate]) VALUES (1, N'123', N'avt-hai.jpg', N'Hải', N'Bùi Quang', N'Mạch Lũng - Đại Mạch - Đông Anh - Hà Nội', N'0976445870', N'bqhai.199x@gmail.com', 1, NULL)
 GO
-INSERT [dbo].[Account] ([AccountId], [UserName], [Password], [ImageURL], [FirstName], [LastName], [Address], [Phone], [Email], [Role], [CreatedDate]) VALUES (2, N'haibq', N'123', NULL, N'Duyên', N'Bùi Thị Mỹ', N'Làng Chài - Võng La - Đông Anh - Hà Nội', N'0907076600', N'yendu197@gmail.com', 0, NULL)
+INSERT [dbo].[Account] ([AccountId], [Password], [ImageURL], [FirstName], [LastName], [Address], [Phone], [Email], [Role], [CreatedDate]) VALUES (2, N'123', NULL, N'Duyên', N'Bùi Thị Mỹ', N'Làng Chài - Võng La - Đông Anh - Hà Nội', N'0907076600', N'yendu197@gmail.com', 0, NULL)
 GO
 SET IDENTITY_INSERT [dbo].[Account] OFF
 GO

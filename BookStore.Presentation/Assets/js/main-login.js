@@ -44,21 +44,9 @@ $('.login100-form').submit(function () {
                     });
                 }
                 else {
-                    if (data.existUser) {
-                        var input = $("input[name='UserName']");
-                        $(input).parent().attr('data-validate', 'Tài khoản đã tồn tại');
-                        $(input).parent().addClass('alert-validate');
-                    } 
-                    if (data.existEmail) {
-                        var input = $("input[name='Email']");
-                        $(input).parent().attr('data-validate', 'Email đã tồn tại');
-                        $(input).parent().addClass('alert-validate');
-                    }
-                    if (data.existPhone) {
-                        var input = $("input[name='Phone']");
-                        $(input).parent().attr('data-validate', 'Số điện thoại đã tồn tại');
-                        $(input).parent().addClass('alert-validate');
-                    }
+                    var input = $("input[name='email']");
+                    $(input).parent().attr('data-validate', 'Email đã tồn tại');
+                    $(input).parent().addClass('alert-validate');
                 }
             },
             error: function (error) {
@@ -82,22 +70,12 @@ function validate(input) {
             return false;
         }
     }
-    else if ($(input).attr('type') == 'tel' || $(input).attr('name') == 'phoneNumber') {
-        if ($(input).val().trim().match(/^[0-9]{10}$/) == null) {
-            $(input).parent().attr('data-validate', 'Số điện thoại không hợp lệ');
-            return false;
-        }
+    else if ($(input).val().trim() == '') {
+        return false;
     }
-    else if ($(input).attr('name') == 'UserName') {
-        if ($(input).val().trim() == '') {
-            $(input).parent().attr('data-validate', 'Bạn chưa nhập tài khoản'); 
-            return false;
-        }
-    }
-    else {
-        if ($(input).val().trim() == '') {
-            return false;
-        }
+    else if ($(input).attr('name') == 're-password' && ($(input).val() != $("[name='password']").val())) {
+        $(input).parent().attr('data-validate', 'Mật khẩu không trùng khớp');
+        return false;
     }
 }
 

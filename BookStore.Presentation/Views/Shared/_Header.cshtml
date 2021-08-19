@@ -66,11 +66,7 @@
                                 else
                                 {
                                     <ul class="sub-menu">
-                                        <li>
-                                            <a class="text-danger">
-                                                @(Base.Account.FirstName.IsBlank() ? "Xin chào!" : $"Hi, {Base.Account.FirstName}")
-                                            </a>
-                                        </li>
+                                        <li><a class="text-danger">Hi, @Base.Account.FirstName</a></li>
                                         <li class="dropdown-divider"></li>
                                         <li><a href="#">Sửa thông tin</a></li>
                                         <li><a href="#">Quản lý đơn hàng</a></li>

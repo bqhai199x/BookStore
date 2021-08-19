@@ -1,9 +1,9 @@
-﻿namespace BookStore.Domain
-{
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
+namespace BookStore.Domain
+{
     [Table("OrderDetail")]
     public partial class OrderDetail
     {
