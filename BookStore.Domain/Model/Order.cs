@@ -28,11 +28,18 @@ namespace BookStore.Domain
         [DisplayName("Số điện thoại")]
         public string Phone { get; set; }
 
+        [DisplayName("Ghi chú")]
+        public string Note { get; set; }
+
+        [DisplayName("Phương thức thanh toán")]
+        public Payment Payment { get; set; }
+
         public int? ShipperId { get; set; }
 
         public int? CouponId { get; set; }
 
         public int? AccountId { get; set; }
+
 
         [ForeignKey("AccountId")]
         public virtual Account Account { get; set; }

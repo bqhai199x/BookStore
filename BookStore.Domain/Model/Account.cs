@@ -25,6 +25,15 @@ namespace BookStore.Domain
         
         public string LastName { get; set; }
 
+        [DisplayName("Tỉnh/Thành phố")]
+        public string City { get; set; }
+
+        [DisplayName("Quận huyện")]
+        public string District { get; set; }
+
+        [DisplayName("Phường xã")]
+        public string Commune { get; set; }
+
         [DisplayName("Địa chỉ")]
         public string Address { get; set; }
 

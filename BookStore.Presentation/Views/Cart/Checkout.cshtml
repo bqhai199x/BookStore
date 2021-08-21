@@ -2,6 +2,8 @@
     ViewBag.Title = "Thanh toán";
 }
 
+@model Order
+
 <div class="checkout">
     <div class="container">
         <div class="title">
@@ -10,92 +12,70 @@
         <div class="d-flex">
             <form action="" method="post">
                 <label>
-                    <span class="fname">Họ tên <span class="required">*</span></span>
-                    <input type="text" name="fullname">
+                    <span class="fname">Họ và tên <span class="required">*</span></span>
+                    <input type="text" name="fullName" value="@Model.Account.FullName">
                 </label>
                 <label>
                     <span>Số điện thoại <span class="required">*</span></span>
-                    <input type="tel" name="phone">
+                    <input type="tel" name="phone" value="@Model.Account.Phone">
                 </label>
                 <label>
                     <span>Tỉnh/Thành phố <span class="required">*</span></span>
                     <select name="city">
-                        <option value="select">Select a country...</option>
-                        <option value="AFG">Afghanistan</option>
-                        <option value="ALA">Åland Islands</option>
+                        <option value="0" hidden>Chọn tỉnh/thành phố</option>
                     </select>
                 </label>
                 <label>
-                    <span>Quận/Huyện<span class="required">*</span></span>
+                    <span>Quận huyện <span class="required">*</span></span>
                     <select name="district">
-                        <option value="select">Select a country...</option>
-                        <option value="AFG">Afghanistan</option>
-                        <option value="ALA">Åland Islands</option>
+                        <option value="0" hidden>Chọn quận huyện</option>
                     </select>
                 </label>
                 <label>
-                    <span>Phường/Xã<span class="required">*</span></span>
+                    <span>Phường xã <span class="required">*</span></span>
                     <select name="commune">
-                        <option value="select">Select a country...</option>
-                        <option value="AFG">Afghanistan</option>
-                        <option value="ALA">Åland Islands</option>
+                        <option value="0" hidden>Chọn phường xã</option>
                     </select>
                 </label>
                 <label>
-                    <span>Địa chỉ <span class="required">*</span></span>
-                    <input type="tel" name="street">
+                    <span>Địa chỉ chi tiết <span class="required">*</span></span>
+                    <input type="tel" name="street" placeholder="Nhập địa chỉ chi tiết (đường, thôn, ấp, số nhà, ...)">
+                </label>
+                <label>
+                    <span>Ghi chú</span>
+                    <input type="tel" name="note">
                 </label>
             </form>
             <div class="Yorder">
                 <h5>Đơn hàng của bạn</h5>
-                <div class="row">
-                    <div class="col-md-10">
-                        <p>2 x Phép Màu Để Trở Thành Chính Mình</p>
+                @foreach (var item in Model.OrderDetails)
+                {
+                    <div class="row">
+                        <div class="col-md-10">
+                            <p>@item.Quantity x @item.Product.Name</p>
+                        </div>
+                        <div class="col-md-2">
+                            <p class="float-right price">@Html.DisplayFor(x => item.Total)</p>
+                        </div>
                     </div>
-                    <div class="col-md-2">
-                        <p class="float-right">99000</p>
-                    </div>
-                </div>
-                <div class="row pt-1">
-                    <div class="col-md-10">
-                        <p>2 x Phép Màu Để Trở Thành Chính Mình</p>
-                    </div>
-                    <div class="col-md-2">
-                        <p class="float-right">99000</p>
-                    </div>
-                </div>
-                <div class="row pt-1">
-                    <div class="col-md-10">
-                        <p>2 x Phép Màu Để Trở Thành Chính Mình</p>
-                    </div>
-                    <div class="col-md-2">
-                        <p class="float-right">99000</p>
-                    </div>
-                </div>
-                <div class="row pt-1">
-                    <div class="col-md-10">
-                        <p>2 x Phép Màu Để Trở Thành Chính Mình</p>
-                    </div>
-                    <div class="col-md-2">
-                        <p class="float-right">99000</p>
-                    </div>
-                </div>
-                <div class="row pt-1">
-                    <div class="col-md-10">
-                        <p>2 x Phép Màu Để Trở Thành Chính Mình</p>
-                    </div>
-                    <div class="col-md-2">
-                        <p class="float-right">99000</p>
-                    </div>
-                </div>
+                }
                 <hr>
-                <h5>Tạm tính</h5>
+                <h5>Tạm tính <span class="float-right price p-r-15">@Html.DisplayFor(x => Model.SubTotal) VNĐ</span></h5>
                 <hr>
-                <h5>Mã giảm giá</h5>
+                <h5>
+                    Mã giảm giá
+                    @if (Model.CouponId != null)
+                    {
+
+                        <span class="float-right p-r-15 price">
+                            @Model.Coupon.Code (-@((Model.Coupon.Discount*100).Value.ToString("#,###"))%)
+                        </span>
+                    }
+                </h5>
                 <hr>
                 <h5>Phí vận chuyển</h5>
                 <hr>
-                <h5>Tổng tiền</h5>
+                <h5>Tổng tiền <span class="float-right p-r-15 text-danger">@Html.DisplayFor(x => Model.GrandTotal) VNĐ</span></h5>
                 <hr>
                 <h5>Hình thức thanh toán</h5>
                 <div>
@@ -114,3 +94,40 @@
     </div>
 </div>
 
+@if (Model.Account.Address.IsNotBlank())
+{
+    <script>
+        $.getJSON("Assets/json/tinh_tp.json", function (data) {
+            $.each(data, function (key, val) {
+                $("select[name='city']").append("<option code='" + val.code + "' value='"
+                    + val.slug + "'>" + val.name_with_type + "</option>");
+            });
+            var code = BindAddress('@Model.Account.City', 'city');
+            $.getJSON("Assets/json/quan-huyen/" + code + ".json", function (data) {
+                $.each(data, function (key, val) {
+                    $("select[name='district']").append("<option code='" + val.code + "' value='"
+                        + val.slug + "'>" + val.name_with_type + "</option>");
+                });
+                code = BindAddress('@Model.Account.District', 'district');
+                $.getJSON("Assets/json/xa-phuong/" + code + ".json", function (data) {
+                    $.each(data, function (key, val) {
+                        $("select[name='commune']").append("<option code='" + val.code + "' value='"
+                            + val.slug + "'>" + val.name_with_type + "</option>");
+                    });
+                    BindAddress('@Model.Account.Commune', 'commune');
+                });
+            });
+        });
+
+        CityChange();
+        DistrictChange();
+    </script>
+}
+else
+{
+    <script>
+        GetCity();
+        CityChange();
+        DistrictChange();
+    </script>
+}

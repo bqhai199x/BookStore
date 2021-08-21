@@ -111,6 +111,7 @@ br {
         margin-top: 12px;
         padding-right: 10px;
         font-size: 1.1rem;
+        font-weight: 600;
     }
 
 .checkout input[type="text"], .checkout input[type="tel"], .checkout input[type="email"], .checkout select {
@@ -119,6 +120,10 @@ br {
     padding: 5px 10px;
     margin-bottom: 10px;
     border: 1px solid #dadada;
+    /*color: #888;*/
+}
+
+.checkout input::placeholder {
     color: #888;
 }
 
@@ -167,11 +172,16 @@ br {
 
 .checkout p {
     display: block;
-    color: #52ad9c;
+    color: #888;
     margin: 0;
     /*padding: 10px 25px 0 25px;*/
     font-size: 1rem;
     font-family: 'Montserrat-Regular';
+}
+
+.checkout .price {
+    color: #52ad9c;
+    font-size: 15px;
 }
 
 .checkout h5 {

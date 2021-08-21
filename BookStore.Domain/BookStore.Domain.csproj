@@ -59,6 +59,7 @@
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\Coupon.cs" />
     <Compile Include="Model\enum\OrderStatus.cs" />
+    <Compile Include="Model\enum\Payment.cs" />
     <Compile Include="Model\enum\RoleUser.cs" />
     <Compile Include="Model\Feedback.cs" />
     <Compile Include="Model\Order.cs" />

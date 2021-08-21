@@ -2,9 +2,9 @@ USE [BookStoreDB]
 GO
 SET IDENTITY_INSERT [dbo].[Account] ON 
 GO
-INSERT [dbo].[Account] ([AccountId], [Password], [ImageURL], [FirstName], [LastName], [Address], [Phone], [Email], [Role], [CreatedDate]) VALUES (1, N'123', N'avt-hai.jpg', N'Hải', N'Bùi Quang', N'Mạch Lũng - Đại Mạch - Đông Anh - Hà Nội', N'0976445870', N'bqhai.199x@gmail.com', 1, NULL)
+INSERT [dbo].[Account] ([AccountId], [Password], [ImageURL], [FirstName], [LastName], [Address], [Phone], [Email], [Role], [CreatedDate]) VALUES (1, 'QE78aRCyTns=', N'avt-hai.jpg', N'Quang Hải', N'Bùi', N'Mạch Lũng - Đại Mạch - Đông Anh - Hà Nội', N'0976445870', N'bqhai.199x@gmail.com', 1, NULL)
 GO
-INSERT [dbo].[Account] ([AccountId], [Password], [ImageURL], [FirstName], [LastName], [Address], [Phone], [Email], [Role], [CreatedDate]) VALUES (2, N'123', NULL, N'Duyên', N'Bùi Thị Mỹ', N'Làng Chài - Võng La - Đông Anh - Hà Nội', N'0907076600', N'yendu197@gmail.com', 0, NULL)
+INSERT [dbo].[Account] ([AccountId], [Password], [ImageURL], [FirstName], [LastName], [Address], [Phone], [Email], [Role], [CreatedDate]) VALUES (2, 'QE78aRCyTns', NULL, N'Mỹ Duyên', N'Bùi Thị', N'Làng Chài - Võng La - Đông Anh - Hà Nội', N'0907076600', N'yendu197@gmail.com', 0, NULL)
 GO
 SET IDENTITY_INSERT [dbo].[Account] OFF
 GO
@@ -20,7 +20,7 @@ SET IDENTITY_INSERT [dbo].[Coupon] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Order] ON 
 GO
-INSERT [dbo].[Order] ([OrderId], [OrderDate], [Status], [FullName], [Address], [Phone], [ShipperId], [CouponId], [AccountId]) VALUES (1, NULL, 0, N'Bùi Quang Hải', N'Mạch Lũng - Đại Mạch - Đông Anh - Hà Nội', N'0976445870', NULL, 1, 1)
+INSERT [dbo].[Order] ([OrderId], [OrderDate], [Status], [FullName], [Address], [Phone], [ShipperId], [CouponId], [AccountId], [Payment]) VALUES (1, NULL, 0, N'Bùi Quang Hải', N'Mạch Lũng - Đại Mạch - Đông Anh - Hà Nội', N'0976445870', NULL, 1, 1, 0)
 GO
 SET IDENTITY_INSERT [dbo].[Order] OFF
 GO
