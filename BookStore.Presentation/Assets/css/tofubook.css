@@ -123,6 +123,18 @@ br {
     /*color: #888;*/
 }
 
+.checkout input[type="radio"], .checkout input[type="radio"] + label {
+    cursor: pointer;
+}
+
+.checkout textarea {
+    width: 70%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #dadada;
+    resize: none;
+}
+
 .checkout input::placeholder {
     color: #888;
 }

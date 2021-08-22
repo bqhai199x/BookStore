@@ -2,7 +2,6 @@
 using BookStore.Common;
 using BookStore.Domain;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -142,17 +141,6 @@ namespace BookStore.Presentation.Controllers
             }
 
             return Json("OK", JsonRequestBehavior.AllowGet);
-        }
-
-        [Route("thanh-toan")]
-        public async Task<ActionResult> CheckoutView()
-        {
-            var cart = await _order.FindAsync(x => x.AccountId == Base.AccountId && x.Status == OrderStatus.InCart);
-            if(cart == null || cart.OrderDetails == null || !cart.OrderDetails.Any()) 
-            {
-                return Redirect("/gio-hang");
-            }
-            return View("Checkout", cart);
         }
     }
 }

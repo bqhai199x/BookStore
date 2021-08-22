@@ -151,6 +151,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -207,8 +208,11 @@
     <Content Include="Assets\images\icons\icon-pay-03.png" />
     <Content Include="Assets\images\icons\icon-pay-04.png" />
     <Content Include="Assets\images\icons\icon-pay-05.png" />
+    <Content Include="Assets\images\icons\icon-payment-method-atm.svg" />
+    <Content Include="Assets\images\icons\icon-payment-method-cod.svg" />
+    <Content Include="Assets\images\icons\icon-payment-method-mo-mo.svg" />
     <Content Include="Assets\images\icons\icon-prev.png" />
-	<Content Include="Assets\images\icons\payment.png" />
+    <Content Include="Assets\images\icons\payment.png" />
     <Content Include="Assets\images\layouts\bg-1.jpg" />
     <Content Include="Assets\images\layouts\bg-2.jpg" />
     <Content Include="Assets\images\layouts\bg-3.jpg" />
@@ -270,7 +274,7 @@
     <Content Include="Assets\js\tofubook.js" />
     <Content Include="Assets\css\main-login.css" />
     <Content Include="Assets\js\main-login.js" />
-	<Content Include="Assets\js\address.js" />
+    <Content Include="Assets\js\address.js" />
     <Content Include="Assets\vendor\animate\animate.css" />
     <Content Include="Assets\vendor\animsition\css\animsition.css" />
     <Content Include="Assets\vendor\animsition\css\animsition.min.css" />
@@ -459,7 +463,7 @@
     <Content Include="Assets\vendor\slick\slick.less" />
     <Content Include="Assets\vendor\slick\slick.scss" />
     <Content Include="Areas\Admin\Views\web.config" />
-	<Content Include="Assets\json\tinh_tp.json" />
+    <Content Include="Assets\json\tinh_tp.json" />
     <Content Include="Assets\json\quan-huyen\01.json" />
     <Content Include="Assets\json\quan-huyen\02.json" />
     <Content Include="Assets\json\quan-huyen\04.json" />
@@ -1256,7 +1260,7 @@
     <Content Include="Views\Cart\_ShoppingCart.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Cart\Checkout.cshtml" />
+    <Content Include="Views\Order\Checkout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BookStore.BusinessLogic\BookStore.BusinessLogic.csproj">

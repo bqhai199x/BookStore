@@ -14,9 +14,7 @@ namespace BookStore.Common
         {
             get
             {
-                //if (Account == null) return null;
-                //else return Account.AccountId;
-                return 1;
+                return Account == null ? 1 : Account.AccountId;
             }
         }
     }

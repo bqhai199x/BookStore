@@ -5,7 +5,7 @@ namespace BookStore.Domain
     public enum Payment
     {
         [Description("Thanh toán sau khi nhận hàng")]
-        Cash,
+        COD,
 
         [Description("Thanh toán bằng Momo")]
         Momo,
