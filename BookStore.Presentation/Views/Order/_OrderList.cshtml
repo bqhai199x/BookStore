@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Order>
+
+@if (Model != null && Model.Count() > 0)
+{
+    foreach (var order in Model)
+    {
+        <div class="wrap-table-shopping-cart m-b-30 m-l-50 m-r-50">
+            <div class="float-right p-all-10 @order.StatusDisplay[1] border border-bottom-0 text-uppercase">@order.StatusDisplay[0]</div>
+
+            <table class="table-shopping-cart">
+                <tr class="table_head">
+                    <th class="column-1">Sản phẩm</th>
+                    <th class="column-2"></th>
+                    <th class="column-3 text-center">Giá</th>
+                    <th class="column-4 text-center">Số lượng</th>
+                    <th class="column-5 text-center">Tạm tính</th>
+                </tr>
+
+                @foreach (var item in order.OrderDetails)
+                {
+                    <tr class="table_row" style="height:80px">
+                        <td class="column-1">
+                            <div class="how-itemcart2">
+                                <img src="~/Assets/images/products/@item.Product.Images.FirstOrDefault().ImageURL"
+                                     alt="@item.Product.Name" class="w-75">
+                            </div>
+                        </td>
+                        <td class="column-2">@item.Product.Name</td>
+                        <td class="column-3 text-center">@Html.DisplayFor(x => item.Product.Price)</td>
+                        <td class="column-4 text-center">
+                            @item.Quantity
+                        </td>
+                        <td class="column-5" style="text-align:center">@Html.DisplayFor(x => item.Total)</td>
+                    </tr>
+                }
+                <tr class="table_row" style="height:80px">
+                    <td class="column-1" colspan="2">
+                        <span class="mr-2">Tổng số tiền:</span>
+                        <span class="text-danger font-weight-bold">@Html.DisplayFor(x => order.GrandTotal) VNĐ</span>
+                    </td>
+                    <td class="column-4 pr-3"></td>
+                    <td class="column-4 p-r-30" colspan="2">
+                        <button class="btn btn-success">Xem chi tiết</button>
+                        @if (order.Status == OrderStatus.Waitting || order.Status == OrderStatus.Confirmed)
+                        {
+                            <button class="btn btn-danger ml-2">Huỷ đơn hàng</button>
+                        }
+                    </td>
+                </tr>
+            </table>
+        </div>
+    }
+}
+else
+{
+    <div class="empty-order"><img src="~/Assets/images/layouts/emty-order.png"></div>
+}

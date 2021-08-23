@@ -57,25 +57,3 @@ function BindAddress(name, type) {
     element.attr("selected", "selected");
     return element.attr('code');
 }
-
-function Checkout() {
-    var cityElement = $("select[name='city']");
-    var city = cityElement.find('option[value="' + cityElement.val() + '"]').text();
-
-    var districtElement = $("select[name='district']");
-    var district = districtElement.find('option[value="' + districtElement.val() + '"]').text();
-
-    var communeElement = $("select[name='commune']");
-    var commune = communeElement.find('option[value="' + communeElement.val() + '"]').text();
-
-    var street = $("textarea[name='street']").val();
-
-    var address = street + ', ' + commune + ', ' + district + ', ' + city;
-    $("input[name='address']").val(address);
-
-    var shipType = $("input[name='shiptype']").val();
-    var noteMassage = $("input[name='noteMessage']").val();
-
-    var note = (shipType == 'home' ? '[Nhà riêng] ' : '[Cơ quan] ') + noteMassage;
-    $("input[name='note']").val(note);
-}

@@ -220,8 +220,10 @@
     <Content Include="Assets\images\layouts\book.jpg" />
     <Content Include="Assets\images\layouts\checkout.jpg" />
     <Content Include="Assets\images\layouts\empty-cart.png" />
+    <Content Include="Assets\images\layouts\emty-order.png" />
     <Content Include="Assets\images\layouts\logo.png" />
     <Content Include="Assets\images\layouts\mini-logo.jpg" />
+    <Content Include="Assets\images\layouts\noimage.png" />
     <Content Include="Assets\images\products\50-bai-hoc-co-ban-de-tro-thanh-nguoi-lich-thiep.jpg" />
     <Content Include="Assets\images\products\cho-tran-gio-kinh-thien.jpg" />
     <Content Include="Assets\images\products\cuon-sach-cua-nang-tho-2.jpg" />
@@ -1261,6 +1263,8 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Order\Checkout.cshtml" />
+    <Content Include="Views\Order\OrderManagement.cshtml" />
+    <Content Include="Views\Order\_OrderList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BookStore.BusinessLogic\BookStore.BusinessLogic.csproj">

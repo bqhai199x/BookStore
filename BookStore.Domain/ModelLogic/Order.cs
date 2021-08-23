@@ -38,5 +38,26 @@ namespace BookStore.Domain
                 return grandTotal;
             }
         }
+
+        public string[] StatusDisplay
+        {
+            get {
+                switch (Status)
+                {
+                    case OrderStatus.Waitting:
+                        return new string[] { "Đang chờ xác nhận", "text-warning" };
+                    case OrderStatus.Confirmed:
+                        return new string[] { "Đã xác nhận", "text-info" };
+                    case OrderStatus.Shipping:
+                        return new string[] { "Đang giao hàng", "text-primary" };
+                    case OrderStatus.Delivered:
+                        return new string[] { "Đã giao hàng", "text-success" };
+                    case OrderStatus.Cancelled:
+                        return new string[] { "Đã huỷ", "text-danger" };
+                    default:
+                        return null;
+                }
+            }
+        }
     }
 }

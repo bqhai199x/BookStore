@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "Quản lý đơn hàng";
+}
+
+<!-- Contents -->
+<section class="sec-product-detail bg0 p-t-65 p-b-60">
+    <div class="container">
+        <div class="bor10 p-b-20">
+            <!-- Tab01 -->
+            <div class="tab01">
+                <!-- Nav tabs -->
+                <ul style="border-bottom: 1px solid #e6e6e6;" class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#allorder" role="tab">Tất cả</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#waitconfirm" role="tab">Chờ xác nhận</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#confirmed" role="tab">Đã xác nhận</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#shipping" role="tab">Đang giao hàng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#deliverded" role="tab">Đã giao hàng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#cancelled" role="tab">Đã hủy</a>
+                    </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content p-t-43">
+                    <div class="tab-pane fade show active" id="allorder" role="tabpanel">
+                        @{Html.RenderAction("OrderList", new { status = OrderStatus.InCart });}
+                    </div>
+
+                    <div class="tab-pane fade" id="waitconfirm" role="tabpanel">
+                        @{Html.RenderAction("OrderList", new { status = OrderStatus.Waitting });}
+                    </div>
+
+                    <div class="tab-pane fade" id="confirmed" role="tabpanel">
+                        @{Html.RenderAction("OrderList", new { status = OrderStatus.Confirmed });}
+                    </div>
+
+                    <div class="tab-pane fade" id="shipping" role="tabpanel">
+                        @{Html.RenderAction("OrderList", new { status = OrderStatus.Shipping });}
+                    </div>
+
+                    <div class="tab-pane fade" id="deliverded" role="tabpanel">
+                        @{Html.RenderAction("OrderList", new { status = OrderStatus.Delivered });}
+                    </div>
+
+                    <div class="tab-pane fade" id="cancelled" role="tabpanel">
+                        @{Html.RenderAction("OrderList", new { status = OrderStatus.Cancelled });}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+

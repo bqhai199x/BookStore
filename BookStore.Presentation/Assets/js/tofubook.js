@@ -356,3 +356,52 @@ function UpdateQuantity(productId, quantity) {
         }
     });
 }
+
+/*==================================================================
+    [ Checkout ]*/
+
+function Checkout() {
+    var cityElement = $("select[name='city']");
+    var city = cityElement.find('option[value="' + cityElement.val() + '"]').text();
+
+    var districtElement = $("select[name='district']");
+    var district = districtElement.find('option[value="' + districtElement.val() + '"]').text();
+
+    var communeElement = $("select[name='commune']");
+    var commune = communeElement.find('option[value="' + communeElement.val() + '"]').text();
+
+    var street = $("textarea[name='street']").val();
+
+    var address = street + ', ' + commune + ', ' + district + ', ' + city;
+    $("input[name='address']").val(address);
+
+    var shipType = $("input[name='shiptype']").val();
+    var noteMassage = $("input[name='noteMessage']").val();
+
+    var note = (shipType == 'home' ? '[Nhà riêng] ' : '[Cơ quan] ') + noteMassage;
+    $("input[name='note']").val(note);
+
+    $.ajax({
+        url: "/Order/CheckoutRequest",
+        type: "POST",
+        data: $('.checkout form').serialize(),
+        success: function (data) {
+            if (data.success) {
+                swal({
+                    icon: 'success',
+                    title: 'Đặt hàng thành công !',
+                    buttons: 'OK',
+                    text: 'Đơn hàng đã được gửi tới người bán. Bạn có thể xem tại mục quản lý đơn hàng.',
+                }).then((value) => {
+                    window.location = "/";
+                });
+            }
+            else {
+                swal("Đặt hàng thất bại !", "Có một lỗi đã xảy ra vui lòng thử lại sau !", "error");
+            }
+        },
+        error: function (error) {
+            swal("Lỗi", "Có một lỗi đã xảy ra vui lòng thử lại !", "error");
+        }
+    });
+}

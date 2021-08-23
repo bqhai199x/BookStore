@@ -2010,14 +2010,15 @@ input.num-product2 {
 
 .wrap-table-shopping-cart {
     overflow: auto;
-    border-left: 1px solid #e6e6e6;
-    border-right: 1px solid #e6e6e6;
+    /*border-left: 1px solid #e6e6e6;
+    border-right: 1px solid #e6e6e6;*/
 }
 
 .table-shopping-cart {
     border-collapse: collapse;
     width: 100%;
     min-width: 680px;
+    border: 1px solid #e6e6e6;
 }
 
     .table-shopping-cart tr {

@@ -28,7 +28,7 @@ namespace BookStore.Presentation.Controllers
             return View("Checkout", cart);
         }
 
-        public async Task<ActionResult> CheckoutRequest(string fullName, string phoneNumber, string address, string note, Payment payment)
+        public async Task<JsonResult> CheckoutRequest(string fullName, string phoneNumber, string address, string note, Payment payment)
         {
             Order order = await _order.FindAsync(x => x.AccountId == Base.AccountId && x.Status == OrderStatus.InCart);
             order.FullName = fullName;
@@ -38,10 +38,26 @@ namespace BookStore.Presentation.Controllers
             order.Payment = payment;
             order.Status = OrderStatus.Waitting;
             order.OrderDate = DateTime.Now;
-            
-            ViewBag.Success = await _order.UpdateAsync(order);
 
-            return View("CheckoutResult");
+            bool success = await _order.UpdateAsync(order);
+            return Json(new { success = success }, JsonRequestBehavior.AllowGet);
+        }
+
+        [Route("quan-ly-don-hang")]
+        public ActionResult OrderManagement()
+        {
+            //if(Base.Account == null)
+            //{
+            //    return Redirect("/");
+            //}
+            return View();
+        }
+
+        public ActionResult OrderList(OrderStatus status)
+        {
+            bool flag = status != OrderStatus.InCart;
+            var order = _order.FindAll(x => x.AccountId == Base.AccountId && (x.Status == status) == flag).OrderByDescending(x => x.OrderDate);
+            return PartialView("_OrderList", order);
         }
     }
 }
