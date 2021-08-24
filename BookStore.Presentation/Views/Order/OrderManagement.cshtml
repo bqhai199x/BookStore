@@ -2,6 +2,20 @@
     ViewBag.Title = "Quản lý đơn hàng";
 }
 
+<!-- breadcrumb -->
+<div class="container">
+    <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+        <a href="/" class="stext-109 cl8 hov-cl1 trans-04">
+            Trang chủ
+            <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+        </a>
+
+        <span class="stext-109 cl4">
+            Quản lý đơn hàng
+        </span>
+    </div>
+</div>
+
 <!-- Contents -->
 <section class="sec-product-detail bg0 p-t-65 p-b-60">
     <div class="container">
@@ -26,7 +40,7 @@
                         <a class="nav-link" data-toggle="tab" href="#deliverded" role="tab">Đã giao hàng</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#cancelled" role="tab">Đã hủy</a>
+                        <a class="nav-link" data-toggle="tab" href="#cancelled" role="tab" id="cancelled">Đã hủy</a>
                     </li>
                 </ul>
 

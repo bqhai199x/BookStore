@@ -1,0 +1,100 @@
+﻿@{
+    ViewBag.Title = "Chi tiết đơn hàng";
+}
+
+@model  Order
+
+<!-- breadcrumb -->
+<div class="container">
+    <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+        <a href="/" class="stext-109 cl8 hov-cl1 trans-04">
+            Trang chủ
+            <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+        </a>
+
+        <a href="/quan-ly-don-hang" class="stext-109 cl8 hov-cl1 trans-04">
+            Quản lý đơn hàng
+            <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+        </a>
+
+        <span class="stext-109 cl4">
+            @Model.Code
+        </span>
+    </div>
+</div>
+
+<section class="sec-product-detail bg0 p-t-65 p-b-60">
+    <div class="container">
+        <div class="wrap-table-shopping-cart m-b-60 m-l-50 m-r-50">
+            <div>
+                <span class="float-left p-t-10 font-weight-bold text-secondary">Ngày đặt: @Model.OrderDate.Value.ToString("HH:mm dd/MM/yyyy")</span>
+                <span class="float-right p-all-10 @Model.StatusDisplay[1] border border-bottom-0 text-uppercase">@Model.StatusDisplay[0]</span>
+            </div>
+
+            <table class="table-shopping-cart">
+                <tr class="table_row" style="height:80px">
+                    <td class="column-1 pr-3 border">Thông tin đặt hàng</td>
+                    <td class="column-1" colspan="4">
+                        Họ và tên: <b>@Model.FullName</b><br />
+                        Số điện thoại: <b>@Model.Phone</b><br />
+                        Địa chỉ: <b>@Model.Address</b><br />
+                        @if (Model.Note.IsNotBlank())
+                        {
+                            <span>Ghi chú: @Model.Note</span>
+                        }
+                    </td>
+                </tr>
+
+                @foreach (var item in Model.OrderDetails)
+                {
+                    <tr class="table_row" style="height:80px">
+                        <td class="column-1">
+                            <div class="how-itemcart2">
+                                <img src="~/Assets/images/products/@item.Product.Images.FirstOrDefault().ImageURL"
+                                     alt="@item.Product.Name" class="w-75">
+                            </div>
+                        </td>
+                        <td class="column-2">@item.Product.Name</td>
+                        <td class="column-3 text-center">@Html.DisplayFor(x => item.Product.Price)</td>
+                        <td class="column-4 text-center">
+                            @item.Quantity
+                        </td>
+                        <td class="column-5" style="text-align:center">@Html.DisplayFor(x => item.Total)</td>
+                    </tr>
+                }
+
+                <tr class="table_row" style="height:40px">
+                    <td class="column-4 pr-3 border" colspan="3">Tổng tiền hàng</td>
+                    <td class="column-4 p-r-70" colspan="2">@Html.DisplayFor(x => Model.SubTotal) VNĐ</td>
+                </tr>
+                <tr class="table_row" style="height:40px">
+                    <td class="column-4 pr-3 border" colspan="3">Giảm giá</td>
+                    <td class="column-4 p-r-70" colspan="2">
+                        @if (Model.CouponId != null)
+                        {
+                            <span>- @Html.DisplayFor(x => Model.Discount) VNĐ</span>
+                        }
+                    </td>
+                </tr>
+                <tr class="table_row" style="height:40px">
+                    <td class="column-4 pr-3 border" colspan="3">Phí vận chuyển</td>
+                    <td class="column-4 p-r-70" colspan="2">Miễn phí</td>
+                </tr>
+                <tr class="table_row" style="height:40px">
+                    <td class="column-4 pr-3 border" colspan="3">Tổng thanh toán</td>
+                    <td class="column-4 p-r-70 text-danger font-weight-bold" colspan="2">@Html.DisplayFor(x => Model.GrandTotal) VNĐ</td>
+                </tr>
+                <tr class="table_row" style="height:40px">
+                    <td class="column-4 pr-3 border" colspan="3">Phương thức thanh toán</td>
+                    <td class="column-4 p-r-70" colspan="2">@Model.PaymentDisplay</td>
+                </tr>
+            </table>
+            <div class="float-right mt-3">
+                @if (Model.Status == OrderStatus.Waitting || Model.Status == OrderStatus.Confirmed)
+                {
+                    <button class="btn btn-danger ml-2" onclick="CancelOrder(@Model.OrderId)">Huỷ đơn hàng</button>
+                }
+            </div>
+        </div>
+    </div>
+</section>

@@ -1265,6 +1265,7 @@
     <Content Include="Views\Order\Checkout.cshtml" />
     <Content Include="Views\Order\OrderManagement.cshtml" />
     <Content Include="Views\Order\_OrderList.cshtml" />
+    <Content Include="Views\Order\OrderDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BookStore.BusinessLogic\BookStore.BusinessLogic.csproj">

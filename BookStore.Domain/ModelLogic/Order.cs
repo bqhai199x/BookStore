@@ -59,5 +59,34 @@ namespace BookStore.Domain
                 }
             }
         }
+
+        public string PaymentDisplay
+        {
+            get
+            {
+                switch (Payment)
+                {
+                    case Payment.COD:
+                        return "Thanh toán khi nhận hàng";
+                    case Payment.Momo:
+                        return "Thanh toán bằng ví Momo";
+                    case Payment.PayPal:
+                        return "Thanh toán bằng Paypal";
+                    case Payment.ATM:
+                        return "Thanh toán bằng thẻ ATM nội địa/Internet Banking";
+                    default:
+                        return string.Empty;
+                }
+            }
+        }
+
+        [DisplayFormat(DataFormatString = "{0:#,###}")]
+        public decimal? Discount
+        {
+            get
+            {
+                return SubTotal - GrandTotal;
+            }
+        }
     }
 }

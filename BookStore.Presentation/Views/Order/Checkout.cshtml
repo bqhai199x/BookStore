@@ -4,6 +4,25 @@
 
 @model Order
 
+<!-- breadcrumb -->
+<div class="container">
+    <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+        <a href="/" class="stext-109 cl8 hov-cl1 trans-04">
+            Trang chủ
+            <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+        </a>
+
+        <a href="/gio-hang" class="stext-109 cl8 hov-cl1 trans-04">
+            Giỏ hàng
+            <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+        </a>
+
+        <span class="stext-109 cl4">
+            Thanh toán
+        </span>
+    </div>
+</div>
+
 <div class="checkout">
     <div class="container">
         <div class="title">
@@ -56,11 +75,10 @@
                     </label>
                     <label>
                         <span>Ghi chú</span>
-                        <input type="text" name="noteMessage">
+                        <input type="text" name="note">
                     </label>
 
                     <input hidden name="address" />
-                    <input hidden name="note" />
                 </div>
                 <div class="Yorder">
                     <h5>Đơn hàng của bạn</h5>

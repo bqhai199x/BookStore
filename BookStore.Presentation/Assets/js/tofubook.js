@@ -372,14 +372,11 @@ function Checkout() {
 
     var street = $("textarea[name='street']").val();
 
-    var address = street + ', ' + commune + ', ' + district + ', ' + city;
-    $("input[name='address']").val(address);
-
     var shipType = $("input[name='shiptype']").val();
-    var noteMassage = $("input[name='noteMessage']").val();
+    var note = (shipType == 'home' ? '[Nhà riêng] ' : '[Cơ quan] ');
 
-    var note = (shipType == 'home' ? '[Nhà riêng] ' : '[Cơ quan] ') + noteMassage;
-    $("input[name='note']").val(note);
+    var address = note + street + ', ' + commune + ', ' + district + ', ' + city;
+    $("input[name='address']").val(address);
 
     $.ajax({
         url: "/Order/CheckoutRequest",
@@ -402,6 +399,44 @@ function Checkout() {
         },
         error: function (error) {
             swal("Lỗi", "Có một lỗi đã xảy ra vui lòng thử lại !", "error");
+        }
+    });
+}
+
+function CancelOrder(orderId) {
+    swal({
+        text: "Bạn có chắc muốn huỷ đơn hàng này?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+    })
+    .then((willCancel) => {
+        if (willCancel) {
+            $.ajax({
+                url: "/Order/CancelOrder",
+                type: "POST",
+                data: {
+                    "orderId": orderId
+                },
+                success: function (data) {
+                    if (data.success) {
+                        swal({
+                            icon: 'success',
+                            title: 'Huỷ đơn hàng thành công !',
+                            buttons: 'OK',
+                            text: 'Đơn hàng đã được huỷ. Mong bạn có trải nghiệm tốt hơn lần sau !',
+                        }).then((value) => {
+                            window.location = "/chi-tiet-don-hang/" + orderId;
+                        });
+                    }
+                    else {
+                        swal("Huỷ đơn hàng thất bại !", "Có một lỗi đã xảy ra vui lòng thử lại sau !", "error");
+                    }
+                },
+                error: function (error) {
+                    swal("Lỗi", "Có một lỗi đã xảy ra vui lòng thử lại !", "error");
+                }
+            });
         }
     });
 }

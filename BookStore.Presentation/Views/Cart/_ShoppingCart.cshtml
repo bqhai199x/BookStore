@@ -107,8 +107,11 @@
                             @if (Model.CouponId != null)
                             {
 
-                                <span class="stext-110 cl3">
+                                @*<span class="stext-110 cl3">
                                     @Model.Coupon.Code (-@((Model.Coupon.Discount*100).Value.ToString("#,###"))%)
+                                </span>*@
+                                <span class="stext-110 cl3 d-block">
+                                    - @Html.DisplayFor(x => Model.Discount) VNĐ
                                 </span>
                             }
                             else
@@ -116,6 +119,20 @@
                                 <span class="stext-110 cl3">
                                 </span>
                             }
+                        </div>
+                    </div>
+
+                    <div class="flex-w flex-t bor12 p-b-20 p-t-20">
+                        <div class="size-208">
+                            <span class="stext-110 cl2">
+                                Vận chuyển:
+                            </span>
+                        </div>
+
+                        <div class="size-209">
+                            <span class="stext-110 cl3">
+                                Miễn phí
+                            </span>
                         </div>
                     </div>
 

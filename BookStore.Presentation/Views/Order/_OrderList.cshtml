@@ -4,8 +4,11 @@
 {
     foreach (var order in Model)
     {
-        <div class="wrap-table-shopping-cart m-b-30 m-l-50 m-r-50">
-            <div class="float-right p-all-10 @order.StatusDisplay[1] border border-bottom-0 text-uppercase">@order.StatusDisplay[0]</div>
+        <div class="wrap-table-shopping-cart m-b-60 m-l-50 m-r-50">
+            <div>
+                <span class="float-left p-t-10 font-weight-bold text-secondary">Ngày đặt: @order.OrderDate.Value.ToString("HH:mm dd/MM/yyyy")</span>
+                <span class="float-right p-all-10 @order.StatusDisplay[1] border border-bottom-0 text-uppercase">@order.StatusDisplay[0]</span>
+            </div>
 
             <table class="table-shopping-cart">
                 <tr class="table_head">
@@ -38,12 +41,11 @@
                         <span class="mr-2">Tổng số tiền:</span>
                         <span class="text-danger font-weight-bold">@Html.DisplayFor(x => order.GrandTotal) VNĐ</span>
                     </td>
-                    <td class="column-4 pr-3"></td>
-                    <td class="column-4 p-r-30" colspan="2">
-                        <button class="btn btn-success">Xem chi tiết</button>
+                    <td class="column-4 p-r-30" colspan="3">
+                        <button class="btn btn-success" onclick="location.href='/chi-tiet-don-hang/@order.OrderId'">Xem chi tiết</button>
                         @if (order.Status == OrderStatus.Waitting || order.Status == OrderStatus.Confirmed)
                         {
-                            <button class="btn btn-danger ml-2">Huỷ đơn hàng</button>
+                            <button class="btn btn-danger ml-2" onclick="CancelOrder(@order.OrderId)">Huỷ đơn hàng</button>
                         }
                     </td>
                 </tr>

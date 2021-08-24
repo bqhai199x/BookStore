@@ -27,10 +27,10 @@ namespace BookStore.Presentation.Controllers
             return View();
         }
 
-        [Route("san-pham/{id}")]
-        public async Task<ActionResult> ProductDetail(int? id)
+        [Route("san-pham/{productId}")]
+        public async Task<ActionResult> ProductDetail(int? productId)
         {
-            var product = await _product.GetByIdAsync(id);
+            var product = await _product.GetByIdAsync(productId);
             ViewBag.RateAVG = product.Reviews.Where(x => x.Rating != 0).Average(x => x.Rating);
             return View(product);
         }

@@ -46,10 +46,10 @@ namespace BookStore.Presentation.Controllers
         [Route("quan-ly-don-hang")]
         public ActionResult OrderManagement()
         {
-            //if(Base.Account == null)
-            //{
-            //    return Redirect("/");
-            //}
+            if (Base.Account == null)
+            {
+                return Redirect("/gio-hang");
+            }
             return View();
         }
 
@@ -58,6 +58,21 @@ namespace BookStore.Presentation.Controllers
             bool flag = status != OrderStatus.InCart;
             var order = _order.FindAll(x => x.AccountId == Base.AccountId && (x.Status == status) == flag).OrderByDescending(x => x.OrderDate);
             return PartialView("_OrderList", order);
+        }
+
+        [Route("chi-tiet-don-hang/{orderId}")]
+        public async Task<ActionResult> OrderDetail(int orderId)
+        {
+            var order = await _order.FindAsync(x => x.OrderId == orderId);
+            return View(order);
+        }
+
+        public async Task<JsonResult> CancelOrder(int orderId)
+        {
+            var order = await _order.FindAsync(x => x.OrderId == orderId);
+            order.Status = OrderStatus.Cancelled;
+            bool success = await _order.UpdateAsync(order);
+            return Json(new { success = success }, JsonRequestBehavior.AllowGet);
         }
     }
 }
