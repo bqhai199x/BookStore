@@ -1,0 +1,179 @@
+﻿
+@{
+    ViewBag.Title = "ProductView";
+}
+
+@model  PaginatedList<Product>
+
+<style scoped>
+    .table th, .table td {
+        vertical-align: bottom;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .table thead th {
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .swal-button--danger {
+        background-color: #e64942;
+        font-size: revert;
+        font-weight: 600;
+    }
+
+    .swal-button--cancel {
+        color: #555;
+        font-size: revert;
+        background-color: revert;
+        font-weight: 600;
+    }
+
+    .swal-button:hover {
+        color: white;
+    }
+</style>
+
+<!-- Button trigger modal -->
+<div class="mb-5">
+    <button type="button" class="btn btn-primary" onclick="AddOrEdit(0)">
+        Thêm sản phẩm
+    </button>
+
+    <form action="/trang-quan-tri" class="float-right" method="post">
+        <div class="input-group">
+            <input type="text" class="border px-3 form-control" placeholder="Nhập tên sản phẩm" name="search" value="@ViewData["CurrentFilter"]">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">
+                    Tìm kiếm
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal1">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 1140px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-lr-50 p-b-30" id="myModalBodyDiv1">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div>
+    <!-- List candidate -->
+    <table class="table ">
+        <thead>
+            <tr class="">
+                <th scope="col" style="width:8%">Hình ảnh</th>
+                <th scope="col" style="width:22%">Tên sản phẩm</th>
+                <th scope="col" style="width:15%">Thể loại</th>
+                <th scope="col" style="width:17%">Tác giả</th>
+                <th scope="col" style="width:13%">Nhà xuất bản</th>
+                <th scope="col" style="width:8%">Giá</th>
+                <th scope="col" style="width:8%">Ngày nhập</th>
+                <th scope="col" style="width:9%"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td><img src="/Assets/images/products/@item.Images.FirstOrDefault().ImageURL" width="100" height="140" /></td>
+                    <td>@item.Name</td>
+                    <td>@item.Category.Name</td>
+                    <td>@item.Author</td>
+                    <td>@item.Publisher.Name</td>
+                    <td>@Html.DisplayFor(x => item.Price) VNĐ</td>
+                    @if (item.CreatedDate.HasValue)
+                    {
+                        <td>@item.CreatedDate.Value.ToString("d")</td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    <td class="text-center">
+                        <button type="button" onclick="AddOrEdit(@item.ProductId)" class="btn btn-success">Sửa</button>
+                        <button type="button" onclick="ProductDelete(@item.ProductId)" class="btn btn-danger">Xoá</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        @{ var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+            ViewBag.PageRange = 3; }
+        <li class="page-item">
+            <a href="@Url.Action("ProductView", "ProductAdmin", new { page=1, currentFilter=ViewData["CurrentFilter"] })"
+               class="btn page-link @prevDisabled"><<</a>
+        <li class="page-item">
+            <a href="@Url.Action("ProductView", "ProductAdmin", new { page=(Model.PageIndex - 1 <= 0 ? 1 : Model.PageIndex - 1), currentFilter=ViewData["CurrentFilter"] })"
+               class="btn page-link @prevDisabled"><</a>
+        </li>
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            if (i >= Model.PageIndex - ViewBag.PageRange && i <= Model.PageIndex + ViewBag.PageRange)
+            {
+                <li class="page-item">
+                    <a class="@(i==Model.PageIndex ? "Current" : "") page-link"
+                       href="@Url.Action("ProductView", "ProductAdmin", new { page=i, currentFilter=ViewData["CurrentFilter"] })">@i</a>
+                </li>
+            }
+        }
+        <li class="page-item">
+            <a href="@Url.Action("ProductView", "ProductAdmin", new { page=(Model.PageIndex + 1 > Model.TotalPages ? Model.TotalPages : Model.PageIndex + 1), currentFilter=ViewData["CurrentFilter"] })"
+               class="btn page-link @nextDisabled">></a>
+        <li class="page-item">
+            <a href="@Url.Action("ProductView", "ProductAdmin", new { page=(Model.TotalPages), currentFilter=ViewData["CurrentFilter"] })"
+               class="btn page-link @nextDisabled">>></a>
+    </ul>
+</nav>
+
+<script>
+    var AddOrEdit = function (prodcutId) {
+        var url = "/Admin/ProductAdmin/ProductModal?productId=" + prodcutId;
+        $("#myModalBodyDiv1").load(url, function () {
+            $("#myModal1").modal("show");
+        })
+    }
+
+    function ProductDelete(productId) {
+        swal({
+            text: "Bạn có chắc muốn xoá sản phẩm này?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true
+        })
+            .then((willCancel) => {
+                if (willCancel) {
+                    $.ajax({
+                        url: "/Admin/ProductAdmin/ProductDelete",
+                        type: "POST",
+                        data: {
+                            "productId": productId
+                        },
+                        success: function (data) {
+                            window.location = "/trang-quan-tri";
+                        },
+                        error: function (error) {
+                            swal("Lỗi", "Có một lỗi đã xảy ra vui lòng thử lại !", "error");
+                        }
+                    });
+                }
+            });
+    }
+</script>

@@ -1,0 +1,118 @@
+﻿@model Product
+
+<style scoped>
+    #productForm img {
+        width: 100%;
+        height: 100%;
+    }
+
+    #productForm label {
+        font-weight: 600;
+    }
+
+    #productForm .how-itemcart1 {
+        position: relative;
+        cursor: pointer;
+        width: 120px;
+        height: 168px;
+        margin-right: 0.75rem;
+        background-color: #fafafa;
+        border: 1px dashed #d9d9d9;
+        border-radius: 2px;
+    }
+
+    #productForm .add-item.how-itemcart1::after {
+        content: '';
+    }
+
+    #productForm select option:first-child{
+        display: none;
+    }
+
+    #productForm textarea{
+        resize: none;
+    }
+</style>
+
+<script>
+    document.getElementById('staticBackdropLabel').innerHTML = '@ViewBag.Label sản phẩm';
+</script>
+
+<div>
+    <form id="productForm" method="post" enctype="multipart/form-data" action="/Admin/ProductAdmin/ProductUpsert">
+
+        @Html.HiddenFor(model => model.ProductId)
+
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label>Tên sản phẩm</label>
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @required = "required" })
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label>Hình ảnh</label>
+                @if (Model.Images != null)
+                {
+                    foreach (var item in Model.Images)
+                    {
+                            <label class="how-itemcart1 d-inline-block">
+                                <img src="/Assets/images/products/@item.ImageURL" />
+                            </label>
+                    }
+                }
+                <label class="how-itemcart1 d-inline-block add-item" for="new-img">
+                    <img src="~/Assets/images/icons/new-image.png" class="p-all-30" />
+                    <input hidden type="file" accept="image/*" id="new-img" />
+                </label>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6 pr-2">
+                <label>Danh mục</label>
+                @Html.DropDownListFor(model => model.CategoryId, ViewBag.CategoryList as SelectList, "", new { @class = "form-control", @required = "required" })
+            </div>
+
+            <div class="form-group col-md-6 pl-2">
+                <label>Nhà xất bản</label>
+                @Html.DropDownListFor(model => model.PublisherId, ViewBag.PubliserList as SelectList, "", new { @class = "form-control", @required = "required" })
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6 pr-2">
+                <label>Tác giả</label>
+                @Html.TextBoxFor(model => model.Author, new { @class = "form-control" })
+            </div>
+            <div class="form-group col-md-6 pl-2">
+                <label>Kích thước</label>
+                @Html.TextBoxFor(model => model.Size, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6 pr-2">
+                <label for="inputName">Số trang</label>
+                @Html.TextBoxFor(model => model.NumPage, new { @class = "form-control" })
+            </div>
+            <div class="form-group col-md-6 pl-2">
+                <label for="inputPhone">Giá tiền</label>
+                @Html.TextBoxFor(model => model.Price, new { @class = "form-control", Value = String.Format("{0:0}", Model.Price) })
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label>Mô tả</label>
+                @Html.TextAreaFor(model => model.Description, 8, 1, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-success" id="btnSubmit">
+                @ViewBag.Label
+            </button>
+        </div>
+    </form>
+</div>

@@ -1,10 +1,9 @@
 ﻿using BookStore.BusinessLogic.IServices;
-using System.Web.Mvc;
 using BookStore.Common;
-using System.Threading.Tasks;
 using BookStore.Domain;
-using System.Collections.Generic;
 using System;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace BookStore.Presentation.Controllers
 {

@@ -1,0 +1,121 @@
+﻿<!Doctype html>
+<html lang="en">
+
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/png" href="~/Assets/images/layouts/mini-logo.jpg" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/fonts/linearicons-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/css/style-admin.css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/css/util.css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/css/tofubook.css">
+
+    <script src="~/Assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+</head>
+
+<body>
+
+
+    <div class="container-fluid d-flex pl-1">
+
+        <nav id="sidebar">
+            <div class="p-4">
+                <h1><a href="@Url.Action("Index","Home", new { area = ""})" class="logo">Tofu Books <span>Nhà sách Tofu</span></a></h1>
+                <ul class="list-unstyled components mb-5">
+                    <li class="active">
+                        <a href="@Url.Action("Index","HomeAdmin")"><span class="fa fa-home mr-3"></span>Trang chủ</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index","Accounts")"><span class="fa fa-user mr-3"></span>Tài khoản</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index","Categories")"><span class="fa fa-th  mr-3"></span>Danh mục</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index","Suppliers")"><span class="fa fa-cogs mr-3"></span>Nhà phát hành</a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Index","Products")"><span class="fa fa-book mr-3"></span>Sản phẩm</a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Index","Comments")"><span class="fa fa-comment mr-3"></span>Bình luận</a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Index","Coupons")"><span class="fa fa-gift mr-3"></span>Mã giảm giá</a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Index","Orders")"><span class="fa fa-shopping-cart mr-3"></span>Đơn hàng</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index","Contacts")"><span class="fa fa-envelope mr-3"></span>Hòm thư góp ý</a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="fa fa-table mr-3"></span>Thống kê</a>
+                    </li>
+
+
+                </ul>
+
+                <div class="mb-5">
+                    <button onclick="location.href='@Url.Action("Logout","Account",new { area = ""})'" class="btn btn-info"><span class="fa fa-sign-out mr-3"></span> Đăng xuất</button>
+                </div>
+
+                <div class="footer">
+                    <p>
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> Nhà sách Tofu <i class="icon-heart" aria-hidden="true"></i>
+                        by <a href="https://fb.com/tofu19" target="_blank" style="color: #30e3ca;">Quang Hải</a>
+                    </p>
+                </div>
+
+            </div>
+        </nav>
+
+        <!-- Page Content  -->
+
+        <div id="content">
+            <div class="p-4 p-md-5 pt-5">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Assets/vendor/sweetalert/sweetalert.min.js"></script>
+    <script src="~/Assets/vendor/bootstrap/js/popper.js"></script>
+    <script src="~/Assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <script>
+
+        var loadfile = function (event) {
+            var img = document.getElementById('output');
+            img.src = URL.createObjectURL(event.target.files[0]);
+        };
+
+        (function ($) {
+
+            "use strict";
+
+            var fullHeight = function () {
+
+                $('.js-fullheight').css('height', $(window).height());
+                $(window).resize(function () {
+                    $('.js-fullheight').css('height', $(window).height());
+                });
+
+            };
+            fullHeight();
+
+        })(jQuery);
+
+    </script>
+</body>
+
+</html>
