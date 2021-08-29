@@ -18,8 +18,6 @@
 </head>
 
 <body>
-
-
     <div class="container-fluid d-flex pl-1">
 
         <nav id="sidebar">
@@ -91,31 +89,7 @@
     <script src="~/Assets/vendor/sweetalert/sweetalert.min.js"></script>
     <script src="~/Assets/vendor/bootstrap/js/popper.js"></script>
     <script src="~/Assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-
-    <script>
-
-        var loadfile = function (event) {
-            var img = document.getElementById('output');
-            img.src = URL.createObjectURL(event.target.files[0]);
-        };
-
-        (function ($) {
-
-            "use strict";
-
-            var fullHeight = function () {
-
-                $('.js-fullheight').css('height', $(window).height());
-                $(window).resize(function () {
-                    $('.js-fullheight').css('height', $(window).height());
-                });
-
-            };
-            fullHeight();
-
-        })(jQuery);
-
-    </script>
+    <script src="~/Assets/js/main-admin.js"></script>
 </body>
 
 </html>

@@ -3,6 +3,7 @@ using BookStore.Common;
 using BookStore.Domain;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -68,7 +69,7 @@ namespace BookStore.Presentation.Areas.Admin.Controllers
         }
 
         [ValidateInput(false)]
-        public async Task<ActionResult> ProductUpsert(Product product)
+        public async Task<ActionResult> ProductUpsert(Product product, string removeId)
         {
             if (product.ProductId > 0)
             {
@@ -83,18 +84,40 @@ namespace BookStore.Presentation.Areas.Admin.Controllers
                 newProduct.Description = product.Description;
 
                 await _product.UpdateAsync(newProduct);
+
+                string[] id = removeId.Split(',');
+                int imageId = 0;
+                foreach (var item in id)
+                {
+                    if (item == "0") continue;
+                    if(int.TryParse(item, out imageId))
+                    {
+                        await _productImage.DeleteByIdAsync(imageId);
+                    }
+                }
             }
             else
             {
                 product.CreatedDate = DateTime.Now;
                 await _product.CreateAsync(product);
+            }
 
-                ProductImage productImage = new ProductImage()
+            var files = Request.Files.GetMultiple("imgFile");
+            foreach (var item in files)
+            {
+                if (item != null && item.ContentLength > 0)
                 {
-                    ProductId = product.ProductId,
-                    ImageURL = "no-img.jpg" //TODO
-                };
-                await _productImage.CreateAsync(productImage);
+                    string fileName = Path.GetFileName(item.FileName);
+                    string uploadPath = Server.MapPath("~/Assets/images/products/" + fileName);
+                    item.SaveAs(uploadPath);
+
+                    ProductImage productImage = new ProductImage()
+                    {
+                        ProductId = product.ProductId,
+                        ImageURL = fileName
+                    };
+                    await _productImage.CreateAsync(productImage);
+                }
             }
 
             return Redirect("/trang-quan-tri");
