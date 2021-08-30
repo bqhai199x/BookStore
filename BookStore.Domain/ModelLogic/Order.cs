@@ -45,15 +45,15 @@ namespace BookStore.Domain
                 switch (Status)
                 {
                     case OrderStatus.Waitting:
-                        return new string[] { "Đang chờ xác nhận", "text-warning" };
+                        return new string[] { "Đang chờ xác nhận", "text-warning", "border-warning" };
                     case OrderStatus.Confirmed:
-                        return new string[] { "Đã xác nhận", "text-info" };
+                        return new string[] { "Đã xác nhận", "text-info", "border-info" };
                     case OrderStatus.Shipping:
-                        return new string[] { "Đang giao hàng", "text-primary" };
+                        return new string[] { "Đang giao hàng", "text-primary", "border-primary" };
                     case OrderStatus.Delivered:
-                        return new string[] { "Đã giao hàng", "text-success" };
+                        return new string[] { "Đã giao hàng", "text-success", "border-success" };
                     case OrderStatus.Cancelled:
-                        return new string[] { "Đã huỷ", "text-danger" };
+                        return new string[] { "Đã huỷ", "text-danger", "border-danger" };
                     default:
                         return null;
                 }

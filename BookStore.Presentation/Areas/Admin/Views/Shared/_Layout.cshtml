@@ -22,48 +22,39 @@
 
         <nav id="sidebar">
             <div class="p-4">
-                <h1><a href="@Url.Action("Index","Home", new { area = ""})" class="logo">Tofu Books <span>Nhà sách Tofu</span></a></h1>
+                <h1><a href="/" class="logo">Tofu Books <span>Nhà sách Tofu</span></a></h1>
                 <ul class="list-unstyled components mb-5">
                     <li class="active">
-                        <a href="@Url.Action("Index","HomeAdmin")"><span class="fa fa-home mr-3"></span>Trang chủ</a>
+                        <a href="/trang-quan-tri"><span class="fa fa-home mr-3"></span>Thống kê</a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Index","Accounts")"><span class="fa fa-user mr-3"></span>Tài khoản</a>
+                        <a href="/trang-quan-tri/quan-ly-don-hang"><span class="fa fa-shopping-cart mr-3"></span>Đơn hàng</a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Index","Categories")"><span class="fa fa-th  mr-3"></span>Danh mục</a>
+                        <a href="/trang-quan-tri/quan-ly-san-pham"><span class="fa fa-book mr-3"></span>Sản phẩm</a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Index","Suppliers")"><span class="fa fa-cogs mr-3"></span>Nhà phát hành</a>
-                    </li>
-
-                    <li>
-                        <a href="@Url.Action("Index","Products")"><span class="fa fa-book mr-3"></span>Sản phẩm</a>
-                    </li>
-
-                    <li>
-                        <a href="@Url.Action("Index","Comments")"><span class="fa fa-comment mr-3"></span>Bình luận</a>
-                    </li>
-
-                    <li>
-                        <a href="@Url.Action("Index","Coupons")"><span class="fa fa-gift mr-3"></span>Mã giảm giá</a>
-                    </li>
-
-                    <li>
-                        <a href="@Url.Action("Index","Orders")"><span class="fa fa-shopping-cart mr-3"></span>Đơn hàng</a>
+                        <a href="/trang-quan-tri/quan-ly-danh-muc"><span class="fa fa-th  mr-3"></span>Danh mục</a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Index","Contacts")"><span class="fa fa-envelope mr-3"></span>Hòm thư góp ý</a>
+                        <a href="/trang-quan-tri/quan-ly-nha-xuat-ban"><span class="fa fa-cogs mr-3"></span>Nhà xuất bản</a>
                     </li>
                     <li>
-                        <a href="#"><span class="fa fa-table mr-3"></span>Thống kê</a>
+                        <a href="/trang-quan-tri/quan-ly-tai-khoan"><span class="fa fa-user mr-3"></span>Tài khoản</a>
                     </li>
-
-
+                    <li>
+                        <a href="/trang-quan-tri/quan-ly-nhan-xet"><span class="fa fa-comment mr-3"></span>Nhận xét</a>
+                    </li>
+                    <li>
+                        <a href="/trang-quan-tri/quan-ly-ma-giam-gia"><span class="fa fa-gift mr-3"></span>Mã giảm giá</a>
+                    </li>
+                    <li>
+                        <a href="/trang-quan-tri/quan-ly-hop-thu"><span class="fa fa-envelope mr-3"></span>Hòm thư góp ý</a>
+                    </li>
                 </ul>
 
                 <div class="mb-5">
-                    <button onclick="location.href='@Url.Action("Logout","Account",new { area = ""})'" class="btn btn-info"><span class="fa fa-sign-out mr-3"></span> Đăng xuất</button>
+                    <button onclick="location.href='/dang-xuat'" class="btn btn-info"><span class="fa fa-sign-out mr-3"></span> Đăng xuất</button>
                 </div>
 
                 <div class="footer">

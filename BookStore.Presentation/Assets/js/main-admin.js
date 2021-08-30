@@ -48,3 +48,40 @@ function DeleteImage(el) {
     removeId.value += ',' + el.getAttribute("data-img");
     el.remove();
 }
+
+/*==================================================================
+    [ Order Admin ]*/
+
+function ViewDetail(orderId) {
+    var url = "/Admin/OrderAdmin/OrderDetail?orderId=" + orderId;
+    $("#myModalBodyDiv1").load(url, function () {
+        $("#myModal1").modal("show");
+    })
+}
+
+function UpdateOrder(orderId) {
+    $.ajax({
+        url: "/Admin/OrderAdmin/UpdateStatus",
+        type: "POST",
+        data: {
+            "orderId": orderId,
+            "status": $("select[data-order='" + orderId + "']").val()
+        },
+        success: function (data) {
+            if (data) {
+                swal("Thành công", "Trạng thái đơn hàng đã được cập nhật !", "success");
+            }
+            else {
+                swal("Cập nhật thất bại", "Trạng thái đơn hàng hiện không có sự thay đổi !", "warning");
+            }
+        },
+        error: function (error) {
+            swal("Lỗi", "Có một lỗi đã xảy ra vui lòng thử lại !", "error");
+        }
+    });
+}
+
+function Reset() {
+    $('#orderForm select option').removeAttr('selected');
+    $('#orderForm input[type="date"]').removeAttr('value');
+}

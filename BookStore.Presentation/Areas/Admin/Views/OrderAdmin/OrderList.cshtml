@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewBag.Title = "Quản lý đơn hàng";
+}
+
+@model  PaginatedList<Order>
+
+<!-- Button trigger modal -->
+
+<form action="/trang-quan-tri/quan-ly-don-hang" method="post" class="mb-5" id="orderForm">
+    <div class="form-row w-75">
+        <div class="form-group col-md-2">
+            <label>Trạng thái đơn hàng</label>
+            <select class="form-control custom-select" name="status">
+                <option value="">Tất cả đơn hàng</option>
+                <option @(ViewBag.Status == OrderStatus.Waitting ? "selected" : "") value="@OrderStatus.Waitting">Chờ xác nhận</option>
+                <option @(ViewBag.Status == OrderStatus.Confirmed ? "selected" : "") value="@OrderStatus.Confirmed">Đã xác nhận</option>
+                <option @(ViewBag.Status == OrderStatus.Shipping ? "selected" : "") value="@OrderStatus.Shipping">Đang giao hàng</option>
+                <option @(ViewBag.Status == OrderStatus.Delivered ? "selected" : "") value="@OrderStatus.Delivered">Đã giao hàng</option>
+                <option @(ViewBag.Status == OrderStatus.Cancelled ? "selected" : "") value="@OrderStatus.Cancelled">Đã hủy</option>
+            </select>
+        </div>
+
+        <div class="form-group col-md-2">
+            <label>Từ ngày</label>
+            <input type="date" class="form-control" name="fromDate" value="@ViewBag.FromDate"/>
+        </div>
+
+        <div class="form-group col-md-2">
+            <label>Đến ngày</label>
+            <input type="date" class="form-control" name="toDate" value="@ViewBag.ToDate"/>
+        </div>
+    </div>
+    <button type="reset" class="btn btn-primary" onclick="Reset()">Đặt lại</button>&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+</form>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal1">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 1140px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Chi tiết đơn hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-lr-50 p-b-30" id="myModalBodyDiv1">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <!-- List order -->
+    <table class="table ">
+        <thead>
+            <tr class="">
+                <th scope="col" style="width: auto">Mã đơn hàng</th>
+                <th scope="col" style="width: auto">Ngày đặt</th>
+                <th scope="col" style="width: auto">Sản phẩm</th>
+                <th scope="col" style="width: auto">Tổng tiền</th>
+                <th scope="col" style="width: auto">Trạng thái</th>
+                <th scope="col" style="width: auto"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Code</td>
+                    <td>@item.OrderDate.Value.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@item.OrderDetails.FirstOrDefault().Product.Name
+                        @if(item.OrderDetails.Count > 1)
+                        {
+                            <span> và @(item.OrderDetails.Count - 1) sản phẩm khác</span>
+                        }
+                    </td>
+                    <td>@Html.DisplayFor(x => item.GrandTotal) VNĐ</td>
+                    <td>
+                        <select class="form-control custom-select" data-order="@item.OrderId">
+                            <option @(item.Status == OrderStatus.Waitting ? "selected": "") value="@OrderStatus.Waitting">Chờ xác nhận</option>
+                            <option @(item.Status == OrderStatus.Confirmed ? "selected": "") value="@OrderStatus.Confirmed">Đã xác nhận</option>
+                            <option @(item.Status == OrderStatus.Shipping ? "selected": "") value="@OrderStatus.Shipping">Đang giao hàng</option>
+                            <option @(item.Status == OrderStatus.Delivered ? "selected": "") value="@OrderStatus.Delivered">Đã giao hàng</option>
+                            <option @(item.Status == OrderStatus.Cancelled ? "selected": "") value="@OrderStatus.Cancelled">Đã hủy</option>
+                        </select>
+                    </td>
+                    <td class="text-center">
+                        <button type="button" onclick="ViewDetail(@item.OrderId)" class="btn btn-info mr-1">Chi tiết</button>
+                        <button type="button" onclick="UpdateOrder(@item.OrderId)" class="btn btn-success">Cập nhật</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        @{ var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+            ViewBag.PageRange = 3; }
+        <li class="page-item">
+            <a href="@Url.Action("OrderList", "OrderAdmin", new { page=1, status = ViewBag.Status, fromDate = ViewBag.FromDate, toDate = ViewBag.ToDate })"
+               class="btn page-link @prevDisabled"><<</a>
+        <li class="page-item">
+            <a href="@Url.Action("OrderList", "OrderAdmin", new { page=(Model.PageIndex - 1 <= 0 ? 1 : Model.PageIndex - 1), status = ViewBag.Status, fromDate = ViewBag.FromDate, toDate = ViewBag.ToDate })"
+               class="btn page-link @prevDisabled"><</a>
+        </li>
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            if (i >= Model.PageIndex - ViewBag.PageRange && i <= Model.PageIndex + ViewBag.PageRange)
+            {
+                <li class="page-item">
+                    <a class="@(i==Model.PageIndex ? "Current" : "") page-link"
+                       href="@Url.Action("OrderList", "OrderAdmin", new { page=i, status = ViewBag.Status, fromDate = ViewBag.FromDate, toDate = ViewBag.ToDate })">@i</a>
+                </li>
+            }
+        }
+        <li class="page-item">
+            <a href="@Url.Action("OrderList", "OrderAdmin", new { page=(Model.PageIndex + 1 > Model.TotalPages ? Model.TotalPages : Model.PageIndex + 1), status = ViewBag.Status, fromDate = ViewBag.FromDate, toDate = ViewBag.ToDate })"
+               class="btn page-link @nextDisabled">></a>
+        <li class="page-item">
+            <a href="@Url.Action("OrderList", "OrderAdmin", new { page=(Model.TotalPages), status = ViewBag.Status, fromDate = ViewBag.FromDate, toDate = ViewBag.ToDate })"
+               class="btn page-link @nextDisabled">>></a>
+    </ul>
+</nav>
