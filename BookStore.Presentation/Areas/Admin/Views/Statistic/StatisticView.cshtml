@@ -3,5 +3,151 @@
     ViewBag.Title = "Trang quản trị";
 }
 
-<h2>Thống kê</h2>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.1.2/dist/echarts.min.js"></script>
 
+<div class="row stats">
+    <div class="col">
+        <div class="statContainer blue shadow-sm">
+            <div class="title text-center">SỐ LƯỢNG SẢN PHẨM</div>
+            <div class="d-flex">
+                <div class="p-2 flex-fill text-center">
+                    Tổng <br />
+                    <h5 class="font-weight-bold">635</h5>
+                </div>
+                <div class="p-2 flex-fill text-center status">
+                    Đã bán <br />
+                    <h6 class="ont-weight-bold">@ViewBag.NumberSold</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="statContainer purple shadow-sm">
+            <div class="title text-center">TỔNG DOANH THU</div>
+            <div class="d-flex">
+                <div class="p-2 d-flex justify-content-center align-items-center m-auto" style="min-height:65px;">
+                   <h5 class="font-weight-bold">@ViewBag.TotalRevenue</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="statContainer pink shadow-sm">
+            <div class="title text-center">TỔNG ĐƠN HÀNG</div>
+            <div class="d-flex">
+                <div class="p-2 flex-fill text-center">
+                    Số lượng <br />
+                    <h5 class="font-weight-bold">@ViewBag.TotalOrder</h5>
+                </div>
+                <div class="p-2 flex-fill text-center status">
+                    Đã hoàn thành <br />
+                    <h5 class="font-weight-bold">@ViewBag.OrderFinal</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="statContainer brown shadow-sm">
+            <div class="title text-center">KHÁCH HÀNG THÂN THIẾT</div>
+            <div class="d-flex">
+                <div class="p-2 flex-fill text-center pos-relative m-auto">
+                    <h6 class="font-weight-bold">@ViewBag.LoyalCustomer</h6>
+                </div>
+                <div class="p-2 flex-fill text-center status">
+                    Số lượng đơn <br />
+                    <h5 class="font-weight-bold">@ViewBag.CustomerOrder</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row stats">
+    <div class="col">
+        <div class="statContainer yellow shadow-sm">
+            <div class="title text-center">SẢN PHẨM BÁN CHẠY</div>
+            <div class="d-flex">
+                <div class="p-2 flex-fill text-center pos-relative m-auto">
+                    <h6 class="font-weight-bold">@ViewBag.ProducOrder</h6>
+                </div>
+                <div class="p-2 flex-fill text-center status">
+                    Đã bán <br />
+                    <h5 class="font-weight-bold">@ViewBag.ProductSold</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="statContainer fountainBlue shadow-sm">
+            <div class="title text-center">DANH MỤC ĐƯỢC YÊU THÍCH</div>
+            <div class="d-flex">
+                <div class="p-2 flex-fill text-center pos-relative m-auto">
+                    <h6 class="font-weight-bold">@ViewBag.CategoryOrder</h6>
+                </div>
+                <div class="p-2 flex-fill text-center status">
+                    Đã bán <br />
+                    <h5 class="font-weight-bold">@ViewBag.CategorySold</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="statContainer lightBlue shadow-sm">
+            <div class="title text-center">SẢN PHẨM ĐƯỢC QUAN TÂM NHẤT</div>
+            <div class="d-flex">
+                <div class="p-2 flex-fill text-center pos-relative m-auto">
+                    <h6 class="font-weight-bold">@ViewBag.ProductReview</h6>
+                </div>
+                <div class="p-2 flex-fill text-center status">
+                    Số lượng bình luận<br />
+                    <h5 class="font-weight-bold">@ViewBag.ReviewQuantity</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="revenue" style="margin-top: 50px; height: 570px"></div>
+
+<script>
+    var myChart = echarts.init(document.getElementById('revenue'));
+
+    option = {
+        color: ['#C23531'],
+        title: {
+            text: 'Doanh thu 7 ngày qua'
+        },
+        tooltip: {},
+        //legend: {
+        //    data: ['销量']
+        //},
+        xAxis: {
+            data:
+                [
+                    '@DateTime.Now.AddDays(-6).ToString("dd/MM")',
+                    '@DateTime.Now.AddDays(-5).ToString("dd/MM")',
+                    '@DateTime.Now.AddDays(-4).ToString("dd/MM")',
+                    '@DateTime.Now.AddDays(-3).ToString("dd/MM")',
+                    '@DateTime.Now.AddDays(-2).ToString("dd/MM")',
+                    '@DateTime.Now.AddDays(-1).ToString("dd/MM")',
+                    '@DateTime.Now.ToString("dd/MM")'
+                ]
+        },
+        yAxis: {},
+        series: [{
+            name: 'Tổng thu',
+            type: 'bar',
+            data: [@ViewBag.Revenue6, @ViewBag.Revenue5, @ViewBag.Revenue4, @ViewBag.Revenue3, @ViewBag.Revenue2, @ViewBag.Revenue1, @ViewBag.Revenue]
+        }]
+    };
+
+
+
+    myChart.setOption(option);
+</script>

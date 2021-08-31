@@ -20,10 +20,10 @@ namespace BookStore.Presentation.Areas.Admin.Controllers
         [Route("trang-quan-tri/quan-ly-don-hang")]
         public async Task<ActionResult> OrderList(OrderStatus? status, DateTime? fromDate, DateTime? toDate, int? page)
         {
-            if (Base.Account == null || Base.Account.Role == RoleUser.Customer)
-            {
-                return Redirect("/");
-            }
+            //if (Base.Account == null || Base.Account.Role == RoleUser.Customer)
+            //{
+            //    return Redirect("/");
+            //}
             var orders = await _order.FindAllAsync(x => x.Status != OrderStatus.InCart);
             if (status.HasValue || fromDate.HasValue || toDate.HasValue)
             {
