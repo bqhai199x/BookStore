@@ -113,7 +113,7 @@
 
 </div>
 
-<div id="revenue" style="margin-top: 50px; height: 570px"></div>
+<div id="revenue" style="margin-top: 50px; height: 570px; padding-left: 20px"></div>
 
 <script>
     var myChart = echarts.init(document.getElementById('revenue'));
@@ -124,9 +124,6 @@
             text: 'Doanh thu 7 ngày qua'
         },
         tooltip: {},
-        //legend: {
-        //    data: ['销量']
-        //},
         xAxis: {
             data:
                 [
@@ -139,15 +136,14 @@
                     '@DateTime.Now.ToString("dd/MM")'
                 ]
         },
-        yAxis: {},
+        yAxis: {
+        },
         series: [{
             name: 'Tổng thu',
             type: 'bar',
             data: [@ViewBag.Revenue6, @ViewBag.Revenue5, @ViewBag.Revenue4, @ViewBag.Revenue3, @ViewBag.Revenue2, @ViewBag.Revenue1, @ViewBag.Revenue]
         }]
     };
-
-
 
     myChart.setOption(option);
 </script>
