@@ -1,6 +1,8 @@
 ﻿///*==================================================================
 //[ active ]*/
 
+/*const { data } = require("jquery");*/
+
 var isotopeButton = $('.filter-tope-group button');
 
 $(isotopeButton).each(function () {
@@ -352,7 +354,7 @@ function UpdateQuantity(productId, quantity) {
             })
         },
         error: function (error) {
-            toastr.warning('Host cùi bấm từ từ thôi =))', '', { positionClass: "toast-bottom-right" })
+            toastr.warning('Vui lòng chậm lại !', '', { positionClass: "toast-bottom-right" })
         }
     });
 }
@@ -437,6 +439,35 @@ function CancelOrder(orderId) {
                     swal("Lỗi", "Có một lỗi đã xảy ra vui lòng thử lại !", "error");
                 }
             });
+        }
+    });
+}
+
+/*==================================================================
+    [ Profile ]*/
+
+function loadImg(event) {
+    var img = document.getElementById('avt-img');
+    img.src = URL.createObjectURL(event.target.files[0]);
+    file = event.target.files[0];
+};
+
+function ChangePassword() {
+    $('#pass-message').text('');
+    $.ajax({
+        url: "/Account/ChangePassword",
+        type: "POST",
+        data: $('#change-pass').serialize(),
+        success: function (data) {
+            if (data == 'OK') {
+                swal("Thành công", "Thay đổi mật khẩu đăng nhập thành công !", "success");
+            }
+            else {
+                $('#pass-message').text(data);
+            }
+        },
+        error: function (error) {
+            swal("Lỗi", "Có một lỗi đã xảy ra vui lòng thử lại !", "error");
         }
     });
 }

@@ -1,0 +1,166 @@
+﻿@{
+    ViewBag.Title = "Thông tin tài khoản";
+}
+
+<!-- breadcrumb -->
+<div class="container">
+    <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+        <a href="/" class="stext-109 cl8 hov-cl1 trans-04">
+            Trang chủ
+            <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+        </a>
+
+        <span class="stext-109 cl4">
+            Tài khoản
+        </span>
+    </div>
+</div>
+
+<div class="container rounder mt-5 mb-5 border profile">
+    <div class="row">
+        <form class="col-md-8 row" method="post" enctype="multipart/form-data" action="/Account/ChangeInfo">
+            <div class="col-md-5 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                    <img class="rounded-circle mt-5" width="200" height="200" src="~/Assets/images/avatars/@(Base.Account.ImageURL ?? "avt.jpg")" id="avt-img">
+                    <div class="d-flex justify-content-between align-items-center experience">
+                        <label class="border px-3 p-1 mt-3 mb-4 add-experience" for="avt-change">Thay đổi</label>
+                        <input hidden type="file" name="avatarFile" id="avt-change" onchange="loadImg(event)" />
+                    </div>
+                    <span class="text-black-50 font-weight-bold">@Base.Account.Email</span>
+                    <span>Ngày tạo: @Base.Account.CreatedDate.Value.ToString("d")</span>
+                </div>
+            </div>
+            <div class="col-md-7 border-right">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4>Sửa thông tin</h4>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <label class="labels">Họ</label>
+                            <input type="text" class="form-control" name="lastName" value="@Base.Account.LastName" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="labels">Tên</label>
+                            <input type="text" class="form-control" name="firstName" value="@Base.Account.FirstName" required>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <label class="labels">Số điện thoại</label>
+                            <input type="text" class="form-control" name="phone" value="@Base.Account.Phone" required>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <label class="labels">Tỉnh/Thành phố</label>
+                            <select name="city" class="form-control" required>
+                                <option value="" hidden>Chọn tỉnh/thành phố</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <label class="labels">Quận huyện</label>
+                            <select name="district" class="form-control" required>
+                                <option value="" hidden>Chọn quận huyện</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <label class="labels">Phường xã</label>
+                            <select name="commune" class="form-control" required>
+                                <option value="" hidden>Chọn phường xã</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <label class="labels">Địa chỉ chi tiết</label>
+                            <textarea type="text" class="form-control" rows="4" style="resize:none" name="address"
+                                      placeholder="Nhập địa chỉ chi tiết (đường, thôn, ấp, số nhà, ...)">@Base.Account.Address</textarea>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 text-center">
+                        <button class="btn btn-primary profile-button" type="submit">Cập nhật</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="col-md-4">
+            <form class="p-3 py-5" action="javascript:void(0);" onsubmit="ChangePassword()" id="change-pass">
+                <div class="d-flex justify-content-between align-items-center experience">
+                    <h4>Đổi mật khẩu</h4>
+                </div>
+                <br>
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <label class="labels">Nhập mật khẩu cũ</label>
+                        <input type="password" class="form-control" name="oldPass" required>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <label class="labels">Nhập mật khẩu mới</label>
+                        <input type="password" class="form-control" name="newPass" required>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <label class="labels">Xác nhận mật khẩu mới</label>
+                        <input type="password" class="form-control" name="rePass" required>
+                    </div>
+                </div>
+                <div class="text-danger mt-3" id="pass-message"></div>
+                <div class="text-center">
+                    <button class="btn btn-primary profile-button mt-4" type="submit">Xác nhận</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@if (Base.Account.City.IsNotBlank())
+{
+    <script>
+        $.getJSON("Assets/json/tinh_tp.json", function (data) {
+            $.each(data, function (key, val) {
+                $("select[name='city']").append("<option code='" + val.code + "' value='"
+                    + val.slug + "'>" + val.name_with_type + "</option>");
+            });
+            var code = BindAddress('@Base.Account.City', 'city');
+            $.getJSON("Assets/json/quan-huyen/" + code + ".json", function (data) {
+                $.each(data, function (key, val) {
+                    $("select[name='district']").append("<option code='" + val.code + "' value='"
+                        + val.slug + "'>" + val.name_with_type + "</option>");
+                });
+                code = BindAddress('@Base.Account.District', 'district');
+                $.getJSON("Assets/json/xa-phuong/" + code + ".json", function (data) {
+                    $.each(data, function (key, val) {
+                        $("select[name='commune']").append("<option code='" + val.code + "' value='"
+                            + val.slug + "'>" + val.name_with_type + "</option>");
+                    });
+                    BindAddress('@Base.Account.Commune', 'commune');
+                });
+            });
+        });
+
+        CityChange();
+        DistrictChange();
+    </script>
+}
+else
+{
+    <script>
+        GetCity();
+        CityChange();
+        DistrictChange();
+    </script>
+}

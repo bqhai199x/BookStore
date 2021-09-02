@@ -242,3 +242,49 @@ br {
         cursor: pointer;
         background: #428a7d;
     }
+
+.profile .border-right {
+    border-right: 1px solid #dee2e6 !important;
+}
+
+.profile .form-control:focus {
+    box-shadow: none;
+    border-color: #BA68C8
+}
+
+.profile .profile-button {
+    background: rgb(99, 39, 120);
+    box-shadow: none;
+    border: none
+}
+
+    .profile .profile-button:hover {
+        background: #682773
+    }
+
+    .profile .profile-button:focus {
+        background: #682773;
+        box-shadow: none
+    }
+
+    .profile .profile-button:active {
+        background: #682773;
+        box-shadow: none
+    }
+
+.profile .back:hover {
+    color: #682773;
+    cursor: pointer
+}
+
+.profile .labels {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.profile .add-experience:hover {
+    background: #BA68C8;
+    color: #fff;
+    cursor: pointer;
+    border: solid 1px #BA68C8
+}

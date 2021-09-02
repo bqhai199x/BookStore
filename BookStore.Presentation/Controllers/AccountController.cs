@@ -2,6 +2,7 @@
 using BookStore.Common;
 using BookStore.Domain;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -52,7 +53,7 @@ namespace BookStore.Presentation.Controllers
         {
             var account = await _account.FindAsync(x => x.Email.ToLower().Equals(info.Email.ToLower()));
             if (account != null)
-             {
+            {
                 return Json(new { success = false }, JsonRequestBehavior.AllowGet);
             }
             info.Password = info.Password.Encrypt();
@@ -67,6 +68,57 @@ namespace BookStore.Presentation.Controllers
             };
             await _account.CreateAsync(newAccount);
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+
+        [Route("sua-thong-tin")]
+        public ActionResult ProfileView()
+        {
+            if (Base.Account == null)
+            {
+                return Redirect("/");
+            }
+            return View("Profile");
+        }
+
+        public async Task<ActionResult> ChangeInfo(Account info)
+        {
+            Account account = await _account.FindAsync(x => x.AccountId == Base.AccountId);
+            account.Address = info.Address;
+            account.City = info.City;
+            account.Commune = info.Commune;
+            account.District = info.District;
+            account.FirstName = info.FirstName;
+            account.LastName = info.LastName;
+            account.Phone = info.Phone;
+
+            var files = Request.Files["avatarFile"];
+            if (files != null && files.ContentLength > 0)
+            {
+                string fileName = Path.GetFileName(files.FileName);
+                string uploadPath = Server.MapPath("~/Assets/images/avatars/" + fileName);
+                files.SaveAs(uploadPath);
+                account.ImageURL = fileName;
+            }
+
+            await _account.UpdateAsync(account);
+            return Redirect("/sua-thong-tin");
+        }
+
+        public async Task<JsonResult> ChangePassword(string oldPass, string newPass, string rePass)
+        {
+            if(newPass != rePass)
+            {
+                return Json("Xác nhận mật khẩu không trùng khớp !", JsonRequestBehavior.AllowGet);
+            }
+            Account account = await _account.FindAsync(x => x.AccountId == Base.AccountId);
+            if(oldPass.Encrypt() != account.Password)
+            {
+                return Json("Mật khẩu cũ không đúng !", JsonRequestBehavior.AllowGet);
+            }
+            account.Password = newPass.Encrypt();
+            bool resul = await _account.UpdateAsync(account);
+
+            return Json("OK", JsonRequestBehavior.AllowGet);
         }
 
         [Route("dang-xuat")]
