@@ -24,7 +24,7 @@ function ProductDelete(productId) {
                         "productId": productId
                     },
                     success: function (data) {
-                        window.location = "/trang-quan-tri";
+                        window.location = "/trang-quan-tri/quan-ly-san-pham";
                     },
                     error: function (error) {
                         swal("Lỗi", "Có một lỗi đã xảy ra vui lòng thử lại !", "error");
@@ -84,4 +84,76 @@ function UpdateOrder(orderId) {
 function Reset() {
     $('#orderForm select option').removeAttr('selected');
     $('#orderForm input[type="date"]').removeAttr('value');
+}
+
+/*==================================================================
+    [ Category Admin ]*/
+
+function CategoryUpsert(categoryId) {
+    var url = "/Admin/CategoryAdmin/CategoryModal?categoryId=" + categoryId;
+    $("#myModalBodyDiv1").load(url, function () {
+        $("#myModal1").modal("show");
+    })
+}
+
+function CategoryDelete(categoryId) {
+    swal({
+        text: "Tất cả sản phẩm trong danh mục sẽ bị xóa. Bạn có chắc muốn xoá danh mục này?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+    })
+        .then((willCancel) => {
+            if (willCancel) {
+                $.ajax({
+                    url: "/Admin/CategoryAdmin/CategoryDelete",
+                    type: "POST",
+                    data: {
+                        "categoryId": categoryId
+                    },
+                    success: function (data) {
+                        window.location = "/trang-quan-tri/quan-ly-danh-muc";
+                    },
+                    error: function (error) {
+                        swal("Lỗi", "Có một lỗi đã xảy ra vui lòng thử lại !", "error");
+                    }
+                });
+            }
+        });
+}
+
+/*==================================================================
+    [ Publisher Admin ]*/
+
+function PublisherUpsert(publisherId) {
+    var url = "/Admin/PublisherAdmin/PublisherModal?publisherId=" + publisherId;
+    $("#myModalBodyDiv1").load(url, function () {
+        $("#myModal1").modal("show");
+    })
+}
+
+function PublisherDelete(publisherId) {
+    swal({
+        text: "Tất cả sản phẩm của nhà xuất bản sẽ bị xóa. Bạn có chắc muốn xoá nhà xuất bản này?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+    })
+        .then((willCancel) => {
+            if (willCancel) {
+                $.ajax({
+                    url: "/Admin/PublisherAdmin/PublisherDelete",
+                    type: "POST",
+                    data: {
+                        "publisherId": publisherId
+                    },
+                    success: function (data) {
+                        window.location = "/trang-quan-tri/quan-ly-nha-xuat-ban";
+                    },
+                    error: function (error) {
+                        swal("Lỗi", "Có một lỗi đã xảy ra vui lòng thử lại !", "error");
+                    }
+                });
+            }
+        });
 }

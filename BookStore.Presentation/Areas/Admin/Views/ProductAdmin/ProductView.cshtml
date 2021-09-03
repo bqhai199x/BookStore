@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Quản lý sản phẩm";
 }
 
@@ -43,7 +42,7 @@
 
 <div>
     <!-- List product -->
-    <table class="table ">
+    <table class="table table-product">
         <thead>
             <tr class="">
                 <th scope="col" style="width:8%">Hình ảnh</th>
@@ -114,3 +113,7 @@
                class="btn page-link @nextDisabled">>></a>
     </ul>
 </nav>
+
+<script>
+    document.getElementById('product-admin').classList.add('active');
+</script>

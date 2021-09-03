@@ -147,8 +147,10 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoryAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrderAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PublisherAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\StatisticController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />
@@ -1251,6 +1253,10 @@
     <Content Include="Areas\Admin\Views\OrderAdmin\OrderList.cshtml" />
     <Content Include="Areas\Admin\Views\OrderAdmin\OrderDetail.cshtml" />
     <Content Include="Areas\Admin\Views\Statistic\StatisticView.cshtml" />
+    <Content Include="Areas\Admin\Views\CategoryAdmin\CategoryView.cshtml" />
+    <Content Include="Areas\Admin\Views\CategoryAdmin\_CategoryModal.cshtml" />
+    <Content Include="Areas\Admin\Views\PublisherAdmin\PublisherView.cshtml" />
+    <Content Include="Areas\Admin\Views\PublisherAdmin\_PublisherModal.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Home\_Slider.cshtml" />
     <Content Include="Views\Shared\_Filter.cshtml" />

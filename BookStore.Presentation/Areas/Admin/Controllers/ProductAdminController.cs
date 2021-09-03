@@ -15,21 +15,26 @@ namespace BookStore.Presentation.Areas.Admin.Controllers
     {
         private readonly IProductServices _product;
         private readonly ICategoryServices _category;
-        private readonly IPublisherServices _publiser;
+        private readonly IPublisherServices _publisher;
         private readonly IProductImageServices _productImage;
+        private readonly IReviewServices _review;
+        private readonly IOrderDetailServices _orderDetail;
 
-        public ProductAdminController(IProductServices product, ICategoryServices category, IPublisherServices publiser, IProductImageServices productImage)
+        public ProductAdminController(IProductServices product, ICategoryServices category, IPublisherServices publiser, 
+            IProductImageServices productImage, IReviewServices review, IOrderDetailServices orderDetail)
         {
             _product = product;
             _category = category;
-            _publiser = publiser;
+            _publisher = publiser;
             _productImage = productImage;
+            _review = review;
+            _orderDetail = orderDetail;
         }
 
         [Route("trang-quan-tri/quan-ly-san-pham")]
         public async Task<ActionResult> ProductView(string search, int? page, string CurrentFilter)
         {
-            if(Base.Account == null || Base.Account.Role == RoleUser.Customer)
+            if (Base.Account == null || Base.Account.Role == RoleUser.Customer)
             {
                 return Redirect("/");
             }
@@ -58,7 +63,7 @@ namespace BookStore.Presentation.Areas.Admin.Controllers
             var categories = await _category.GetAllAsync();
             ViewBag.CategoryList = new SelectList(categories, "CategoryId", "Name");
 
-            var publishers = await _publiser.GetAllAsync();
+            var publishers = await _publisher.GetAllAsync();
             ViewBag.PubliserList = new SelectList(publishers, "PublisherId", "Name");
 
             ViewBag.Label = "Thêm";
@@ -94,7 +99,7 @@ namespace BookStore.Presentation.Areas.Admin.Controllers
                 foreach (var item in id)
                 {
                     if (item == "0") continue;
-                    if(int.TryParse(item, out imageId))
+                    if (int.TryParse(item, out imageId))
                     {
                         await _productImage.DeleteByIdAsync(imageId);
                     }
@@ -124,13 +129,31 @@ namespace BookStore.Presentation.Areas.Admin.Controllers
                 }
             }
 
-            return Redirect("/trang-quan-tri");
+            return Redirect("/trang-quan-tri/quan-ly-san-pham");
         }
 
         public async Task<ActionResult> ProductDelete(int productId)
         {
+            var images = _productImage.FindAllAsync(x => x.ProductId == productId);
+            foreach (var item in await images)
+            {
+                await _productImage.DeleteAsync(item);
+            }
+
+            var reviews = _review.FindAllAsync(x => x.ProductId == productId);
+            foreach (var item in await reviews)
+            {
+                await _review.DeleteAsync(item);
+            }
+
+            var details = _orderDetail.FindAllAsync(x => x.ProductId == productId);
+            foreach (var item in await details)
+            {
+                await _orderDetail.DeleteAsync(item);
+            }
+
             await _product.DeleteByIdAsync(productId);
-            return Redirect("/trang-quan-tri");
+            return Redirect("/trang-quan-tri/quan-ly-san-pham");
         }
     }
 }

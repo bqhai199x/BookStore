@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Quản lý sản phẩm";
+}
+
+@model IEnumerable<Category>
+
+<!-- Button trigger modal -->
+<div class="mb-5">
+    <button type="button" class="btn btn-primary" onclick="CategoryUpsert(0)">
+        Thêm danh mục
+    </button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-lr-50 p-b-30" id="myModalBodyDiv1">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <!-- List order -->
+    <table class="table ">
+        <thead>
+            <tr>
+                <th scope="col" style="width:20%">Tên danh mục</th>
+                <th scope="col" style="width:50%" class="text-center">Mô tả</th>
+                <th scope="col" style="width:20%" class="text-center">Số lượng sản phẩm</th>
+                <th scope="col" style="width:10%"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td class="text-justify">@item.Description</td>
+                    <td class="text-center">
+                        @if (item.Products != null)
+                        {
+                            @item.Products.Count
+                        }
+                    </td>
+                    <td class="text-center">
+                        <button type="button" onclick="CategoryUpsert(@item.CategoryId)" class="btn btn-success mr-1">Sửa</button>
+                        <button type="button" onclick="CategoryDelete(@item.CategoryId)" class="btn btn-danger">Xóa</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    document.getElementById('category-admin').classList.add('active');
+</script>
