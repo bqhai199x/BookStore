@@ -466,3 +466,26 @@ function ChangePassword() {
         }
     });
 }
+
+/*==================================================================
+    [ Feedback ]*/
+
+function SendFeedback() {
+    $.ajax({
+        url: "/Home/FeedbackRequest",
+        type: "POST",
+        data: $('#feedback').serialize(),
+        success: function (data) {
+            if (data) {
+                swal("Thành công", "Chúng tôi đã nhận được phản hồi của bạn. Cảm ơn vì bạn đã quan tâm !", "success");
+                $('#feedback').trigger("reset");
+            }
+            else {
+                swal("Thất bại", "Có một lỗi đã xảy ra vui lòng thử lại !", "error");
+            }
+        },
+        error: function (error) {
+            swal("Lỗi", "Có một lỗi đã xảy ra vui lòng thử lại !", "error");
+        }
+    });
+}

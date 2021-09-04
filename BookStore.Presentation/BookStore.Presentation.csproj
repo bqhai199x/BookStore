@@ -150,6 +150,7 @@
     <Compile Include="Areas\Admin\Controllers\AccountAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\CouponAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\FeedbackAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrderAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\PublisherAdminController.cs" />
@@ -182,28 +183,9 @@
     <Content Include="Assets\fonts\linearicons-v1.0.0\WebFont\Linearicons-Free.svg" />
     <Content Include="Assets\fonts\Montserrat\OFL.txt" />
     <Content Include="Assets\fonts\PlayfairDisplay\OFL.txt" />
-    <Content Include="Assets\images\about-01.jpg" />
-    <Content Include="Assets\images\about-02.jpg" />
     <Content Include="Assets\images\avatars\avatar.png" />
     <Content Include="Assets\images\avatars\avt-hai.jpg" />
     <Content Include="Assets\images\avatars\avt.jpg" />
-    <Content Include="Assets\images\bg-01.jpg" />
-    <Content Include="Assets\images\bg-02.jpg" />
-    <Content Include="Assets\images\blog-01.jpg" />
-    <Content Include="Assets\images\blog-02.jpg" />
-    <Content Include="Assets\images\blog-03.jpg" />
-    <Content Include="Assets\images\blog-04.jpg" />
-    <Content Include="Assets\images\blog-05.jpg" />
-    <Content Include="Assets\images\blog-06.jpg" />
-    <Content Include="Assets\images\gallery-01.jpg" />
-    <Content Include="Assets\images\gallery-02.jpg" />
-    <Content Include="Assets\images\gallery-03.jpg" />
-    <Content Include="Assets\images\gallery-04.jpg" />
-    <Content Include="Assets\images\gallery-05.jpg" />
-    <Content Include="Assets\images\gallery-06.jpg" />
-    <Content Include="Assets\images\gallery-07.jpg" />
-    <Content Include="Assets\images\gallery-08.jpg" />
-    <Content Include="Assets\images\gallery-09.jpg" />
     <Content Include="Assets\images\icons\icon-close.png" />
     <Content Include="Assets\images\icons\icon-close2.png" />
     <Content Include="Assets\images\icons\icon-email.png" />
@@ -232,7 +214,6 @@
     <Content Include="Assets\images\layouts\emty-order.png" />
     <Content Include="Assets\images\layouts\logo.png" />
     <Content Include="Assets\images\layouts\mini-logo.jpg" />
-    <Content Include="Assets\images\layouts\noimage.png" />
     <Content Include="Assets\images\products\50-bai-hoc-co-ban-de-tro-thanh-nguoi-lich-thiep.jpg" />
     <Content Include="Assets\images\products\cho-tran-gio-kinh-thien.jpg" />
     <Content Include="Assets\images\products\cuon-sach-cua-nang-tho-2.jpg" />
@@ -1264,6 +1245,7 @@
     <Content Include="Areas\Admin\Views\CouponAdmin\CouponView.cshtml" />
     <Content Include="Areas\Admin\Views\CouponAdmin\_CouponModal.cshtml" />
     <Content Include="Areas\Admin\Views\ReviewAdmin\ReviewList.cshtml" />
+    <Content Include="Areas\Admin\Views\FeedbackAdmin\FeedbackList.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Home\_Slider.cshtml" />
     <Content Include="Views\Shared\_Filter.cshtml" />
@@ -1289,6 +1271,7 @@
     <Content Include="Views\Order\_OrderList.cshtml" />
     <Content Include="Views\Order\OrderDetail.cshtml" />
     <Content Include="Views\Account\Profile.cshtml" />
+    <Content Include="Views\Home\Feedback.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BookStore.BusinessLogic\BookStore.BusinessLogic.csproj">

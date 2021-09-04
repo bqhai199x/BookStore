@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Quản lý phản hồi";
+}
+
+@model IEnumerable<Feedback>
+
+<script>
+    document.getElementById('feedback-admin').classList.add('active');
+</script>
+
+<div>
+    <!-- List product -->
+    <table class="table table-product">
+        <thead>
+            <tr class="">
+                <th scope="col" style="width: 20%">Email</th>
+                <th scope="col" style="width: 60%">Nội dung</th>
+                <th scope="col" style="width: 20%">Ngày tạo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Email</td>
+                    <td>@item.Content</td>
+                    <td>@item.CreatedDate</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
