@@ -369,7 +369,7 @@ function Checkout() {
 
     var street = $("textarea[name='street']").val();
 
-    var shipType = $("input[name='shiptype']").val();
+    var shipType = $("input[name='shipType']").val();
     var note = (shipType == 'home' ? '[Nhà riêng] ' : '[Cơ quan] ');
 
     var address = note + street + ', ' + commune + ', ' + district + ', ' + city;

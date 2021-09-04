@@ -47,8 +47,7 @@ namespace BookStore.Presentation.Areas.Admin.Controllers
                 orders = orders.Where(x => x.OrderDate <= toDate);
                 ViewBag.ToDate = toDate.Value.ToString("yyyy-MM-dd");
             }
-
-            orders = new PaginatedList<Order>(orders.ToList(), orders.Count(), page ?? 1, 10);
+            orders = new PaginatedList<Order>(orders.Skip(((page ?? 1) - 1) * 10).Take(10).ToList(), orders.Count(), page ?? 1, 10);
 
             return View("~/Areas/Admin/Views/OrderAdmin/OrderList.cshtml", orders);
         }

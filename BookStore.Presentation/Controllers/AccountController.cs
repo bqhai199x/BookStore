@@ -33,8 +33,12 @@ namespace BookStore.Presentation.Controllers
             Account account = await _account.FindAsync(x => x.Email.Equals(email) && x.Password.Equals(password));
             if (account != null)
             {
+                if(account.Role == RoleUser.Banned)
+                {
+                    return Json(new { banned = true }, JsonRequestBehavior.AllowGet);
+                }
                 Base.Login(account);
-                return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+                return Json(new { banned = false, success = true }, JsonRequestBehavior.AllowGet);
             }
             return Json(new { success = false }, JsonRequestBehavior.AllowGet);
         }

@@ -74,7 +74,7 @@
                                         <li class="dropdown-divider"></li>
                                         <li><a href="/sua-thong-tin">Sửa thông tin</a></li>
                                         <li><a href="/quan-ly-don-hang">Quản lý đơn hàng</a></li>
-                                        @if (Base.Account.Role == RoleUser.Admin)
+                                        @if (Base.Account.Role != RoleUser.Customer)
                                         {
                                             <li><a href="/trang-quan-tri">Trang quản trị</a></li>
                                         }

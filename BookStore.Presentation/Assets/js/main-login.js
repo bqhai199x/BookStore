@@ -17,8 +17,9 @@ $('.login100-form').submit(function () {
             type: "POST",
             data: $(this).serialize(),
             success: function (data) {
-                if (data.success) window.location = "/";
-                else $('.err-message').text('Tài khoản hoặc mật khẩu không chính xác!');
+                if (data.banned) $('.err-message').text('Tài khoản của bạn đã bị khoá !');
+                else if (data.success) window.location = "/";
+                else $('.err-message').text('Tài khoản hoặc mật khẩu không chính xác !');
             },
             error: function (error) {
                 swal("Lỗi", "Có một lỗi đã xảy ra vui lòng thử lại !", "error");

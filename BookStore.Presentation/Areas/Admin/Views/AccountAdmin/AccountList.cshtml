@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Quản lý tài khoản";
+}
+
+@model IEnumerable<Account>
+
+<script>
+    document.getElementById('account-admin').classList.add('active');
+</script>
+
+<div>
+    <!-- List product -->
+    <table class="table table-product">
+        <thead>
+            <tr class="">
+                <th scope="col" style="width: auto">Ảnh đại diện</th>
+                <th scope="col" style="width: auto">Email</th>
+                <th scope="col" style="width: auto">Họ tên</th>
+                <th scope="col" style="width: 30%">Địa chỉ</th>
+                <th scope="col" style="width: auto">Số điện thoại</th>
+                <th scope="col" style="width: auto">Ngày tạo</th>
+                <th scope="col" style="width: auto">Phân quyền</th>
+                <th scope="col" style="width: auto"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td><img src="~/Assets/images/avatars/@(item.ImageURL ?? "avt-jpg")" width="100" height="100" /></td>
+                    <td>@item.Email</td>
+                    <td>@item.FullName</td>
+                    @if (item.Orders != null && item.Orders.Any())
+                    {
+                        <td>@item.Orders.FirstOrDefault().Address</td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    <td>@item.Phone</td>
+                    @if (item.CreatedDate.HasValue)
+                    {
+                        <td>@item.CreatedDate.Value.ToString("d")</td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    <td>
+                        <select class="form-control custom-select" data-role="@item.AccountId">
+                            <option @(item.Role == RoleUser.Customer ? "selected" : "") value="@RoleUser.Customer">Khách hàng</option>
+                            <option @(item.Role == RoleUser.Employee ? "selected" : "") value="@RoleUser.Employee">Nhân viên</option>
+                            <option @(item.Role == RoleUser.Admin ? "selected" : "") value="@RoleUser.Admin">Người quản trị</option>
+                            <option @(item.Role == RoleUser.Banned ? "selected" : "") value="@RoleUser.Banned">Bị chặn</option>
+                        </select>
+                    </td>
+                    <td class="text-center">
+                        <button type="button" onclick="UpdateAccount(@item.AccountId)" class="btn btn-success">Cập nhật</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

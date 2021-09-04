@@ -157,3 +157,28 @@ function PublisherDelete(publisherId) {
             }
         });
 }
+
+/*==================================================================
+    [ Account Admin ]*/
+
+function UpdateAccount(accountId) {
+    $.ajax({
+        url: "/Admin/AccountAdmin/UpdateRole",
+        type: "POST",
+        data: {
+            "accountId": accountId,
+            "role": $("select[data-role='" + accountId + "']").val()
+        },
+        success: function (data) {
+            if (data) {
+                swal("Thành công", "Phân quyền đã được cập nhật !", "success");
+            }
+            else {
+                swal("Cập nhật thất bại", "Phân quyền hiện không có sự thay đổi !", "warning");
+            }
+        },
+        error: function (error) {
+            swal("Lỗi", "Có một lỗi đã xảy ra vui lòng thử lại !", "error");
+        }
+    });
+}

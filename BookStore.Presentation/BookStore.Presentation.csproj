@@ -147,6 +147,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AccountAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrderAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductAdminController.cs" />
@@ -1257,6 +1258,7 @@
     <Content Include="Areas\Admin\Views\CategoryAdmin\_CategoryModal.cshtml" />
     <Content Include="Areas\Admin\Views\PublisherAdmin\PublisherView.cshtml" />
     <Content Include="Areas\Admin\Views\PublisherAdmin\_PublisherModal.cshtml" />
+    <Content Include="Areas\Admin\Views\AccountAdmin\AccountList.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Home\_Slider.cshtml" />
     <Content Include="Views\Shared\_Filter.cshtml" />

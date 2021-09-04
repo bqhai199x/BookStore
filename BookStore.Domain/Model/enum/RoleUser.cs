@@ -4,10 +4,16 @@ namespace BookStore.Domain
 {
     public enum RoleUser
     {
-        [Description("Customer")]
+        [Description("Khách hàng")]
         Customer,
 
-        [Description("Admin")]
-        Admin
+        [Description("Quản trị")]
+        Admin,
+
+        [Description("Nhân viên")]
+        Employee,
+
+        [Description("Bị chặn")]
+        Banned
     }
 }
