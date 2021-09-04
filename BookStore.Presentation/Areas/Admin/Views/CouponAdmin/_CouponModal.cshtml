@@ -1,0 +1,70 @@
+﻿@model Coupon
+
+<script>
+    document.getElementById('staticBackdropLabel').innerHTML = '@ViewBag.Label mã giảm giá';
+</script>
+
+<div>
+    <form method="post" action="/Admin/CouponAdmin/CouponUpsert">
+
+        <input hidden name="couponId" value="@Model.CouponId" />
+
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label>Mã</label>
+                <input type="text" class="form-control" name="code" value="@Model.Code" required />
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Chiết khấu</label>
+                <input type="text" class="form-control" name="discount" value="@Model.Discount" required />
+            </div>
+
+            <div class="form-group col-md-6">
+                <label>Số lượng</label>
+                <input type="text" class="form-control" name="quantity" value="@Model.Quantity" required />
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Ngày bắt đầu</label>
+                @if (Model.StartDate.HasValue)
+                {
+                    <input type="date" class="form-control" name="startDate" value="@Model.StartDate.Value.ToString("yyyy-MM-dd")" required />
+                }
+                else
+                {
+
+                    <input type="date" class="form-control" name="startDate" required />
+                }
+            </div>
+
+            <div class="form-group col-md-6">
+                <label>Ngày kết thúc</label>
+                @if (Model.EndDate.HasValue)
+                {
+                    <input type="date" class="form-control" name="endDate" value="@Model.EndDate.Value.ToString("yyyy-MM-dd")" required />
+                }
+                else
+                {
+                    <input type="date" class="form-control" name="endDate" required />
+                }
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label>Mô tả</label>
+                <textarea class="form-control" name="description" rows="6">@Model.Description</textarea>
+            </div>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-success" id="btnSubmit">
+                @ViewBag.Label
+            </button>
+        </div>
+    </form>
+</div>

@@ -149,6 +149,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CouponAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrderAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\PublisherAdminController.cs" />
@@ -1259,6 +1260,8 @@
     <Content Include="Areas\Admin\Views\PublisherAdmin\PublisherView.cshtml" />
     <Content Include="Areas\Admin\Views\PublisherAdmin\_PublisherModal.cshtml" />
     <Content Include="Areas\Admin\Views\AccountAdmin\AccountList.cshtml" />
+    <Content Include="Areas\Admin\Views\CouponAdmin\CouponView.cshtml" />
+    <Content Include="Areas\Admin\Views\CouponAdmin\_CouponModal.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Home\_Slider.cshtml" />
     <Content Include="Views\Shared\_Filter.cshtml" />

@@ -182,3 +182,39 @@ function UpdateAccount(accountId) {
         }
     });
 }
+
+/*==================================================================
+    [ Coupon Admin ]*/
+
+function CouponUpsert(couponId) {
+    var url = "/Admin/CouponAdmin/CouponModal?couponId=" + couponId;
+    $("#myModalBodyDiv1").load(url, function () {
+        $("#myModal1").modal("show");
+    })
+}
+
+function CouponDelete(couponId) {
+    swal({
+        text: "Bạn có chắc muốn xoá mã giảm giá này?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+    })
+        .then((willCancel) => {
+            if (willCancel) {
+                $.ajax({
+                    url: "/Admin/CouponAdmin/CouponDelete",
+                    type: "POST",
+                    data: {
+                        "couponId": couponId
+                    },
+                    success: function (data) {
+                        window.location = "/trang-quan-tri/quan-ly-ma-giam-gia";
+                    },
+                    error: function (error) {
+                        swal("Lỗi", "Có một lỗi đã xảy ra vui lòng thử lại !", "error");
+                    }
+                });
+            }
+        });
+}
