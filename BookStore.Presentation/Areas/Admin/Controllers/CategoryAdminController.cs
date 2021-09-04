@@ -28,7 +28,7 @@ namespace BookStore.Presentation.Areas.Admin.Controllers
         [Route("trang-quan-tri/quan-ly-danh-muc")]
         public async Task<ActionResult> CategoryView()
         {
-            if (Base.Account == null || Base.Account.Role == RoleUser.Customer)
+            if (Session["Account"] == null || (Session["Account"] as Account).Role == RoleUser.Customer)
             {
                 return Redirect("/");
             }

@@ -18,7 +18,7 @@ namespace BookStore.Presentation.Areas.Admin.Controllers
         [Route("trang-quan-tri/quan-ly-ma-giam-gia")]
         public async Task<ActionResult> CouponView()
         {
-            if (Base.Account == null || Base.Account.Role == RoleUser.Customer)
+            if (Session["Account"] == null || (Session["Account"] as Account).Role == RoleUser.Customer)
             {
                 return Redirect("/");
             }

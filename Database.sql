@@ -2,9 +2,9 @@ USE [BookStoreDB]
 GO
 SET IDENTITY_INSERT [dbo].[Account] ON 
 GO
-INSERT [dbo].[Account] ([AccountId], [Password], [ImageURL], [FirstName], [LastName], [Address], [Phone], [Email], [Role], [CreatedDate]) VALUES (1, 'QE78aRCyTns=', N'avt-hai.jpg', N'Quang Hải', N'Bùi', N'Mạch Lũng - Đại Mạch - Đông Anh - Hà Nội', N'0976445870', N'bqhai.199x@gmail.com', 1, NULL)
+INSERT [dbo].[Account] ([AccountId], [Email], [Password], [ImageURL], [FirstName], [LastName], [City], [District], [Commune], [Address], [Phone], [Role], [CreatedDate]) VALUES (1, N'bqhai.199x@gmail.com', N'QE78aRCyTns=', N'avt-hai.jpg', N'Quang Hải', N'Bùi', N'ha-noi', N'dong-anh', N'dai-mach', N'Thôn Mạch Lũng', N'0976445870', 1, CAST(N'2021-06-06T00:00:00.000' AS DateTime))
 GO
-INSERT [dbo].[Account] ([AccountId], [Password], [ImageURL], [FirstName], [LastName], [Address], [Phone], [Email], [Role], [CreatedDate]) VALUES (2, 'QE78aRCyTns', NULL, N'Mỹ Duyên', N'Bùi Thị', N'Làng Chài - Võng La - Đông Anh - Hà Nội', N'0907076600', N'yendu197@gmail.com', 0, NULL)
+INSERT [dbo].[Account] ([AccountId], [Email], [Password], [ImageURL], [FirstName], [LastName], [City], [District], [Commune], [Address], [Phone], [Role], [CreatedDate]) VALUES (2, N'yendu197@gmail.com', N'de1gbax0h+o=', N'avt.jpg', N'Mỹ Duyên', N'Bùi Thị', N'ha-noi', N'dong-anh', N'vong-la', N'Làng Chài', N'0907076600', 0, CAST(N'2021-06-06T00:00:00.000' AS DateTime))
 GO
 SET IDENTITY_INSERT [dbo].[Account] OFF
 GO
@@ -14,27 +14,51 @@ INSERT [dbo].[Coupon] ([CouponId], [Code], [Discount], [StartDate], [EndDate], [
 GO
 INSERT [dbo].[Coupon] ([CouponId], [Code], [Discount], [StartDate], [EndDate], [Quantity], [Description]) VALUES (2, N'HETHAN', CAST(0.75 AS Decimal(18, 2)), CAST(N'2021-06-21T00:00:00.000' AS DateTime), CAST(N'2021-06-30T00:00:00.000' AS DateTime), 2, NULL)
 GO
-INSERT [dbo].[Coupon] ([CouponId], [Code], [Discount], [StartDate], [EndDate], [Quantity], [Description]) VALUES (3, N'MAOK', CAST(0.25 AS Decimal(18, 2)), CAST(N'2021-07-04T00:00:00.000' AS DateTime), CAST(N'2021-12-31T00:00:00.000' AS DateTime), 9999, NULL)
+INSERT [dbo].[Coupon] ([CouponId], [Code], [Discount], [StartDate], [EndDate], [Quantity], [Description]) VALUES (3, N'MAOK', CAST(0.25 AS Decimal(18, 2)), CAST(N'2021-07-04T00:00:00.000' AS DateTime), CAST(N'2021-12-31T00:00:00.000' AS DateTime), 15, NULL)
 GO
 SET IDENTITY_INSERT [dbo].[Coupon] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Order] ON 
 GO
-INSERT [dbo].[Order] ([OrderId], [OrderDate], [Status], [FullName], [Address], [Phone], [ShipperId], [CouponId], [AccountId], [Payment]) VALUES (1, NULL, 0, N'Bùi Quang Hải', N'Mạch Lũng - Đại Mạch - Đông Anh - Hà Nội', N'0976445870', NULL, 1, 1, 0)
+INSERT [dbo].[Order] ([OrderId], [OrderDate], [Status], [FullName], [Address], [Phone], [Note], [Payment], [ShipperId], [CouponId], [AccountId]) VALUES (1, CAST(N'2021-09-01T10:41:24.633' AS DateTime), 4, N'Bùi Quang Hải', N'[Cơ quan] Thôn Mạch Lũng, Xã Đại Mạch, Huyện Đông Anh, Thành phố Hà Nội', N'0976445870', N'', 3, NULL, 1, 1)
+GO
+INSERT [dbo].[Order] ([OrderId], [OrderDate], [Status], [FullName], [Address], [Phone], [Note], [Payment], [ShipperId], [CouponId], [AccountId]) VALUES (2, CAST(N'2021-08-30T21:34:57.060' AS DateTime), 2, N'Bùi Quang Hải', N'[Cơ quan] Thôn Mạch Lũng, Xã Đại Mạch, Huyện Đông Anh, Thành phố Hà Nội', N'0976445870', NULL, 0, NULL, NULL, 1)
+GO
+INSERT [dbo].[Order] ([OrderId], [OrderDate], [Status], [FullName], [Address], [Phone], [Note], [Payment], [ShipperId], [CouponId], [AccountId]) VALUES (3, CAST(N'2021-09-04T13:21:09.173' AS DateTime), 1, N'Bùi Thị Mỹ Duyên', N'[Nhà riêng] Làng Chài, Xã Võng La, Huyện Đông Anh, Thành phố Hà Nội', N'0907076600', N'', 1, NULL, NULL, 2)
+GO
+INSERT [dbo].[Order] ([OrderId], [OrderDate], [Status], [FullName], [Address], [Phone], [Note], [Payment], [ShipperId], [CouponId], [AccountId]) VALUES (4, CAST(N'2021-09-02T21:35:40.467' AS DateTime), 1, N'Bùi Quang Hải', N'[Cơ quan] Thôn Mạch Lũng, Xã Đại Mạch, Huyện Đông Anh, Thành phố Hà Nội', N'0976445870', NULL, 0, NULL, NULL, 1)
+GO
+INSERT [dbo].[Order] ([OrderId], [OrderDate], [Status], [FullName], [Address], [Phone], [Note], [Payment], [ShipperId], [CouponId], [AccountId]) VALUES (5, CAST(N'2021-09-03T23:48:52.577' AS DateTime), 3, N'Bùi Quang Hải', N'[Cơ quan] Thôn Mạch Lũng, Xã Đại Mạch, Huyện Đông Anh, Thành phố Hà Nội', N'0976445870', NULL, 0, NULL, NULL, 1)
+GO
+INSERT [dbo].[Order] ([OrderId], [OrderDate], [Status], [FullName], [Address], [Phone], [Note], [Payment], [ShipperId], [CouponId], [AccountId]) VALUES (6, CAST(N'2021-09-05T23:49:08.090' AS DateTime), 4, N'Bùi Quang Hải', N'[Cơ quan] Thôn Mạch Lũng, Xã Đại Mạch, Huyện Đông Anh, Thành phố Hà Nội', N'0976445870', NULL, 0, NULL, NULL, 1)
+GO
+INSERT [dbo].[Order] ([OrderId], [OrderDate], [Status], [FullName], [Address], [Phone], [Note], [Payment], [ShipperId], [CouponId], [AccountId]) VALUES (7, CAST(N'2021-08-30T22:19:53.633' AS DateTime), 2, N'Bùi Quang Hải', N'[Cơ quan] Thôn Mạch Lũng, Xã Sính Phình, Huyện Tủa Chùa, Tỉnh Điện Biên', N'0976445870', N'Hello', 3, NULL, NULL, 1)
+GO
+INSERT [dbo].[Order] ([OrderId], [OrderDate], [Status], [FullName], [Address], [Phone], [Note], [Payment], [ShipperId], [CouponId], [AccountId]) VALUES (8, CAST(N'2021-08-31T00:01:29.477' AS DateTime), 4, N'Bùi Quang Hải', N'[Cơ quan] Thôn Mạch Lũng, Xã Đại Mạch, Huyện Đông Anh, Thành phố Hà Nội', N'0976445870', NULL, 3, NULL, NULL, 1)
+GO
+INSERT [dbo].[Order] ([OrderId], [OrderDate], [Status], [FullName], [Address], [Phone], [Note], [Payment], [ShipperId], [CouponId], [AccountId]) VALUES (9, CAST(N'2021-09-01T10:41:44.157' AS DateTime), 1, N'Bùi Quang Hải', N'[Cơ quan] Thôn Mạch Lũng, Xã Đại Mạch, Huyện Đông Anh, Thành phố Hà Nội', N'0976445870', N'', 0, NULL, NULL, 1)
+GO
+INSERT [dbo].[Order] ([OrderId], [OrderDate], [Status], [FullName], [Address], [Phone], [Note], [Payment], [ShipperId], [CouponId], [AccountId]) VALUES (11, CAST(N'2021-09-01T10:41:58.873' AS DateTime), 1, N'Bùi Quang Hải', N'[Cơ quan] Thôn Mạch Lũng, Xã Đại Mạch, Huyện Đông Anh, Thành phố Hà Nội', N'0976445870', N'', 0, NULL, NULL, 1)
+GO
+INSERT [dbo].[Order] ([OrderId], [OrderDate], [Status], [FullName], [Address], [Phone], [Note], [Payment], [ShipperId], [CouponId], [AccountId]) VALUES (12, CAST(N'2021-09-01T10:42:22.877' AS DateTime), 1, N'Bùi Quang Hải', N'[Cơ quan] Thôn Mạch Lũng, Xã Đại Mạch, Huyện Đông Anh, Thành phố Hà Nội', N'0976445870', N'', 0, NULL, NULL, 1)
+GO
+INSERT [dbo].[Order] ([OrderId], [OrderDate], [Status], [FullName], [Address], [Phone], [Note], [Payment], [ShipperId], [CouponId], [AccountId]) VALUES (13, NULL, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 1)
+GO
+INSERT [dbo].[Order] ([OrderId], [OrderDate], [Status], [FullName], [Address], [Phone], [Note], [Payment], [ShipperId], [CouponId], [AccountId]) VALUES (14, CAST(N'2021-09-04T13:23:51.267' AS DateTime), 1, N'Bùi Thị Mỹ Duyên', N'[Nhà riêng] Làng Chài, Xã Võng La, Huyện Đông Anh, Thành phố Hà Nội', N'0907076600', N'', 0, NULL, NULL, 2)
 GO
 SET IDENTITY_INSERT [dbo].[Order] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Category] ON 
 GO
-INSERT [dbo].[Category] ([CategoryId], [Name], [Description]) VALUES (1, N'Văn Học', NULL)
+INSERT [dbo].[Category] ([CategoryId], [Name], [Description]) VALUES (1, N'Văn Học', N'Thể loại văn học là một thể loại của sáng tác văn học. Thể loại có thể được xác định bằng kỹ thuật văn học, giọng điệu, nội dung hoặc thậm chí (như trong trường hợp tiểu thuyết). Sự khác biệt giữa các thể loại và thể loại là linh hoạt và được xác định một cách lỏng lẻo, thường có các nhóm nhỏ.')
 GO
-INSERT [dbo].[Category] ([CategoryId], [Name], [Description]) VALUES (2, N'Kinh Tế', NULL)
+INSERT [dbo].[Category] ([CategoryId], [Name], [Description]) VALUES (2, N'Kinh Tế', N'Kinh tế học là một môn khoa học xã hội nghiên cứu hành vi con người và các phúc lợi xã hội như là một mối quan hệ giữa 1 bên là các nhu cầu không giới hạn của xã hội với bên kia là sự hạn chế của các nguồn cung vốn có các cách sử dụng khác nhau')
 GO
-INSERT [dbo].[Category] ([CategoryId], [Name], [Description]) VALUES (3, N'Tâm Lý - Kỹ Năng Sống', NULL)
+INSERT [dbo].[Category] ([CategoryId], [Name], [Description]) VALUES (3, N'Tâm Lý - Kỹ Năng Sống', N'Tâm lý học là ngành khoa học nghiên cứu nguyên lý nảy sinh và vận hành thế giới tinh thần trong đời sống hàng ngày của con người dưới tác động của tổng hòa các mối quan hệ xã hội.')
 GO
 INSERT [dbo].[Category] ([CategoryId], [Name], [Description]) VALUES (4, N'Sách Thiếu Nhi', NULL)
 GO
-INSERT [dbo].[Category] ([CategoryId], [Name], [Description]) VALUES (5, N'Tiểu Sử - Hồi Ký', NULL)
+INSERT [dbo].[Category] ([CategoryId], [Name], [Description]) VALUES (5, N'Tiểu Sử - Hồi Ký', N'Tiểu sử là một mô tả chi tiết về cuộc sống của một người. Nó mô tả không chỉ những sự kiện cơ bản như giáo dục, công việc, các mối quan hệ và cái chết; mà còn miêu tả trải nghiệm của một người về những sự kiện cuộc sống này. ... ')
 GO
 INSERT [dbo].[Category] ([CategoryId], [Name], [Description]) VALUES (6, N'Sách Chuyên Ngành', NULL)
 GO
@@ -54,7 +78,7 @@ INSERT [dbo].[Publisher] ([PublisherId], [Name], [Description]) VALUES (5, N'NXB
 GO
 INSERT [dbo].[Publisher] ([PublisherId], [Name], [Description]) VALUES (6, N'NXB Thanh Niên', NULL)
 GO
-INSERT [dbo].[Publisher] ([PublisherId], [Name], [Description]) VALUES (7, N'NVB Đại Học Quốc Gia', NULL)
+INSERT [dbo].[Publisher] ([PublisherId], [Name], [Description]) VALUES (7, N'NXB Đại Học Quốc Gia', NULL)
 GO
 INSERT [dbo].[Publisher] ([PublisherId], [Name], [Description]) VALUES (8, N'NXB Dân Trí', NULL)
 GO
@@ -305,13 +329,63 @@ Sau khi học các từ mới, bạn nên tập sử dụng chúng hàng
 GO
 SET IDENTITY_INSERT [dbo].[Product] OFF
 GO
+SET IDENTITY_INSERT [dbo].[Review] ON 
+GO
+INSERT [dbo].[Review] ([ReviewId], [AccountId], [ProductId], [Rating], [Content], [CreatedTime]) VALUES (2, 2, 18, 5, N'Rất bổ ích', CAST(N'2021-09-04T15:32:39.943' AS DateTime))
+GO
+INSERT [dbo].[Review] ([ReviewId], [AccountId], [ProductId], [Rating], [Content], [CreatedTime]) VALUES (3, 2, 16, 4, N'Truyện hay thật đấy tác giả đúng là rất công phu trong khi viết bài này', CAST(N'2021-09-04T15:42:44.453' AS DateTime))
+GO
+INSERT [dbo].[Review] ([ReviewId], [AccountId], [ProductId], [Rating], [Content], [CreatedTime]) VALUES (4, 1, 16, 5, N'Dế mèn phiêu lưu ký có nội dung quá quen thuộc với chúng ta. Sách được tái bản nhiều lần cho thấy rằng nội dung và tình tiết câu chuyện hay và phù hợp với tư duy cuộc sống.', CAST(N'2021-09-04T15:44:09.213' AS DateTime))
+GO
+INSERT [dbo].[Review] ([ReviewId], [AccountId], [ProductId], [Rating], [Content], [CreatedTime]) VALUES (5, 1, 17, 2, N'Không hay lắm', CAST(N'2021-09-04T15:45:48.480' AS DateTime))
+GO
+SET IDENTITY_INSERT [dbo].[Review] OFF
+GO
+INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (1, 10, 1)
+GO
 INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (1, 13, 2)
 GO
 INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (1, 14, 1)
 GO
-INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (1, 17, 2)
+INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (1, 18, 2)
 GO
-INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (1, 18, 3)
+INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (2, 13, 2)
+GO
+INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (3, 11, 1)
+GO
+INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (3, 14, 2)
+GO
+INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (4, 14, 1)
+GO
+INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (5, 10, 4)
+GO
+INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (5, 13, 1)
+GO
+INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (6, 11, 3)
+GO
+INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (6, 17, 2)
+GO
+INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (7, 10, 1)
+GO
+INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (7, 14, 2)
+GO
+INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (8, 11, 1)
+GO
+INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (9, 17, 1)
+GO
+INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (9, 18, 1)
+GO
+INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (11, 11, 1)
+GO
+INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (11, 13, 2)
+GO
+INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (12, 17, 2)
+GO
+INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (13, 14, 2)
+GO
+INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (13, 17, 1)
+GO
+INSERT [dbo].[OrderDetail] ([OrderId], [ProductId], [Quantity]) VALUES (14, 17, 1)
 GO
 SET IDENTITY_INSERT [dbo].[ProductImage] ON 
 GO

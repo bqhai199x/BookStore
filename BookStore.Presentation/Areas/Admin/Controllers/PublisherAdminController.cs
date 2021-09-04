@@ -28,7 +28,7 @@ namespace BookStore.Presentation.Areas.Admin.Controllers
         [Route("trang-quan-tri/quan-ly-nha-xuat-ban")]
         public async Task<ActionResult> PublisherView()
         {
-            if (Base.Account == null || Base.Account.Role == RoleUser.Customer)
+            if (Session["Account"] == null || (Session["Account"] as Account).Role == RoleUser.Customer)
             {
                 return Redirect("/");
             }

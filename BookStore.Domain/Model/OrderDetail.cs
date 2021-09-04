@@ -9,11 +9,11 @@ namespace BookStore.Domain
     {
         [Key]
         [Column(Order = 1)]
-        public int? OrderId { get; set; }
+        public int OrderId { get; set; }
 
         [Key]
         [Column(Order = 2)]
-        public int? ProductId { get; set; }
+        public int ProductId { get; set; }
 
         [DisplayName("Số lượng")]
         public int? Quantity { get; set; }

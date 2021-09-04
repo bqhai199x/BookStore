@@ -20,7 +20,7 @@ namespace BookStore.Presentation.Controllers
         [Route("dang-nhap")]
         public ActionResult LoginView()
         {
-            if (Base.Account != null)
+            if (Session["Account"] != null)
             {
                 return Redirect("/");
             }
@@ -37,7 +37,7 @@ namespace BookStore.Presentation.Controllers
                 {
                     return Json(new { banned = true }, JsonRequestBehavior.AllowGet);
                 }
-                Base.Login(account);
+                Session["Account"] = account;
                 return Json(new { banned = false, success = true }, JsonRequestBehavior.AllowGet);
             }
             return Json(new { success = false }, JsonRequestBehavior.AllowGet);
@@ -46,7 +46,7 @@ namespace BookStore.Presentation.Controllers
         [Route("dang-ky")]
         public ActionResult RegisterView()
         {
-            if (Base.Account != null)
+            if (Session["Account"] != null)
             {
                 return Redirect("/");
             }
@@ -77,16 +77,17 @@ namespace BookStore.Presentation.Controllers
         [Route("sua-thong-tin")]
         public ActionResult ProfileView()
         {
-            if (Base.Account == null)
+            if (Session["Account"] == null)
             {
                 return Redirect("/");
             }
-            return View("Profile");
+            return View("Profile", Session["Account"] as Account);
         }
 
         public async Task<ActionResult> ChangeInfo(Account info)
         {
-            Account account = await _account.FindAsync(x => x.AccountId == Base.AccountId);
+            int? baseId = (Session["Account"] as Account)?.AccountId;
+            Account account = await _account.FindAsync(x => x.AccountId == baseId);
             account.Address = info.Address;
             account.City = info.City;
             account.Commune = info.Commune;
@@ -114,7 +115,8 @@ namespace BookStore.Presentation.Controllers
             {
                 return Json("Xác nhận mật khẩu không trùng khớp !", JsonRequestBehavior.AllowGet);
             }
-            Account account = await _account.FindAsync(x => x.AccountId == Base.AccountId);
+            int? baseId = (Session["Account"] as Account)?.AccountId;
+            Account account = await _account.FindAsync(x => x.AccountId == baseId);
             if(oldPass.Encrypt() != account.Password)
             {
                 return Json("Mật khẩu cũ không đúng !", JsonRequestBehavior.AllowGet);
@@ -128,7 +130,7 @@ namespace BookStore.Presentation.Controllers
         [Route("dang-xuat")]
         public ActionResult Logout()
         {
-            Base.Logout();
+            Session.Clear();
             return Redirect(Request.UrlReferrer.ToString());
         }
     }

@@ -34,7 +34,7 @@ namespace BookStore.Presentation.Areas.Admin.Controllers
         [Route("trang-quan-tri/quan-ly-san-pham")]
         public async Task<ActionResult> ProductView(string search, int? page, string CurrentFilter)
         {
-            if (Base.Account == null || Base.Account.Role == RoleUser.Customer)
+            if (Session["Account"] == null || (Session["Account"] as Account).Role == RoleUser.Customer)
             {
                 return Redirect("/");
             }

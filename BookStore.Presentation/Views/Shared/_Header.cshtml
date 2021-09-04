@@ -59,7 +59,7 @@
                         <ul class="main-menu">
                             <li>
                                 <i class="zmdi zmdi-accounts-outline"></i>
-                                @if (Base.Account == null)
+                                @if (Session["Account"] == null)
                                 {
                                     <ul class="sub-menu">
                                         <li><a href="/dang-nhap">Đăng nhập</a></li>
@@ -70,11 +70,11 @@
                                 else
                                 {
                                     <ul class="sub-menu">
-                                        <li><a class="text-danger">Hi, @Base.Account.FirstName</a></li>
+                                        <li><a class="text-danger">Hi, @((Session["Account"] as Account).FirstName)</a></li>
                                         <li class="dropdown-divider"></li>
                                         <li><a href="/sua-thong-tin">Sửa thông tin</a></li>
                                         <li><a href="/quan-ly-don-hang">Quản lý đơn hàng</a></li>
-                                        @if (Base.Account.Role != RoleUser.Customer)
+                                        @if ((Session["Account"] as Account).Role != RoleUser.Customer)
                                         {
                                             <li><a href="/trang-quan-tri">Trang quản trị</a></li>
                                         }

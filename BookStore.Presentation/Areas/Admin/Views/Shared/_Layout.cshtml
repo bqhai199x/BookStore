@@ -40,7 +40,7 @@
                     <li id="publisher-admin">
                         <a href="/trang-quan-tri/quan-ly-nha-xuat-ban"><span class="fa fa-cogs mr-3"></span>Nhà xuất bản</a>
                     </li>
-                    @if (Base.Account != null && Base.Account.Role == RoleUser.Admin)
+                    @if (Session["Account"] != null && (Session["Account"] as Account).Role == RoleUser.Admin)
                     {
                         <li id="account-admin">
                             <a href="/trang-quan-tri/quan-ly-tai-khoan"><span class="fa fa-user mr-3"></span>Tài khoản</a>

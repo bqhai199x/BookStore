@@ -45,9 +45,10 @@ namespace BookStore.Presentation.Controllers
         [HttpPost]
         public async Task<JsonResult> AddReview(int productId, int? rate, string content)
         {
+            int? baseId = (Session["Account"] as Account)?.AccountId;
             Review review = new Review()
             {
-                AccountId = Base.AccountId,
+                AccountId = baseId,
                 ProductId = productId,
                 Rating = rate,
                 Content = content,

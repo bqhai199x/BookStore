@@ -22,7 +22,7 @@ namespace BookStore.Presentation.Areas.Admin.Controllers
         [Route("trang-quan-tri/quan-ly-tai-khoan")]
         public async Task<ActionResult> AccountList()
         {
-            if (Base.Account == null || Base.Account.Role != RoleUser.Admin)
+            if (Session["Account"] == null || (Session["Account"] as Account).Role != RoleUser.Admin)
             {
                 return Redirect("/");
             }

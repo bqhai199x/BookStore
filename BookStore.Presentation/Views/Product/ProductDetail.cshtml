@@ -266,7 +266,7 @@
                                         @Html.Action("Review", "Product", new { productId = Model.ProductId })
                                     </div>
 
-                                    @if (Base.Account == null)
+                                    @if (Session["Account"] == null)
                                     {
                                         <div class="text-center">
                                             <span>Bạn cần <a href="/dang-nhap">đăng nhập</a> để bình luận và đánh giá !</span>

@@ -20,7 +20,8 @@ namespace BookStore.Presentation.Controllers
         [Route("thanh-toan")]
         public async Task<ActionResult> CheckoutView()
         {
-            var cart = await _order.FindAsync(x => x.AccountId == Base.AccountId && x.Status == OrderStatus.InCart);
+            int? baseId = (Session["Account"] as Account)?.AccountId;
+            var cart = await _order.FindAsync(x => x.AccountId == baseId && x.Status == OrderStatus.InCart);
             if (cart == null || cart.OrderDetails == null || !cart.OrderDetails.Any())
             {
                 return Redirect("/gio-hang");
@@ -30,7 +31,8 @@ namespace BookStore.Presentation.Controllers
 
         public async Task<JsonResult> CheckoutRequest(string fullName, string phoneNumber, string address, string note, Payment payment)
         {
-            Order order = await _order.FindAsync(x => x.AccountId == Base.AccountId && x.Status == OrderStatus.InCart);
+            int? baseId = (Session["Account"] as Account)?.AccountId;
+            Order order = await _order.FindAsync(x => x.AccountId == baseId && x.Status == OrderStatus.InCart);
             order.FullName = fullName;
             order.Phone = phoneNumber;
             order.Address = address;
@@ -46,7 +48,7 @@ namespace BookStore.Presentation.Controllers
         [Route("quan-ly-don-hang")]
         public ActionResult OrderManagement()
         {
-            if (Base.Account == null)
+            if (Session["Account"] == null)
             {
                 return Redirect("/gio-hang");
             }
@@ -56,7 +58,8 @@ namespace BookStore.Presentation.Controllers
         public ActionResult OrderList(OrderStatus status)
         {
             bool flag = status != OrderStatus.InCart;
-            var order = _order.FindAll(x => x.AccountId == Base.AccountId && (x.Status == status) == flag).OrderByDescending(x => x.OrderDate);
+            int? baseId = (Session["Account"] as Account)?.AccountId;
+            var order = _order.FindAll(x => x.AccountId == baseId && (x.Status == status) == flag).OrderByDescending(x => x.OrderDate);
             return PartialView("_OrderList", order);
         }
 

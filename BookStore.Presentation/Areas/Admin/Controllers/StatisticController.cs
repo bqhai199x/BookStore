@@ -25,7 +25,7 @@ namespace BookStore.Presentation.Areas.Admin.Controllers
         [Route("trang-quan-tri")]
         public async Task<ActionResult> StatisticView()
         {
-            if (Base.Account == null || Base.Account.Role == RoleUser.Customer)
+            if (Session["Account"] == null || (Session["Account"] as Account).Role == RoleUser.Customer)
             {
                 return Redirect("/");
             }
