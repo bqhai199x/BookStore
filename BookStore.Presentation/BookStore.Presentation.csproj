@@ -153,6 +153,7 @@
     <Compile Include="Areas\Admin\Controllers\OrderAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\PublisherAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ReviewAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\StatisticController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />
@@ -1262,6 +1263,7 @@
     <Content Include="Areas\Admin\Views\AccountAdmin\AccountList.cshtml" />
     <Content Include="Areas\Admin\Views\CouponAdmin\CouponView.cshtml" />
     <Content Include="Areas\Admin\Views\CouponAdmin\_CouponModal.cshtml" />
+    <Content Include="Areas\Admin\Views\ReviewAdmin\ReviewList.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Home\_Slider.cshtml" />
     <Content Include="Views\Shared\_Filter.cshtml" />

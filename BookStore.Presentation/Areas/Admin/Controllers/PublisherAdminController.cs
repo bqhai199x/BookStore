@@ -1,4 +1,5 @@
 ﻿using BookStore.BusinessLogic.IServices;
+using BookStore.Common;
 using BookStore.Domain;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -27,6 +28,10 @@ namespace BookStore.Presentation.Areas.Admin.Controllers
         [Route("trang-quan-tri/quan-ly-nha-xuat-ban")]
         public async Task<ActionResult> PublisherView()
         {
+            if (Base.Account == null || Base.Account.Role == RoleUser.Customer)
+            {
+                return Redirect("/");
+            }
             var publishers = await _publisher.GetAllAsync();
             return View("~/Areas/Admin/Views/PublisherAdmin/PublisherView.cshtml", publishers);
         }

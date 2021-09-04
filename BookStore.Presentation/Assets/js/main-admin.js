@@ -218,3 +218,32 @@ function CouponDelete(couponId) {
             }
         });
 }
+
+/*==================================================================
+    [ Review Admin ]*/
+
+function ReviewDelete(reviewId) {
+    swal({
+        text: "Bạn có chắc muốn xoá nhận xét này?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+    })
+        .then((willCancel) => {
+            if (willCancel) {
+                $.ajax({
+                    url: "/Admin/ReviewAdmin/ReviewDelete",
+                    type: "POST",
+                    data: {
+                        "reviewId": reviewId
+                    },
+                    success: function (data) {
+                        window.location = "/trang-quan-tri/quan-ly-nhan-xet";
+                    },
+                    error: function (error) {
+                        swal("Lỗi", "Có một lỗi đã xảy ra vui lòng thử lại !", "error");
+                    }
+                });
+            }
+        });
+}

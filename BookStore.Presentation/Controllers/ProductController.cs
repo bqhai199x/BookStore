@@ -1,6 +1,7 @@
 ﻿using BookStore.BusinessLogic.IServices;
 using BookStore.Common;
 using BookStore.Domain;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -49,7 +50,8 @@ namespace BookStore.Presentation.Controllers
                 AccountId = Base.AccountId,
                 ProductId = productId,
                 Rating = rate,
-                Content = content
+                Content = content,
+                CreatedTime = DateTime.Now
             };
             await _review.CreateAsync(review);
             var reviews = await _review.FindAllAsync(x => x.ProductId == productId);
